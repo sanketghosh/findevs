@@ -11,28 +11,44 @@ import {
 // components
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { Job } from "@prisma/client";
 
-export default function JobCard() {
+type JobCardProps = {
+  job: Job;
+};
+
+export default function JobCard({ job }: JobCardProps) {
+  const {
+    companyLogoUrl,
+    companyName,
+    createdAt,
+    jobType,
+    location,
+    salary,
+    seniority,
+    title,
+    workplace,
+  } = job;
+
   return (
     <Card className="relative w-full space-y-3.5 p-4 hover:shadow">
       <div className="flex items-center gap-3">
-        <div className="size-16 rounded-md border">
+        <div className="size-16 overflow-hidden rounded-md border">
           <img
-            src="./google-logo.png"
-            alt="hero image"
+            //@ts-ignore
+            src={!companyLogoUrl ? companyLogoUrl : "./company-img.webp"}
+            alt={companyName}
             className="h-full w-full object-cover"
           />
         </div>
         <div className="leading-tight">
-          <h2 className="text-base font-semibold lg:text-lg">
-            Full Stack Developer
-          </h2>
-          <p className="font-medium text-muted-foreground">Google inc.</p>
+          <h2 className="text-base font-semibold lg:text-lg">{title}</h2>
+          <p className="font-medium text-muted-foreground">{companyName}</p>
         </div>
       </div>
       <div className="line-clamp-1 flex items-center gap-1 font-medium">
         <MapPinIcon size={17} />
-        <p className="line-clamp-1 text-sm">San Francisco, United States</p>
+        <p className="line-clamp-1 text-sm">{location}</p>
       </div>
 
       {/* 3rd para */}
@@ -43,28 +59,28 @@ export default function JobCard() {
         </div> */}
         <Badge variant={"secondary"}>
           <WalletIcon size={17} />
-          <p className="ml-1.5 text-sm">120000 INR PA</p>
+          <p className="ml-1.5 text-sm">{salary} INR PA</p>
         </Badge>
         <Badge variant={"secondary"}>
           <ClockIcon size={17} />
-          <p className="ml-1.5 text-sm">Part Time</p>
+          <p className="ml-1.5 text-sm">{jobType}</p>
         </Badge>
         <Badge variant={"secondary"}>
           <BriefcaseBusinessIcon size={17} />
-          <p className="ml-1.5 text-sm">Entry Level</p>
+          <p className="ml-1.5 text-sm">{seniority}</p>
         </Badge>
       </div>
       <div className="flex w-full items-center justify-between">
-        <h2 className="font-medium">{format(new Date(), "PPP")}</h2>
+        <h2 className="font-medium">{format(createdAt, "PPP")}</h2>
         <button>
           <HeartIcon />
         </button>
       </div>
       <Badge
-        className="absolute -top-1 right-2 font-medium"
-        variant={"outline"}
+        className="absolute -top-1 right-2 text-sm font-medium"
+        variant={"secondary"}
       >
-        Remote
+        {workplace}
       </Badge>
     </Card>
   );

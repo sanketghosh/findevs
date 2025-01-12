@@ -7,8 +7,11 @@ import { Button } from "@/components/ui/button";
 import FilterDrawer from "@/app/(main)/_components/filter-drawer";
 import SidebarContainer from "@/app/(main)/_components/sidebar-container";
 import Hero from "@/app/(main)/_components/hero";
+import { fetchAllJobs } from "./fetchers";
 
-export default function Home() {
+export default async function Home() {
+  const { jobs } = await fetchAllJobs();
+
   return (
     <div className="space-y-6">
       <Hero />
@@ -19,8 +22,8 @@ export default function Home() {
         </div>
         <div className="w-full space-y-6">
           <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-2">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((item) => (
-              <JobCard key={item} />
+            {jobs.map((item) => (
+              <JobCard key={item.id} job={item} />
             ))}
           </div>
           <div className="flex items-center justify-end gap-4">

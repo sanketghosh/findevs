@@ -20,8 +20,7 @@ export default function FilterDrawer() {
       <DrawerTrigger>Open</DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-          <DrawerDescription>This action cannot be undone.</DrawerDescription>
+          <DrawerTitle className="text-left">Filter</DrawerTitle>
         </DrawerHeader>
         <div className="p-3">
           <FilterOptions />
