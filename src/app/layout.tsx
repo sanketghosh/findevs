@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
-import "./globals.css";
+// packages
 import { Toaster } from "sonner";
+import type { Metadata } from "next";
+import "@/app/globals.css";
 
 export const metadata: Metadata = {
   title: "findevs",

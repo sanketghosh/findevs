@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
+
+// components
 import Header from "@/app/(main)/_components/header";
 
 export const metadata: Metadata = {
@@ -15,8 +17,12 @@ export default function MainLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
-        {children}
+        <main className="relative w-full">
+          <Header />
+          <div className="mx-auto max-w-[95rem] px-4 py-6 md:py-8 lg:px-6 xl:py-10">
+            {children}
+          </div>
+        </main>
       </body>
     </html>
   );
