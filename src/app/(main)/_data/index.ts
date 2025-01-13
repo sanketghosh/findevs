@@ -256,3 +256,72 @@ export const NAV_LINKS = [
     label: "bookmarks",
   },
 ];
+
+export const JOB_TYPES = [
+  {
+    jobTypeId: "FullTime",
+    label: "Full Time",
+  },
+  {
+    jobTypeId: "PartTime",
+    label: "Part Time",
+  },
+  {
+    jobTypeId: "Volunteer",
+    label: "Volunteer",
+  },
+  {
+    jobTypeId: "Internship",
+    label: "Internship",
+  },
+  {
+    jobTypeId: "Contract",
+    label: "Contract",
+  },
+];
+
+export const WORKPLACE_OPTIONS = [
+  {
+    workplaceOptionId: "Remote",
+    label: "Remote",
+  },
+  {
+    workplaceOptionId: "Hybrid",
+    label: "Hybrid",
+  },
+  {
+    workplaceOptionId: "OnSite",
+    label: "On Site",
+  },
+  {
+    workplaceOptionId: "InCountryRemote",
+    label: "In-Country Remote",
+  },
+];
+
+export const SENIORITY_OPTIONS = [
+  {
+    seniorityOptionId: "EntryLevel",
+    label: "Entry Level",
+  },
+  {
+    seniorityOptionId: "MidLevel",
+    label: "Mid Level",
+  },
+  {
+    seniorityOptionId: "Senior",
+    label: "Senior",
+  },
+  {
+    seniorityOptionId: "Manager",
+    label: "Manager",
+  },
+  {
+    seniorityOptionId: "Director",
+    label: "Director",
+  },
+  {
+    seniorityOptionId: "Executive",
+    label: "Executive",
+  },
+];

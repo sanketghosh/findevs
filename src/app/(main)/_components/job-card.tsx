@@ -23,11 +23,12 @@ export default function JobCard({ job }: JobCardProps) {
     companyName,
     createdAt,
     jobType,
-    location,
+    city,
     salary,
     seniority,
     title,
     workplace,
+    country,
   } = job;
 
   return (
@@ -48,7 +49,10 @@ export default function JobCard({ job }: JobCardProps) {
       </div>
       <div className="line-clamp-1 flex items-center gap-1 font-medium">
         <MapPinIcon size={17} />
-        <p className="line-clamp-1 text-sm">{location}</p>
+        <p className="line-clamp-1 text-sm">
+          {city}, {country}
+          {workplace === "InCountryRemote" && ` (In Country Remote)`}
+        </p>
       </div>
 
       {/* 3rd para */}
@@ -59,25 +63,27 @@ export default function JobCard({ job }: JobCardProps) {
         </div> */}
         <Badge variant={"secondary"}>
           <WalletIcon size={17} />
-          <p className="ml-1.5 text-sm">{salary} INR PA</p>
+          <p className="ml-1.5">{salary} INR PA</p>
         </Badge>
         <Badge variant={"secondary"}>
           <ClockIcon size={17} />
-          <p className="ml-1.5 text-sm">{jobType}</p>
+          <p className="ml-1.5">{jobType}</p>
         </Badge>
         <Badge variant={"secondary"}>
           <BriefcaseBusinessIcon size={17} />
-          <p className="ml-1.5 text-sm">{seniority}</p>
+          <p className="ml-1.5">{seniority}</p>
         </Badge>
       </div>
       <div className="flex w-full items-center justify-between">
-        <h2 className="font-medium">{format(createdAt, "PPP")}</h2>
+        <h2 className="text-sm font-semibold text-muted-foreground">
+          {format(createdAt, "PPP")}
+        </h2>
         <button>
           <HeartIcon />
         </button>
       </div>
       <Badge
-        className="absolute -top-1 right-2 text-sm font-medium"
+        className="absolute -top-1 right-2 text-sm font-semibold"
         variant={"secondary"}
       >
         {workplace}

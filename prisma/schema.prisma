@@ -19,12 +19,14 @@ enum JobType {
   PartTime
   Internship
   Contract
+  Volunteer
 }
 
 enum Workplace {
   Remote
   Hybrid
   OnSite
+  InCountryRemote
 }
 
 enum Seniority {
@@ -106,7 +108,9 @@ model Job {
   jobType         JobType
   workplace       Workplace
   seniority       Seniority
-  location        String?
+  city            String?
+  country         String
+  address         String?
   employerEmail   String?
   employerWebsite String?
   salary          Int

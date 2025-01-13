@@ -17,10 +17,27 @@ export default async function Home() {
       <Hero />
       <div className="flex flex-col gap-5 lg:flex-row">
         <SidebarContainer />
-        <div className="block lg:hidden">
-          <FilterDrawer />
-        </div>
+
         <div className="w-full space-y-6">
+          {/* search box */}
+          <div className="flex w-full items-center">
+            <div className="h-10 w-full overflow-hidden rounded-l-md border p-1 md:h-14">
+              <input
+                type="text"
+                placeholder="Search title, description or company..."
+                className="w-ful h-full w-full border-none px-3 outline-none"
+              />
+            </div>
+            <button className="h-10 shrink-0 rounded-r-md bg-primary px-5 text-background hover:bg-primary/90 md:h-14">
+              {" "}
+              Search
+            </button>
+          </div>
+          <div className="block lg:hidden">
+            <FilterDrawer />
+          </div>
+
+          {/*  */}
           <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-2">
             {jobs.map((item) => (
               <JobCard key={item.id} job={item} />

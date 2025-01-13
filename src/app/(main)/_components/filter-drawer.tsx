@@ -13,11 +13,20 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { FilterIcon, SlidersHorizontalIcon } from "lucide-react";
 
 export default function FilterDrawer() {
   return (
     <Drawer>
-      <DrawerTrigger>Open</DrawerTrigger>
+      <DrawerTrigger asChild>
+        <Button
+          className="flex w-full items-center gap-1"
+          variant={"secondary"}
+        >
+          <SlidersHorizontalIcon size={18} />
+          Filter Jobs
+        </Button>
+      </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
           <DrawerTitle className="text-left">Filter</DrawerTitle>

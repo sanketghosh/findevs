@@ -12,20 +12,38 @@ export async function fetchAllJobs() {
   return { jobs };
 }
 
-export async function fetchDistinctLocations() {
-  const distinctLocations = (await prisma.job
+export async function fetchDistinctCities() {
+  const distinctCities = (await prisma.job
     .findMany({
       where: {
         approved: true,
       },
       select: {
-        location: true,
+        city: true,
       },
-      distinct: ["location"],
+      distinct: ["city"],
     })
-    .then((locations) =>
-      locations.map(({ location }) => location).filter(Boolean),
+    .then((cities) =>
+      cities.map(({ city }) => city).filter(Boolean),
     )) as string[];
 
-  return { distinctLocations };
+  return { distinctCities };
+}
+
+export async function fetchDistinctCountries() {
+  const distinctCountries = (await prisma.job
+    .findMany({
+      where: {
+        approved: true,
+      },
+      select: {
+        country: true,
+      },
+      distinct: ["country"],
+    })
+    .then((countries) =>
+      countries.map(({ country }) => country).filter(Boolean),
+    )) as string[];
+
+  return { distinctCountries };
 }
