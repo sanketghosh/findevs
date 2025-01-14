@@ -34,12 +34,6 @@ export default function FilterDrawer() {
         <div className="p-3">
           <FilterOptions />
         </div>
-        <DrawerFooter>
-          <Button>Submit</Button>
-          <DrawerClose asChild>
-            <Button variant="outline">Cancel</Button>
-          </DrawerClose>
-        </DrawerFooter>
       </DrawerContent>
     </Drawer>
   );

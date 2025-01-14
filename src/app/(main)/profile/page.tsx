@@ -30,7 +30,7 @@ export default async function Profile() {
       <div className="flex flex-col items-center space-y-3">
         <h2>Sessions</h2>
         <Card className="max-w-md bg-secondary p-3 font-medium">
-          <p>
+          <p className="text-center text-sm text-muted-foreground">
             Session created at {sessionCreatedAt?.toISOString()} and session
             expires at {sessionExpiresAt?.toISOString()}
           </p>

@@ -1,6 +1,9 @@
+"use client";
+
 // packages
 import { format } from "date-fns";
 import {
+  BookmarkIcon,
   BriefcaseBusinessIcon,
   ClockIcon,
   HeartIcon,
@@ -12,12 +15,17 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Job } from "@prisma/client";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
+import { convertToReadableString } from "@/app/utils/convert-readable-string";
 
 type JobCardProps = {
   job: Job;
 };
 
 export default function JobCard({ job }: JobCardProps) {
+  const [bookmark, setBookmark] = useState<boolean>(false);
+
   const {
     companyLogoUrl,
     companyName,
@@ -78,15 +86,17 @@ export default function JobCard({ job }: JobCardProps) {
         <h2 className="text-sm font-semibold text-muted-foreground">
           {format(createdAt, "PPP")}
         </h2>
-        <button>
-          <HeartIcon />
+        <button onClick={() => setBookmark(!bookmark)}>
+          <BookmarkIcon
+            className={cn(bookmark && "fill-teal-700 stroke-none")}
+          />
         </button>
       </div>
       <Badge
         className="absolute -top-1 right-2 text-sm font-semibold"
         variant={"secondary"}
       >
-        {workplace}
+        {convertToReadableString(workplace)}
       </Badge>
     </Card>
   );

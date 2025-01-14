@@ -3,6 +3,7 @@ import "@/app/globals.css";
 
 // components
 import Header from "@/app/(main)/_components/header";
+import Footer from "./_components/footer";
 
 export const metadata: Metadata = {
   title: "findevs",
@@ -22,6 +23,7 @@ export default function MainLayout({
           <div className="mx-auto max-w-[95rem] px-4 py-6 md:py-8 lg:px-6 xl:py-10">
             {children}
           </div>
+          <Footer />
         </main>
       </body>
     </html>

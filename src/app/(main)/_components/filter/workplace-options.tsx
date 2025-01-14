@@ -16,7 +16,11 @@ export default function WorkplaceOptions() {
               key={item.workplaceOptionId}
               className="flex items-center gap-1"
             >
-              <Checkbox id={item.workplaceOptionId} />
+              <Checkbox
+                id={item.workplaceOptionId}
+                name="workplaceOptions"
+                value={item.workplaceOptionId}
+              />
               <Label
                 htmlFor={item.workplaceOptionId}
                 className="font-medium capitalize"

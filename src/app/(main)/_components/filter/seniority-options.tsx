@@ -18,7 +18,8 @@ export default function SeniorityOptions() {
             >
               <Checkbox
                 id={item.seniorityOptionId}
-                name={item.seniorityOptionId}
+                value={item.seniorityOptionId}
+                name="seniorityOptions"
               />
               <Label
                 htmlFor={item.seniorityOptionId}

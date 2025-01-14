@@ -13,7 +13,11 @@ export default function JobTypes() {
         {JOB_TYPES.map((item) => {
           return (
             <div key={item.jobTypeId} className="flex items-center gap-1">
-              <Checkbox id={item.jobTypeId} name={item.jobTypeId} />
+              <Checkbox
+                id={item.jobTypeId}
+                value={item.jobTypeId}
+                name="jobTypes"
+              />
               <Label
                 htmlFor={item.jobTypeId}
                 className="font-medium capitalize"

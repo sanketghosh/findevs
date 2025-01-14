@@ -2,6 +2,7 @@
 import { Toaster } from "sonner";
 import type { Metadata } from "next";
 import "@/app/globals.css";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 
 export const metadata: Metadata = {
   title: "findevs",
@@ -14,11 +15,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
-        <Toaster />
-        {children}
-      </body>
-    </html>
+    <>
+      <html lang="en">
+        <head />
+        <body>
+          <Toaster />
+          {children}
+        </body>
+      </html>
+    </>
   );
 }
