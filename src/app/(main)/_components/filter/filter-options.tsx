@@ -1,11 +1,10 @@
 // local modules
+import { filterJobsAction } from "@/app/(main)/_actions/filter-jobs-action";
 import { cn } from "@/lib/utils";
 import {
   fetchDistinctCities,
   fetchDistinctCountries,
 } from "@/app/(main)/_fetchers";
-import { createSearchParams } from "@/app/utils/create-search-params";
-import { JobFilterSchema } from "@/app/(main)/_schemas/job-filter";
 
 // components
 import JobTypes from "@/app/(main)/_components/filter/job-types";
@@ -14,40 +13,16 @@ import WorkplaceOptions from "@/app/(main)/_components/filter/workplace-options"
 import { Label } from "@/components/ui/label";
 import CustomSelect from "@/components/ui/custom-select";
 import { Button } from "@/components/ui/button";
+import { JobFilterSchemaType } from "../../_schemas/job-filter";
 
-/**
- *
- * @param formData
- */
-
-export async function filterJobsAction(formData: FormData) {
-  "use server";
-
-  const values = {
-    jobTypes: formData.getAll("jobTypes"),
-    seniorityOptions: formData.getAll("seniorityOptions"),
-    workplaceOptions: formData.getAll("workplaceOptions"),
-    city: formData.get("city") || null,
-    country: formData.get("country") || null,
-  };
-
-  // Validate using JobFilterSchema
-  const parsedValues = JobFilterSchema.parse(values);
-
-  // console.log(parsedValues);
-
-  /* const searchParams = new URLSearchParams({
-    ...(parsedValues.city && { city: parsedValues.city.trim() }),
-    ...(parsedValues.country && { country: parsedValues.country.trim() }),
-  }); */
-
-  const searchParam = createSearchParams(parsedValues);
-  console.log(searchParam);
-}
+type FilterOptionsProps = {
+  defaultValues: JobFilterSchemaType;
+} & React.ComponentPropsWithRef<"div">;
 
 export default async function FilterOptions({
   className,
-}: React.ComponentPropsWithRef<"div">) {
+  defaultValues,
+}: FilterOptionsProps) {
   /** */
   const { distinctCities } = await fetchDistinctCities();
   const { distinctCountries } = await fetchDistinctCountries();
@@ -60,8 +35,12 @@ export default async function FilterOptions({
           <Label htmlFor="city" className="text-base font-medium capitalize">
             Cities
           </Label>
-          <CustomSelect id="city" name="city">
-            <option>All Cities</option>
+          <CustomSelect
+            id="city"
+            name="city"
+            defaultValue={defaultValues?.city || ""}
+          >
+            <option value={""}>All Cities</option>
             {distinctCities.map((city) => (
               <option
                 value={city}
@@ -78,8 +57,12 @@ export default async function FilterOptions({
           <Label htmlFor="country" className="text-base font-medium capitalize">
             Countries
           </Label>
-          <CustomSelect id="country" name="country">
-            <option>All Countries</option>
+          <CustomSelect
+            id="country"
+            name="country"
+            defaultValue={defaultValues?.country || ""}
+          >
+            <option value={""}>All Countries</option>
             {distinctCountries.map((country) => (
               <option
                 value={country}
@@ -91,10 +74,16 @@ export default async function FilterOptions({
             ))}
           </CustomSelect>
         </div>
-        <JobTypes />
-        <SeniorityOptions />
-        <WorkplaceOptions />
-        <Button className="w-full">Apply Filter</Button>
+        <JobTypes defaultJobTypes={defaultValues?.jobTypes || []} />
+        <SeniorityOptions
+          defaultSeniorityOptions={defaultValues?.seniorityOptions || []}
+        />
+        <WorkplaceOptions
+          defaultWorkplaceOptions={defaultValues?.workplaceOptions || []}
+        />
+        <Button className="w-full" type="submit">
+          Apply Filter
+        </Button>
       </form>
     </div>
   );

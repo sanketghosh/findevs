@@ -5,7 +5,13 @@ import { JOB_TYPES } from "@/app/(main)/_data";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 
-export default function JobTypes() {
+type JobTypesProps = {
+  defaultJobTypes?: string[];
+};
+
+export default function JobTypes({ defaultJobTypes }: JobTypesProps) {
+  // console.log(defaultJobTypes);
+
   return (
     <div className="space-y-2 rounded-md border p-3">
       <h1 className="font-semibold">Job Types</h1>
@@ -17,6 +23,7 @@ export default function JobTypes() {
                 id={item.jobTypeId}
                 value={item.jobTypeId}
                 name="jobTypes"
+                defaultChecked={defaultJobTypes?.includes(item.jobTypeId)}
               />
               <Label
                 htmlFor={item.jobTypeId}

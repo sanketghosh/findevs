@@ -5,7 +5,13 @@ import { SENIORITY_OPTIONS } from "@/app/(main)/_data";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 
-export default function SeniorityOptions() {
+type SeniorityOptionsProps = {
+  defaultSeniorityOptions?: string[];
+};
+
+export default function SeniorityOptions({
+  defaultSeniorityOptions,
+}: SeniorityOptionsProps) {
   return (
     <div className="space-y-2 rounded-md border p-3">
       <h1 className="font-semibold">Seniority</h1>
@@ -20,6 +26,9 @@ export default function SeniorityOptions() {
                 id={item.seniorityOptionId}
                 value={item.seniorityOptionId}
                 name="seniorityOptions"
+                defaultChecked={defaultSeniorityOptions?.includes(
+                  item.seniorityOptionId,
+                )}
               />
               <Label
                 htmlFor={item.seniorityOptionId}

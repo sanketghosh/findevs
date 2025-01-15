@@ -6,11 +6,11 @@ import {
 } from "@/app/(main)/_data";
 
 const validJobTypeIds = JOB_TYPES.map((item) => item.jobTypeId);
-const validWorkplaceOptionIds = WORKPLACE_OPTIONS.map(
-  (item) => item.workplaceOptionId,
-);
 const validSeniorityOptionIds = SENIORITY_OPTIONS.map(
   (item) => item.seniorityOptionId,
+);
+const validWorkplaceOptionIds = WORKPLACE_OPTIONS.map(
+  (item) => item.workplaceOptionId,
 );
 
 /**

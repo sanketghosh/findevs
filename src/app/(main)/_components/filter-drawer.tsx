@@ -14,8 +14,13 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { FilterIcon, SlidersHorizontalIcon } from "lucide-react";
+import { JobFilterSchemaType } from "../_schemas/job-filter";
 
-export default function FilterDrawer() {
+type FilterDrawerProps = {
+  defaultValues: JobFilterSchemaType;
+};
+
+export default function FilterDrawer({ defaultValues }: FilterDrawerProps) {
   return (
     <Drawer>
       <DrawerTrigger asChild>
@@ -32,7 +37,7 @@ export default function FilterDrawer() {
           <DrawerTitle className="text-left">Filter</DrawerTitle>
         </DrawerHeader>
         <div className="p-3">
-          <FilterOptions />
+          <FilterOptions defaultValues={defaultValues} />
         </div>
       </DrawerContent>
     </Drawer>

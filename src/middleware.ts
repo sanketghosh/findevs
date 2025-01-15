@@ -13,7 +13,7 @@ export default async function authMiddleware(request: NextRequest) {
     },
   });
 
-  console.log(session);
+  // console.log(session);
 
   if (!session) {
     return NextResponse.redirect(new URL("/sign-in", request.url));
@@ -55,6 +55,6 @@ export const config = {
     /* "/((?!.+\\.[\\w]+$|_next).*)",
     "/",
     "/(api|trpc)(.*)", */
-    "/",
+    // "/",
   ],
 };

@@ -2,23 +2,28 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 
 // local modules
-import { fetchAllJobs } from "@/app/(main)/_fetchers";
+import { JobFilterSchemaType } from "@/app/(main)/_schemas/job-filter";
 
 // components
-import JobCard from "@/app/(main)/_components/job-card";
 import { Button } from "@/components/ui/button";
 import FilterDrawer from "@/app/(main)/_components/filter-drawer";
 import SidebarContainer from "@/app/(main)/_components/sidebar-container";
 import Hero from "@/app/(main)/_components/hero";
+import JobList from "@/app/(main)/_components/job/job-list";
+import { Suspense } from "react";
 
-export default async function Home() {
-  const { jobs } = await fetchAllJobs();
+type HomePageProps = {
+  searchParams: Promise<JobFilterSchemaType>;
+};
+
+export default async function Home({ searchParams }: HomePageProps) {
+  const resolvedSearchParams = await searchParams;
 
   return (
     <div className="space-y-6">
       <Hero />
       <div className="flex flex-col gap-5 lg:flex-row">
-        <SidebarContainer />
+        <SidebarContainer defaultValues={resolvedSearchParams} />
 
         <div className="w-full space-y-6">
           {/* search box */}
@@ -36,15 +41,13 @@ export default async function Home() {
             </button>
           </div>
           <div className="block xl:hidden">
-            <FilterDrawer />
+            <FilterDrawer defaultValues={resolvedSearchParams} />
           </div>
 
-          {/*  */}
-          <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-2">
-            {jobs.map((item) => (
-              <JobCard key={item.id} job={item} />
-            ))}
-          </div>
+          {/* JOB LIST  */}
+
+          <JobList jobListFilterValues={resolvedSearchParams} />
+
           <div className="flex items-center justify-end gap-4">
             <Button variant={"default"} size={"sm"}>
               <ChevronLeftIcon />

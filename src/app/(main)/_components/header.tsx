@@ -14,7 +14,10 @@ export default async function Header() {
   return (
     <header className="sticky top-0 z-20 h-16 w-full bg-secondary text-foreground">
       <div className="mx-auto flex h-full max-w-[95rem] items-center justify-between px-4 lg:px-6">
-        <Link href={"/"} className="text-xl font-bold md:text-2xl lg:text-3xl">
+        <Link
+          href={"/"}
+          className="font-playfairDisplay text-xl font-bold md:text-2xl lg:text-3xl"
+        >
           findevs
         </Link>
         <DesktopNav email={email} id={id} name={name} />

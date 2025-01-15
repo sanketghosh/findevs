@@ -3,8 +3,15 @@ import { SlidersHorizontalIcon } from "lucide-react";
 
 // components
 import FilterOptions from "@/app/(main)/_components/filter/filter-options";
+import { JobFilterSchemaType } from "../_schemas/job-filter";
 
-export default function SidebarContainer() {
+type SidebarContainerProps = {
+  defaultValues: JobFilterSchemaType;
+};
+
+export default function SidebarContainer({
+  defaultValues,
+}: SidebarContainerProps) {
   return (
     <aside className="sticky top-20 hidden h-fit xl:block xl:w-[32rem]">
       <div className="h-full w-full rounded-md border p-3 md:rounded-lg">
@@ -12,7 +19,7 @@ export default function SidebarContainer() {
           <SlidersHorizontalIcon size={17} />
           <h2 className="uppercase">Filters</h2>
         </div>
-        <FilterOptions />
+        <FilterOptions defaultValues={defaultValues} />
       </div>
     </aside>
   );

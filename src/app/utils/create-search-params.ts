@@ -3,6 +3,11 @@ import { JobFilterSchemaType } from "../(main)/_schemas/job-filter";
 export const createSearchParams = (filters: JobFilterSchemaType) => {
   const params = new URLSearchParams();
 
+  /* const searchParams = new URLSearchParams({
+    ...(parsedValues.city && { city: parsedValues.city.trim() }),
+    ...(parsedValues.country && { country: parsedValues.country.trim() }),
+  }); */
+
   // add single value fields if provided
   if (filters.city) params.set("city", filters.city);
   if (filters.country) params.set("country", filters.country);
