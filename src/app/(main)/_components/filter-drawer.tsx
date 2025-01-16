@@ -1,20 +1,19 @@
 // packages
+import { SlidersHorizontalIcon } from "lucide-react";
+
+// local modules
+import { JobFilterSchemaType } from "@/app/(main)/_schemas/job-filter";
 
 // components
 import FilterOptions from "@/app/(main)/_components/filter/filter-options";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { FilterIcon, SlidersHorizontalIcon } from "lucide-react";
-import { JobFilterSchemaType } from "../_schemas/job-filter";
 
 type FilterDrawerProps = {
   defaultValues: JobFilterSchemaType;

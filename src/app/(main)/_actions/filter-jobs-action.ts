@@ -7,6 +7,7 @@ import { createSearchParams } from "@/app/utils/create-search-params";
 import { JobFilterSchema } from "@/app/(main)/_schemas/job-filter";
 
 export async function filterJobsAction(formData: FormData) {
+  // form values by name
   const values = {
     jobTypes: formData.getAll("jobTypes"),
     seniorityOptions: formData.getAll("seniorityOptions"),
@@ -15,6 +16,7 @@ export async function filterJobsAction(formData: FormData) {
     country: formData.get("country") || undefined,
   };
 
+  // normalize the form values
   const normalizeValues = {
     ...values,
     jobTypes: values.jobTypes.length > 0 ? values.jobTypes : undefined,
@@ -24,7 +26,6 @@ export async function filterJobsAction(formData: FormData) {
       values.workplaceOptions.length > 0 ? values.workplaceOptions : undefined,
   };
 
-  // Validate using JobFilterSchema
   const parsedValues = JobFilterSchema.parse(normalizeValues);
 
   // console.log(parsedValues);

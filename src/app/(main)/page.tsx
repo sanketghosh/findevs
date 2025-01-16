@@ -46,7 +46,9 @@ export default async function Home({ searchParams }: HomePageProps) {
 
           {/* JOB LIST  */}
 
-          <JobList jobListFilterValues={resolvedSearchParams} />
+          <Suspense>
+            <JobList jobListFilterValues={resolvedSearchParams} />
+          </Suspense>
 
           <div className="flex items-center justify-end gap-4">
             <Button variant={"default"} size={"sm"}>

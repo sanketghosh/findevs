@@ -15,7 +15,7 @@ export default function Footer() {
           target="_blank"
           className="flex items-center gap-1 text-sm font-semibold lowercase text-muted-foreground hover:underline hover:underline-offset-4"
         >
-          Source Code
+          Github
         </a>
       </div>
     </footer>

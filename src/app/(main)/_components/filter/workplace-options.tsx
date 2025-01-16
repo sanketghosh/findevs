@@ -12,17 +12,28 @@ type WorkplaceOptionsProps = {
 export default function WorkplaceOptions({
   defaultWorkplaceOptions,
 }: WorkplaceOptionsProps) {
-  console.log(defaultWorkplaceOptions);
+  // console.log(defaultWorkplaceOptions);
 
   return (
     <div className="space-y-2 rounded-md border p-3">
       <h1 className="font-semibold">Workplace</h1>
       <div className="grid grid-cols-2 gap-2">
         {WORKPLACE_OPTIONS.map((item) => {
-          const isChecked = defaultWorkplaceOptions?.includes(
-            item.workplaceOptionId,
-          );
-          // console.log(item.workplaceOptionId, isChecked);
+          /**
+           *
+           * The issue was InCountryRemote also contains the string Remote
+           *
+           *
+           * check if defaultWorkplaceOptions is an array using Array.isArray().
+           *
+           * If it's an array, we use the includes() method to check if it includes item.workplaceOptionId.
+           *
+           * If it's not an array, we assume it's a string and use the === operator to check for an exact match.
+           *
+           */
+          const isChecked = Array.isArray(defaultWorkplaceOptions)
+            ? defaultWorkplaceOptions.includes(item.workplaceOptionId)
+            : defaultWorkplaceOptions === item.workplaceOptionId;
           return (
             <div
               key={item.workplaceOptionId}

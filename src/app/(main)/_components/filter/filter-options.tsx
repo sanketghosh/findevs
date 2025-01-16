@@ -5,6 +5,7 @@ import {
   fetchDistinctCities,
   fetchDistinctCountries,
 } from "@/app/(main)/_fetchers";
+import { JobFilterSchemaType } from "@/app/(main)/_schemas/job-filter";
 
 // components
 import JobTypes from "@/app/(main)/_components/filter/job-types";
@@ -13,7 +14,6 @@ import WorkplaceOptions from "@/app/(main)/_components/filter/workplace-options"
 import { Label } from "@/components/ui/label";
 import CustomSelect from "@/components/ui/custom-select";
 import { Button } from "@/components/ui/button";
-import { JobFilterSchemaType } from "../../_schemas/job-filter";
 
 type FilterOptionsProps = {
   defaultValues: JobFilterSchemaType;
