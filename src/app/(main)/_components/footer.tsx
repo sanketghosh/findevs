@@ -1,4 +1,4 @@
-import { GithubIcon } from "lucide-react";
+import { ExternalLinkIcon, GithubIcon } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -13,9 +13,11 @@ export default function Footer() {
         <a
           href="https://github.com/sanketghosh/findevs"
           target="_blank"
-          className="flex items-center gap-1 text-sm font-semibold lowercase text-muted-foreground hover:underline hover:underline-offset-4"
+          className="flex items-center gap-1 text-sm font-semibold text-muted-foreground hover:underline hover:underline-offset-4"
         >
+          {/* <GithubIcon size={15} /> */}
           Github
+          <ExternalLinkIcon size={15} />
         </a>
       </div>
     </footer>

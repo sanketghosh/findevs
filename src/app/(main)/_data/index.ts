@@ -1,4 +1,5 @@
-[
+export const COUNTRY_LIST = [
+  { name: "Anywhere", code: "ANYWHERE" },
   { name: "Afghanistan", code: "AF" },
   { name: "Åland Islands", code: "AX" },
   { name: "Albania", code: "AL" },
