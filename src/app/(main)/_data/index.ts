@@ -326,3 +326,650 @@ export const SENIORITY_OPTIONS = [
     label: "Executive",
   },
 ];
+
+export const CURRENCY_TYPES = [
+  {
+    countryName: "United Arab Emirates Dirham",
+    currency: "AED",
+  },
+  {
+    countryName: "Afghan Afghani",
+    currency: "AFN",
+  },
+  {
+    countryName: "Albanian Lek",
+    currency: "ALL",
+  },
+  {
+    countryName: "Armenian Dram",
+    currency: "AMD",
+  },
+  {
+    countryName: "Netherlands Antillean Guilder",
+    currency: "ANG",
+  },
+  {
+    countryName: "Angolan Kwanza",
+    currency: "AOA",
+  },
+  {
+    countryName: "Argentine Peso",
+    currency: "ARS",
+  },
+  {
+    countryName: "Australian Dollar",
+    currency: "AUD",
+  },
+  {
+    countryName: "Aruban Florin",
+    currency: "AWG",
+  },
+  {
+    countryName: "Azerbaijani Manat",
+    currency: "AZN",
+  },
+  {
+    countryName: "Bosnia-Herzegovina Convertible Mark",
+    currency: "BAM",
+  },
+  {
+    countryName: "Barbadian Dollar",
+    currency: "BBD",
+  },
+  {
+    countryName: "Bangladeshi Taka",
+    currency: "BDT",
+  },
+  {
+    countryName: "Bulgarian Lev",
+    currency: "BGN",
+  },
+  {
+    countryName: "Bahraini Dinar",
+    currency: "BHD",
+  },
+  {
+    countryName: "Burundian Franc",
+    currency: "BIF",
+  },
+  {
+    countryName: "Bermudian Dollar",
+    currency: "BMD",
+  },
+  {
+    countryName: "Brunei Dollar",
+    currency: "BND",
+  },
+  {
+    countryName: "Bolivian Boliviano",
+    currency: "BOB",
+  },
+  {
+    countryName: "Brazilian Real",
+    currency: "BRL",
+  },
+  {
+    countryName: "Bahamian Dollar",
+    currency: "BSD",
+  },
+  {
+    countryName: "Bhutanese Ngultrum",
+    currency: "BTN",
+  },
+  {
+    countryName: "Botswanan Pula",
+    currency: "BWP",
+  },
+  {
+    countryName: "Belarusian Ruble",
+    currency: "BYN",
+  },
+  {
+    countryName: "Belize Dollar",
+    currency: "BZD",
+  },
+  {
+    countryName: "Canadian Dollar",
+    currency: "CAD",
+  },
+  {
+    countryName: "Congolese Franc",
+    currency: "CDF",
+  },
+  {
+    countryName: "Swiss Franc",
+    currency: "CHF",
+  },
+  {
+    countryName: "Chilean Peso",
+    currency: "CLP",
+  },
+  {
+    countryName: "Chinese Yuan",
+    currency: "CNY",
+  },
+  {
+    countryName: "Colombian Peso",
+    currency: "COP",
+  },
+  {
+    countryName: "Costa Rican Colón",
+    currency: "CRC",
+  },
+  {
+    countryName: "Cuban Peso",
+    currency: "CUP",
+  },
+  {
+    countryName: "Cape Verdean Escudo",
+    currency: "CVE",
+  },
+  {
+    countryName: "Czech Koruna",
+    currency: "CZK",
+  },
+  {
+    countryName: "Djiboutian Franc",
+    currency: "DJF",
+  },
+  {
+    countryName: "Danish Krone",
+    currency: "DKK",
+  },
+  {
+    countryName: "Dominican Peso",
+    currency: "DOP",
+  },
+  {
+    countryName: "Algerian Dinar",
+    currency: "DZD",
+  },
+  {
+    countryName: "Egyptian Pound",
+    currency: "EGP",
+  },
+  {
+    countryName: "Eritrean Nakfa",
+    currency: "ERN",
+  },
+  {
+    countryName: "Ethiopian Birr",
+    currency: "ETB",
+  },
+  {
+    countryName: "Euro",
+    currency: "EUR",
+  },
+  {
+    countryName: "Fijian Dollar",
+    currency: "FJD",
+  },
+  {
+    countryName: "Falkland Islands Pound",
+    currency: "FKP",
+  },
+  {
+    countryName: "Faroese Króna",
+    currency: "FOK",
+  },
+  {
+    countryName: "British Pound Sterling",
+    currency: "GBP",
+  },
+  {
+    countryName: "Georgian Lari",
+    currency: "GEL",
+  },
+  {
+    countryName: "Guernsey Pound",
+    currency: "GGP",
+  },
+  {
+    countryName: "Ghanaian Cedi",
+    currency: "GHS",
+  },
+  {
+    countryName: "Gibraltar Pound",
+    currency: "GIP",
+  },
+  {
+    countryName: "Gambian Dalasi",
+    currency: "GMD",
+  },
+  {
+    countryName: "Guinean Franc",
+    currency: "GNF",
+  },
+  {
+    countryName: "Guatemalan Quetzal",
+    currency: "GTQ",
+  },
+  {
+    countryName: "Guyanaese Dollar",
+    currency: "GYD",
+  },
+  {
+    countryName: "Hong Kong Dollar",
+    currency: "HKD",
+  },
+  {
+    countryName: "Honduran Lempira",
+    currency: "HNL",
+  },
+  {
+    countryName: "Croatian Kuna",
+    currency: "HRK",
+  },
+  {
+    countryName: "Haitian Gourde",
+    currency: "HTG",
+  },
+  {
+    countryName: "Hungarian Forint",
+    currency: "HUF",
+  },
+  {
+    countryName: "Indonesian Rupiah",
+    currency: "IDR",
+  },
+  {
+    countryName: "Israeli New Shekel",
+    currency: "ILS",
+  },
+  {
+    countryName: "Isle of Man Pound",
+    currency: "IMP",
+  },
+  {
+    countryName: "Indian Rupee",
+    currency: "INR",
+  },
+  {
+    countryName: "Iraqi Dinar",
+    currency: "IQD",
+  },
+  {
+    countryName: "Iranian Rial",
+    currency: "IRR",
+  },
+  {
+    countryName: "Icelandic Króna",
+    currency: "ISK",
+  },
+  {
+    countryName: "Jersey Pound",
+    currency: "JEP",
+  },
+  {
+    countryName: "Jamaican Dollar",
+    currency: "JMD",
+  },
+  {
+    countryName: "Jordanian Dinar",
+    currency: "JOD",
+  },
+  {
+    countryName: "Japanese Yen",
+    currency: "JPY",
+  },
+  {
+    countryName: "Kenyan Shilling",
+    currency: "KES",
+  },
+  {
+    countryName: "Kyrgystani Som",
+    currency: "KGS",
+  },
+  {
+    countryName: "Cambodian Riel",
+    currency: "KHR",
+  },
+  {
+    countryName: "Kiribati Dollar",
+    currency: "KID",
+  },
+  {
+    countryName: "Comorian Franc",
+    currency: "KMF",
+  },
+  {
+    countryName: "South Korean Won",
+    currency: "KRW",
+  },
+  {
+    countryName: "Kuwaiti Dinar",
+    currency: "KWD",
+  },
+  {
+    countryName: "Cayman Islands Dollar",
+    currency: "KYD",
+  },
+  {
+    countryName: "Kazakhstani Tenge",
+    currency: "KZT",
+  },
+  {
+    countryName: "Lao Kip",
+    currency: "LAK",
+  },
+  {
+    countryName: "Lebanese Pound",
+    currency: "LBP",
+  },
+  {
+    countryName: "Sri Lankan Rupee",
+    currency: "LKR",
+  },
+  {
+    countryName: "Liberian Dollar",
+    currency: "LRD",
+  },
+  {
+    countryName: "Lesotho Loti",
+    currency: "LSL",
+  },
+  {
+    countryName: "Libyan Dinar",
+    currency: "LYD",
+  },
+  {
+    countryName: "Moroccan Dirham",
+    currency: "MAD",
+  },
+  {
+    countryName: "Moldovan Leu",
+    currency: "MDL",
+  },
+  {
+    countryName: "Malagasy Ariary",
+    currency: "MGA",
+  },
+  {
+    countryName: "Macedonian Denar",
+    currency: "MKD",
+  },
+  {
+    countryName: "Myanmar Kyat",
+    currency: "MMK",
+  },
+  {
+    countryName: "Mongolian Tugrik",
+    currency: "MNT",
+  },
+  {
+    countryName: "Macanese Pataca",
+    currency: "MOP",
+  },
+  {
+    countryName: "Mauritanian Ouguiya",
+    currency: "MRU",
+  },
+  {
+    countryName: "Mauritian Rupee",
+    currency: "MUR",
+  },
+  {
+    countryName: "Maldivian Rufiyaa",
+    currency: "MVR",
+  },
+  {
+    countryName: "Malawian Kwacha",
+    currency: "MWK",
+  },
+  {
+    countryName: "Mexican Peso",
+    currency: "MXN",
+  },
+  {
+    countryName: "Malaysian Ringgit",
+    currency: "MYR",
+  },
+  {
+    countryName: "Mozambican Metical",
+    currency: "MZN",
+  },
+  {
+    countryName: "Namibian Dollar",
+    currency: "NAD",
+  },
+  {
+    countryName: "Nigerian Naira",
+    currency: "NGN",
+  },
+  {
+    countryName: "Nicaraguan Córdoba",
+    currency: "NIO",
+  },
+  {
+    countryName: "Norwegian Krone",
+    currency: "NOK",
+  },
+  {
+    countryName: "Nepalese Rupee",
+    currency: "NPR",
+  },
+  {
+    countryName: "New Zealand Dollar",
+    currency: "NZD",
+  },
+  {
+    countryName: "Omani Rial",
+    currency: "OMR",
+  },
+  {
+    countryName: "Panamanian Balboa",
+    currency: "PAB",
+  },
+  {
+    countryName: "Peruvian Sol",
+    currency: "PEN",
+  },
+  {
+    countryName: "Papua New Guinean Kina",
+    currency: "PGK",
+  },
+  {
+    countryName: "Philippine Peso",
+    currency: "PHP",
+  },
+  {
+    countryName: "Pakistani Rupee",
+    currency: "PKR",
+  },
+  {
+    countryName: "Polish Zloty",
+    currency: "PLN",
+  },
+  {
+    countryName: "Paraguayan Guarani",
+    currency: "PYG",
+  },
+  {
+    countryName: "Qatari Rial",
+    currency: "QAR",
+  },
+  {
+    countryName: "Romanian Leu",
+    currency: "RON",
+  },
+  {
+    countryName: "Serbian Dinar",
+    currency: "RSD",
+  },
+  {
+    countryName: "Russian Ruble",
+    currency: "RUB",
+  },
+  {
+    countryName: "Rwandan Franc",
+    currency: "RWF",
+  },
+  {
+    countryName: "Saudi Riyal",
+    currency: "SAR",
+  },
+  {
+    countryName: "Solomon Islands Dollar",
+    currency: "SBD",
+  },
+  {
+    countryName: "Seychellois Rupee",
+    currency: "SCR",
+  },
+  {
+    countryName: "Sudanese Pound",
+    currency: "SDG",
+  },
+  {
+    countryName: "Swedish Krona",
+    currency: "SEK",
+  },
+  {
+    countryName: "Singapore Dollar",
+    currency: "SGD",
+  },
+  {
+    countryName: "Saint Helena Pound",
+    currency: "SHP",
+  },
+  {
+    countryName: "Sierra Leonean Leone",
+    currency: "SLE",
+  },
+  {
+    countryName: "Somali Shilling",
+    currency: "SOS",
+  },
+  {
+    countryName: "Surinamese Dollar",
+    currency: "SRD",
+  },
+  {
+    countryName: "South Sudanese Pound",
+    currency: "SSP",
+  },
+  {
+    countryName: "São Tomé and Príncipe Dobra",
+    currency: "STN",
+  },
+  {
+    countryName: "Syrian Pound",
+    currency: "SYP",
+  },
+  {
+    countryName: "Eswatini Lilangeni",
+    currency: "SZL",
+  },
+  {
+    countryName: "Thai Baht",
+    currency: "THB",
+  },
+  {
+    countryName: "Tajikistani Somoni",
+    currency: "TJS",
+  },
+  {
+    countryName: "Turkmenistani Manat",
+    currency: "TMT",
+  },
+  {
+    countryName: "Tunisian Dinar",
+    currency: "TND",
+  },
+  {
+    countryName: "Tongan Paʻanga",
+    currency: "TOP",
+  },
+  {
+    countryName: "Turkish Lira",
+    currency: "TRY",
+  },
+  {
+    countryName: "Trinidad and Tobago Dollar",
+    currency: "TTD",
+  },
+  {
+    countryName: "Tuvaluan Dollar",
+    currency: "TVD",
+  },
+  {
+    countryName: "New Taiwan Dollar",
+    currency: "TWD",
+  },
+  {
+    countryName: "Tanzanian Shilling",
+    currency: "TZS",
+  },
+  {
+    countryName: "Ukrainian Hryvnia",
+    currency: "UAH",
+  },
+  {
+    countryName: "Ugandan Shilling",
+    currency: "UGX",
+  },
+  {
+    countryName: "United States Dollar",
+    currency: "USD",
+  },
+  {
+    countryName: "Uruguayan Peso",
+    currency: "UYU",
+  },
+  {
+    countryName: "Uzbekistani Som",
+    currency: "UZS",
+  },
+  {
+    countryName: "Venezuelan Bolívar Soberano",
+    currency: "VES",
+  },
+  {
+    countryName: "Vietnamese Dong",
+    currency: "VND",
+  },
+  {
+    countryName: "Vanuatu Vatu",
+    currency: "VUV",
+  },
+  {
+    countryName: "Samoan Tala",
+    currency: "WST",
+  },
+  {
+    countryName: "Central African CFA Franc",
+    currency: "XAF",
+  },
+  {
+    countryName: "East Caribbean Dollar",
+    currency: "XCD",
+  },
+  {
+    countryName: "Special Drawing Rights",
+    currency: "XDR",
+  },
+  {
+    countryName: "West African CFA Franc",
+    currency: "XOF",
+  },
+  {
+    countryName: "CFP Franc",
+    currency: "XPF",
+  },
+  {
+    countryName: "Yemeni Rial",
+    currency: "YER",
+  },
+  {
+    countryName: "South African Rand",
+    currency: "ZAR",
+  },
+  {
+    countryName: "Zambian Kwacha",
+    currency: "ZMW",
+  },
+  {
+    countryName: "Zimbabwean Dollar",
+    currency: "ZWL",
+  },
+];

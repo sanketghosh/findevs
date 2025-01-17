@@ -13,7 +13,7 @@ import SeniorityOptions from "@/app/(main)/_components/filter/seniority-options"
 import WorkplaceOptions from "@/app/(main)/_components/filter/workplace-options";
 import { Label } from "@/components/ui/label";
 import CustomSelect from "@/components/ui/custom-select";
-import { Button } from "@/components/ui/button";
+import FormSubmitButton from "@/components/buttons/form-submit-button";
 
 type FilterOptionsProps = {
   defaultValues: JobFilterSchemaType;
@@ -81,9 +81,9 @@ export default async function FilterOptions({
         <WorkplaceOptions
           defaultWorkplaceOptions={defaultValues?.workplaceOptions || []}
         />
-        <Button className="w-full" type="submit">
+        <FormSubmitButton className="w-full" type="submit">
           Apply Filter
-        </Button>
+        </FormSubmitButton>
       </form>
     </div>
   );

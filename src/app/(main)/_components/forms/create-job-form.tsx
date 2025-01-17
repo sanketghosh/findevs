@@ -1,16 +1,32 @@
 "use client";
 
 // packages
+import { ImageIcon, Trash2Icon } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 // local modules
+import { cn } from "@/lib/utils";
 import {
   JobPostFormSchema,
   JobPostFormSchemaType,
 } from "@/app/(main)/_schemas/job-post-form";
+import {
+  COUNTRY_LIST,
+  CURRENCY_TYPES,
+  JOB_TYPES,
+  SENIORITY_OPTIONS,
+  WORKPLACE_OPTIONS,
+} from "@/app/(main)/_data";
+import { createJobAction } from "@/app/(main)/_actions/create-job-action";
 
 // components
+import DescriptionEditor from "@/app/(main)/_components/forms/description-editor";
+import CustomSelect from "@/components/ui/custom-select";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Form,
   FormControl,
@@ -21,13 +37,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import CustomSelect from "@/components/ui/custom-select";
-import {
-  COUNTRY_LIST,
-  JOB_TYPES,
-  SENIORITY_OPTIONS,
-  WORKPLACE_OPTIONS,
-} from "../../_data";
 import {
   Card,
   CardContent,
@@ -35,15 +44,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
-import { Separator } from "@/components/ui/separator";
-import DescriptionEditor from "../description-editor";
+import LoadingButton from "@/components/buttons/loading-button";
+import { Label } from "@/components/ui/label";
 
 export default function CreateJobForm() {
   const [cityDesc, setCityDesc] = useState<string | undefined | null>();
   const [countryDesc, setCountryDesc] = useState<string | undefined | null>();
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const form = useForm<JobPostFormSchemaType>({
     resolver: zodResolver(JobPostFormSchema),
@@ -58,12 +65,30 @@ export default function CreateJobForm() {
       country: "",
       address: "",
       employerEmail: "",
-      employeeWebsite: "",
+      employerWebsite: "",
       salary: "",
+      currency: "USD",
+      companyLogo: null,
     },
   });
 
-  async function onSubmitHandler() {}
+  const onSubmitJobCreateFormHandler = async (data: JobPostFormSchemaType) => {
+    // console.log(data);
+    const formData = new FormData();
+
+    Object.entries(data).forEach(([key, value]) => {
+      if (value) {
+        formData.append(key, value);
+      }
+    });
+
+    try {
+      await createJobAction(formData);
+      // console.log(formData);
+    } catch (error) {
+      alert("Something went wrong, try again.");
+    }
+  };
 
   return (
     <div>
@@ -78,16 +103,17 @@ export default function CreateJobForm() {
         <CardContent>
           <Form {...form}>
             <form
-              onSubmit={form.handleSubmit(onSubmitHandler)}
+              onSubmit={form.handleSubmit(onSubmitJobCreateFormHandler)}
+              noValidate
               className="space-y-4"
             >
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 <FormField
                   control={form.control}
                   name="title"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Job Title</FormLabel>
+                      <FormLabel>Job Title*</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
@@ -96,6 +122,7 @@ export default function CreateJobForm() {
                           // disabled={isPending}
                         />
                       </FormControl>
+                      <FormDescription>Job title is required</FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -105,7 +132,7 @@ export default function CreateJobForm() {
                   name="companyName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Company Name</FormLabel>
+                      <FormLabel>Company Name*</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
@@ -114,6 +141,34 @@ export default function CreateJobForm() {
                           // disabled={isPending}
                         />
                       </FormControl>
+                      <FormDescription>
+                        Company name is required
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="currency"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Currency of provided salary</FormLabel>
+                      <FormControl>
+                        <CustomSelect {...field}>
+                          <option value="" hidden>
+                            Select the currency
+                          </option>
+                          {CURRENCY_TYPES.map((item) => (
+                            <option key={item.currency} value={item.currency}>
+                              {`${item.currency} (${item.countryName})`}
+                            </option>
+                          ))}
+                        </CustomSelect>
+                      </FormControl>
+                      <FormDescription>
+                        If not selected, it defaults to USD.
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -123,7 +178,7 @@ export default function CreateJobForm() {
                   name="salary"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Salary (Per Annum)</FormLabel>
+                      <FormLabel>Salary (Per Annum)*</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
@@ -132,6 +187,7 @@ export default function CreateJobForm() {
                           // disabled={isPending}
                         />
                       </FormControl>
+                      <FormDescription>Default amount is USD.</FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -141,7 +197,7 @@ export default function CreateJobForm() {
                   name="jobType"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Job Type</FormLabel>
+                      <FormLabel>Job Type*</FormLabel>
                       <FormControl>
                         <CustomSelect {...field}>
                           <option value="" hidden>
@@ -154,6 +210,7 @@ export default function CreateJobForm() {
                           ))}
                         </CustomSelect>
                       </FormControl>
+                      <FormDescription>Job type is required.</FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -163,7 +220,7 @@ export default function CreateJobForm() {
                   name="workplace"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Workplace Type</FormLabel>
+                      <FormLabel>Workplace Type*</FormLabel>
                       <FormControl>
                         <CustomSelect
                           {...field}
@@ -204,6 +261,9 @@ export default function CreateJobForm() {
                           ))}
                         </CustomSelect>
                       </FormControl>
+                      <FormDescription>
+                        Workplace type is required.
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -213,7 +273,7 @@ export default function CreateJobForm() {
                   name="seniority"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Seniority Options</FormLabel>
+                      <FormLabel>Seniority Options*</FormLabel>
                       <FormControl>
                         <CustomSelect {...field}>
                           <option value="" hidden>
@@ -229,6 +289,9 @@ export default function CreateJobForm() {
                           ))}
                         </CustomSelect>
                       </FormControl>
+                      <FormDescription>
+                        Seniority option is required.
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -270,7 +333,7 @@ export default function CreateJobForm() {
                   name="country"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Workplace Country</FormLabel>
+                      <FormLabel>Workplace Country*</FormLabel>
                       <FormControl>
                         <CustomSelect
                           {...field}
@@ -289,6 +352,7 @@ export default function CreateJobForm() {
                               form.clearErrors("country");
                             }
                           }}
+                          // size={10}
                           className="max-h-60 overflow-auto"
                         >
                           <option value="" hidden>
@@ -301,7 +365,11 @@ export default function CreateJobForm() {
                           ))}
                         </CustomSelect>
                       </FormControl>
-                      <FormDescription>{countryDesc}</FormDescription>
+                      <FormDescription>
+                        {countryDesc
+                          ? countryDesc
+                          : "Set country. Remote workplace, sets it to 'Anywhere'."}
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -326,7 +394,7 @@ export default function CreateJobForm() {
                 />
                 <FormField
                   control={form.control}
-                  name="employeeWebsite"
+                  name="employerWebsite"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Employer Website</FormLabel>
@@ -336,6 +404,10 @@ export default function CreateJobForm() {
                           placeholder="https://employer.com"
                           type="url"
                           // disabled={isPending}
+                          onChange={(e) => {
+                            field.onChange(e);
+                            form.trigger("employerEmail");
+                          }}
                         />
                       </FormControl>
                       <FormMessage />
@@ -344,7 +416,7 @@ export default function CreateJobForm() {
                 />
               </div>
 
-              <div>
+              <div className="space-y-4">
                 <FormField
                   control={form.control}
                   name="address"
@@ -363,9 +435,103 @@ export default function CreateJobForm() {
                     </FormItem>
                   )}
                 />
-                <DescriptionEditor />
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Full Job Description*</FormLabel>
+                      <FormControl>
+                        <DescriptionEditor
+                          setValue={field.onChange}
+                          value={field.value}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        Job description is a must.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="companyLogo"
+                  render={({ field: { value, ...fieldValues } }) => (
+                    <FormItem>
+                      <Label>Logo Upload (Only one file & max size 2MB)</Label>
+                      <FormLabel
+                        className={cn(
+                          "flex w-full cursor-pointer flex-col items-center justify-center rounded-md border bg-background px-4 py-14 text-sm text-muted-foreground shadow-sm hover:bg-secondary",
+                          imagePreview && "pointer-events-none",
+                        )}
+                      >
+                        <ImageIcon className="size-6 stroke-muted-foreground md:size-8 lg:size-10" />
+                        <h1 className="font-semibold capitalize text-muted-foreground md:text-lg">
+                          Drop company logo here
+                        </h1>
+                        <p className="text-sm font-medium text-muted-foreground/60">
+                          Only '.png', '.jpg', '.jpeg' format supported and
+                          maximum size of 2MB allowed.
+                        </p>
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="file"
+                          accept="image/*"
+                          {...fieldValues}
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            fieldValues.onChange(file);
+                            setImagePreview(URL.createObjectURL(file!));
+                          }}
+                          className="hidden"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                {imagePreview && (
+                  <div className="relative h-full w-full overflow-hidden rounded-md">
+                    <button
+                      className="absolute right-4 top-4 z-10 rounded-md border-none bg-destructive p-2 text-white outline-none"
+                      onClick={() => {
+                        setImagePreview(null);
+                      }}
+                    >
+                      <Trash2Icon />
+                    </button>
+                    <img
+                      src={imagePreview}
+                      alt="Image Preview"
+                      className="h-full w-full overflow-hidden"
+                    />
+                  </div>
+                )}
+
+                {/* <CompanyLogoUpload /> */}
               </div>
-              <Button>Submit</Button>
+
+              <div className="flex items-center space-x-4">
+                <LoadingButton
+                  type="submit"
+                  loading={form.formState.isSubmitting}
+                >
+                  Submit
+                </LoadingButton>
+                <Link
+                  className={cn(
+                    buttonVariants({
+                      variant: "destructive",
+                    }),
+                  )}
+                  href={"/"}
+                >
+                  Cancel
+                </Link>
+              </div>
             </form>
           </Form>
         </CardContent>
