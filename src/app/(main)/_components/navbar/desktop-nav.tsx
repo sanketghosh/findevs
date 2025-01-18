@@ -14,9 +14,15 @@ type DesktopNavProps = {
   id?: string;
   name?: string;
   email?: string;
+  admin: boolean;
 };
 
-export default function DesktopNav({ email, id, name }: DesktopNavProps) {
+export default function DesktopNav({
+  email,
+  id,
+  name,
+  admin,
+}: DesktopNavProps) {
   return (
     <div className="hidden items-center gap-10 md:flex">
       <nav className="flex items-center gap-4">
@@ -29,6 +35,14 @@ export default function DesktopNav({ email, id, name }: DesktopNavProps) {
             {item.label}
           </Link>
         ))}
+        {admin && (
+          <Link
+            href={"/admin-dashboard"}
+            className="text-sm font-medium capitalize tracking-tight transition-all hover:underline hover:underline-offset-4"
+          >
+            Admin Dashboard
+          </Link>
+        )}
       </nav>
       {id ? (
         <div className="flex items-center gap-2">

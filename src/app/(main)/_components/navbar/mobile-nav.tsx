@@ -22,9 +22,10 @@ type MobileNavProps = {
   id?: string;
   name?: string;
   email?: string;
+  admin: boolean;
 };
 
-export default function MobileNav({ email, id, name }: MobileNavProps) {
+export default function MobileNav({ email, id, name, admin }: MobileNavProps) {
   return (
     <Sheet>
       <SheetTrigger>
@@ -45,6 +46,14 @@ export default function MobileNav({ email, id, name }: MobileNavProps) {
                 {item.label}
               </Link>
             ))}
+            {admin && (
+              <Link
+                href={"/admin-dashboard"}
+                className="text-sm font-medium capitalize tracking-tight transition-all hover:underline hover:underline-offset-4"
+              >
+                Admin Dashboard
+              </Link>
+            )}
           </nav>
           {id ? (
             <div className="flex items-center gap-2">

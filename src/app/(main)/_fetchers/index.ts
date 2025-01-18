@@ -6,6 +6,11 @@ import { prisma } from "@/lib/prisma";
 
 //components
 import { JobFilterSchemaType } from "@/app/(main)/_schemas/job-filter";
+import { cache } from "react";
+import { notFound } from "next/navigation";
+import { isAdmin } from "../_utils/is-admin";
+import { NextResponse } from "next/server";
+import { getSessionHandler } from "@/app/utils/get-session";
 
 export async function fetchAllJobsByFilter(
   jobListFilterValues: JobFilterSchemaType,
@@ -98,3 +103,98 @@ export async function fetchDistinctCountries() {
 
   return { distinctCountries };
 }
+
+/**
+ *
+ */
+export const fetchSingleJob = cache(async (slug: string) => {
+  const job = await prisma.job.findUnique({
+    where: {
+      slug,
+      approved: true,
+    },
+  });
+
+  if (!job) notFound();
+
+  return { job };
+});
+
+/**
+ * fetch non approved jobs
+ */
+
+export const fetchUnApprovedJobs = async () => {
+  const admin = await isAdmin();
+  const { email, id } = await getSessionHandler();
+
+  if (!email && !id) {
+    throw new Error("SignIn with admin credentials to access.");
+  }
+
+  if (!admin) {
+    throw new Error("Please log in with admin email");
+  }
+
+  const unApprovedJobs = await prisma.job.findMany({
+    where: {
+      approved: false,
+    },
+  });
+
+  return { unApprovedJobs };
+};
+
+/**
+ *
+ *
+ *
+ */
+
+export const fetchPostedUnApprovedJobs = async () => {
+  const { email, id } = await getSessionHandler();
+
+  if (!email && !id) {
+    throw new Error("SignIn with admin credentials to access.");
+  }
+
+  const postedUnApprovedJobs = await prisma.job.findMany({
+    where: {
+      userId: id,
+      approved: false,
+    },
+  });
+
+  if (!postedUnApprovedJobs) {
+    throw new Error("Sorry cannot fetch un approved jobs");
+  }
+
+  return { postedUnApprovedJobs };
+};
+
+/***
+ *
+ *
+ *
+ *
+ */
+export const fetchPostedApprovedJobs = async () => {
+  const { email, id } = await getSessionHandler();
+
+  if (!email && !id) {
+    throw new Error("SignIn with admin credentials to access.");
+  }
+
+  const postedApprovedJobs = await prisma.job.findMany({
+    where: {
+      userId: id,
+      approved: true,
+    },
+  });
+
+  if (!postedApprovedJobs) {
+    throw new Error("Sorry cannot fetch approved jobs");
+  }
+
+  return { postedApprovedJobs };
+};

@@ -1,29 +1,37 @@
 "use client";
 
 // packages
+import { useState } from "react";
 import { format } from "date-fns";
 import {
   BookmarkIcon,
   BriefcaseBusinessIcon,
+  CheckCheckIcon,
   ClockIcon,
-  HeartIcon,
+  EyeIcon,
   MapPinIcon,
   WalletIcon,
+  XIcon,
 } from "lucide-react";
+import Link from "next/link";
+import { Job } from "@prisma/client";
+
+// local modules
+import { convertToReadableString } from "@/app/utils/convert-readable-string";
+import { cn } from "@/lib/utils";
 
 // components
 import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
-import { Job } from "@prisma/client";
-import { useState } from "react";
-import { cn } from "@/lib/utils";
-import { convertToReadableString } from "@/app/utils/convert-readable-string";
+import { Card, CardFooter } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
 type JobCardProps = {
   job: Job;
+  admin: boolean;
 };
 
-export default function JobCard({ job }: JobCardProps) {
+export default function JobCard({ job, admin = false }: JobCardProps) {
   const [bookmark, setBookmark] = useState<boolean>(false);
 
   const {
@@ -37,6 +45,8 @@ export default function JobCard({ job }: JobCardProps) {
     title,
     workplace,
     country,
+    slug,
+    approved,
   } = job;
 
   return (
@@ -44,14 +54,18 @@ export default function JobCard({ job }: JobCardProps) {
       <div className="flex items-center gap-3">
         <div className="size-16 overflow-hidden rounded-md border">
           <img
-            //@ts-ignore
-            src={!companyLogoUrl ? companyLogoUrl : "./company-img.webp"}
+            src={companyLogoUrl === null ? "/company-img.webp" : companyLogoUrl}
             alt={companyName}
             className="h-full w-full object-cover"
           />
         </div>
         <div className="leading-tight">
-          <h2 className="text-base font-semibold lg:text-lg">{title}</h2>
+          <Link
+            href={`/job/${slug}`}
+            className="text-base font-semibold lg:text-lg"
+          >
+            {title}
+          </Link>
           <p className="font-medium text-muted-foreground">{companyName}</p>
         </div>
       </div>
@@ -86,11 +100,18 @@ export default function JobCard({ job }: JobCardProps) {
         <h2 className="text-sm font-semibold text-muted-foreground">
           {format(createdAt, "PPP")}
         </h2>
-        <button onClick={() => setBookmark(!bookmark)}>
-          <BookmarkIcon
-            className={cn(bookmark && "fill-teal-700 stroke-none")}
-          />
-        </button>
+        <div className="flex items-center gap-3">
+          {approved && (
+            <button onClick={() => setBookmark(!bookmark)}>
+              <BookmarkIcon
+                className={cn(bookmark && "fill-primary stroke-none")}
+              />
+            </button>
+          )}
+          <Link href={`/job/${slug}`}>
+            <EyeIcon />
+          </Link>
+        </div>
       </div>
       <Badge
         className="absolute -top-1 right-2 text-sm font-semibold"
@@ -98,6 +119,19 @@ export default function JobCard({ job }: JobCardProps) {
       >
         {convertToReadableString(workplace)}
       </Badge>
+
+      {!approved && admin ? <Separator /> : null}
+      {!approved && admin ? (
+        <div className="flex items-center justify-center space-x-4">
+          <Button className="w-full">
+            <CheckCheckIcon /> Approve
+          </Button>
+          <Button variant={"destructive"} className="w-full">
+            <XIcon />
+            Reject
+          </Button>
+        </div>
+      ) : null}
     </Card>
   );
 }

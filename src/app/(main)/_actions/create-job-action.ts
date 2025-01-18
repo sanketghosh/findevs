@@ -43,7 +43,7 @@ export async function createJobAction(formData: FormData) {
     companyLogo,
   });
 
-  const customSlug = `${toSlug(title)}-${uuid_v4()}}`;
+  const customSlug = `${toSlug(title)}-${uuid_v4()}`;
 
   await prisma.job.create({
     data: {

@@ -7,9 +7,11 @@ import { getSessionHandler } from "@/app/utils/get-session";
 //components
 import DesktopNav from "@/app/(main)/_components/navbar/desktop-nav";
 import MobileNav from "@/app/(main)/_components/navbar/mobile-nav";
+import { isAdmin } from "../_utils/is-admin";
 
 export default async function Header() {
   const { id, name, email } = await getSessionHandler();
+  const admin = await isAdmin();
 
   return (
     <header className="sticky top-0 z-20 h-16 w-full bg-secondary text-foreground">
@@ -20,9 +22,9 @@ export default async function Header() {
         >
           findevs
         </Link>
-        <DesktopNav email={email} id={id} name={name} />
+        <DesktopNav email={email} id={id} name={name} admin={admin} />
         <div className="block md:hidden">
-          <MobileNav email={email} id={id} name={name} />
+          <MobileNav email={email} id={id} name={name} admin={admin} />
         </div>
       </div>
     </header>

@@ -248,13 +248,18 @@ export const COUNTRY_LIST = [
 export const NAV_LINKS = [
   {
     id: 1,
-    href: "/post-job",
+    href: "/job/post-job",
     label: "post a job",
   },
   {
     id: 2,
     href: "/bookmarks",
     label: "bookmarks",
+  },
+  {
+    id: 3,
+    href: "/job/posted-jobs",
+    label: "posted jobs",
   },
 ];
 
@@ -972,4 +977,23 @@ export const CURRENCY_TYPES = [
     countryName: "Zimbabwean Dollar",
     currency: "ZWL",
   },
+];
+
+// Array of Top 15 Currencies with their value in USD
+export const CURRENCIES_VALUES = [
+  { currencyId: "USD", valueInUSD: 1 }, // US Dollar
+  { currencyId: "EUR", valueInUSD: 1.1 }, // Euro
+  { currencyId: "GBP", valueInUSD: 1.3 }, // British Pound
+  { currencyId: "JPY", valueInUSD: 0.0074 }, // Japanese Yen
+  { currencyId: "AUD", valueInUSD: 0.66 }, // Australian Dollar
+  { currencyId: "CAD", valueInUSD: 0.74 }, // Canadian Dollar
+  { currencyId: "CHF", valueInUSD: 1.12 }, // Swiss Franc
+  { currencyId: "CNY", valueInUSD: 0.14 }, // Chinese Yuan
+  { currencyId: "HKD", valueInUSD: 0.13 }, // Hong Kong Dollar
+  { currencyId: "NZD", valueInUSD: 0.61 }, // New Zealand Dollar
+  { currencyId: "SEK", valueInUSD: 0.094 }, // Swedish Krona
+  { currencyId: "KRW", valueInUSD: 0.00076 }, // South Korean Won
+  { currencyId: "INR", valueInUSD: 0.012 }, // Indian Rupee
+  { currencyId: "RUB", valueInUSD: 0.011 }, // Russian Ruble
+  { currencyId: "BRL", valueInUSD: 0.2 }, // Brazilian Real
 ];

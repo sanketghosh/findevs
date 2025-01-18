@@ -11,6 +11,8 @@ import SidebarContainer from "@/app/(main)/_components/sidebar-container";
 import Hero from "@/app/(main)/_components/hero";
 import JobList from "@/app/(main)/_components/job/job-list";
 import { Suspense } from "react";
+import CustomSelect from "@/components/ui/custom-select";
+import { CURRENCIES_VALUES } from "./_data";
 
 type HomePageProps = {
   searchParams: Promise<JobFilterSchemaType>;
@@ -35,11 +37,12 @@ export default async function Home({ searchParams }: HomePageProps) {
                 className="w-ful h-full w-full border-none px-3 outline-none"
               />
             </div>
-            <button className="h-10 shrink-0 rounded-r-md bg-teal-700 px-5 text-background hover:bg-teal-700/90 md:h-14">
+            <button className="h-10 shrink-0 rounded-r-md bg-primary px-5 text-background hover:bg-primary/90 md:h-14">
               {" "}
               Search
             </button>
           </div>
+
           <div className="block xl:hidden">
             <FilterDrawer defaultValues={resolvedSearchParams} />
           </div>

@@ -46,6 +46,7 @@ import {
 } from "@/components/ui/card";
 import LoadingButton from "@/components/buttons/loading-button";
 import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
 
 export default function CreateJobForm() {
   const [cityDesc, setCityDesc] = useState<string | undefined | null>();
@@ -85,8 +86,10 @@ export default function CreateJobForm() {
     try {
       await createJobAction(formData);
       // console.log(formData);
+      toast.success("Job post has been created successfully.");
     } catch (error) {
-      alert("Something went wrong, try again.");
+      // alert("Something went wrong, try again.");
+      toast.error("Something went wrong, try again.");
     }
   };
 
@@ -494,20 +497,22 @@ export default function CreateJobForm() {
                   )}
                 />
                 {imagePreview && (
-                  <div className="relative h-full w-full overflow-hidden rounded-md">
-                    <button
-                      className="absolute right-4 top-4 z-10 rounded-md border-none bg-destructive p-2 text-white outline-none"
-                      onClick={() => {
-                        setImagePreview(null);
-                      }}
-                    >
-                      <Trash2Icon />
-                    </button>
-                    <img
-                      src={imagePreview}
-                      alt="Image Preview"
-                      className="h-full w-full overflow-hidden"
-                    />
+                  <div className="bg_cross_pattern flex h-full w-full items-center justify-center rounded-md border p-3">
+                    <div className="relative h-[450px] w-[450px] overflow-hidden rounded-md">
+                      <button
+                        className="absolute right-4 top-4 z-10 rounded-md border-none bg-destructive p-2 text-white outline-none"
+                        onClick={() => {
+                          setImagePreview(null);
+                        }}
+                      >
+                        <Trash2Icon />
+                      </button>
+                      <img
+                        src={imagePreview}
+                        alt="Image Preview"
+                        className="h-[450px] w-[450px] overflow-hidden"
+                      />
+                    </div>
                   </div>
                 )}
 

@@ -87,3 +87,33 @@
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-secondary;
 }
+
+.bg_cross_pattern {
+  background-color: #ffffff;
+  opacity: 0.8;
+  background:
+    radial-gradient(
+      circle,
+      transparent 20%,
+      #ffffff 20%,
+      #ffffff 80%,
+      transparent 80%,
+      transparent
+    ),
+    radial-gradient(
+        circle,
+        transparent 20%,
+        #ffffff 20%,
+        #ffffff 80%,
+        transparent 80%,
+        transparent
+      )
+      25px 25px,
+    linear-gradient(#dadada 2px, transparent 2px) 0 -1px,
+    linear-gradient(90deg, #dadada 2px, #ffffff 2px) -1px 0;
+  background-size:
+    50px 50px,
+    50px 50px,
+    25px 25px,
+    25px 25px;
+}
