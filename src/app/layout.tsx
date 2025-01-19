@@ -2,7 +2,7 @@
 import { Toaster } from "sonner";
 import type { Metadata } from "next";
 import "@/app/globals.css";
-import { ThemeProvider } from "@/components/providers/theme-provider";
+import ThemeProvider from "@/providers/theme-provider";
 
 export const metadata: Metadata = {
   title: "findevs",
@@ -16,11 +16,18 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <head />
         <body>
-          <Toaster />
-          {children}
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Toaster />
+            {children}
+          </ThemeProvider>
         </body>
       </html>
     </>

@@ -1,27 +1,36 @@
-import { CURRENCIES_VALUES } from "@/app/(main)/_data";
+import { CURRENCY_CURRENT_VALUE } from "@/data/currency-current-value";
 
-// Conversion Function
 export function convertCurrency(
-  currentCurrencyId: string,
-  currentValue: number,
-  targetCurrencyId: string,
-): number | string {
-  const currentCurrency = CURRENCIES_VALUES.find(
-    (currency) => currency.currencyId === currentCurrencyId,
+  fromCurrencyId: string,
+  toCurrencyId: string,
+  amount: number,
+): number {
+  const fromCurrency = CURRENCY_CURRENT_VALUE.find(
+    (currency) => currency.currencyId === fromCurrencyId,
   );
-  const targetCurrency = CURRENCIES_VALUES.find(
-    (currency) => currency.currencyId === targetCurrencyId,
+  const toCurrency = CURRENCY_CURRENT_VALUE.find(
+    (currency) => currency.currencyId === toCurrencyId,
   );
 
-  if (!currentCurrency || !targetCurrency) {
-    return "Invalid currency ID";
+  if (!fromCurrency || !toCurrency) {
+    throw new Error("Invalid currency ID provided.");
   }
 
-  // Convert current currency value to USD
-  const valueInUSD = currentValue * currentCurrency.valueInUSD;
+  // Convert the amount to USD (base currency)
+  const amountInUSD = amount / fromCurrency.value;
 
-  // Convert USD to target currency
-  const convertedValue = valueInUSD / targetCurrency.valueInUSD;
+  // Convert the USD amount to the target currency
+  const convertedAmount = amountInUSD * toCurrency.value;
 
-  return parseFloat(convertedValue.toFixed(2)); // Rounded to 2 decimal places
+  return convertedAmount;
 }
+
+/* // Example usage:
+const amount = 2; // Amount in the "fromCurrency"
+const fromCurrency = "EUR"; // Current currency
+const toCurrency = "USD"; // Target currency
+
+const convertedAmount = convertCurrency(fromCurrency, toCurrency, amount);
+console.log(
+  `${amount} ${fromCurrency} is approximately ${convertedAmount.toFixed(2)} ${toCurrency}`,
+); */

@@ -17,3 +17,9 @@ https://company.com
     - This is point two
 
 And this is the email `employ@mail.com`
+
+
+-- set currency
+-- fetch currency 
+
+func <-- set curr, exist curr, 

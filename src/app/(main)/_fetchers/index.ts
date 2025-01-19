@@ -10,7 +10,7 @@ import { cache } from "react";
 import { notFound } from "next/navigation";
 import { isAdmin } from "../_utils/is-admin";
 import { NextResponse } from "next/server";
-import { getSessionHandler } from "@/app/utils/get-session";
+import { getSessionHandler } from "@/app/(main)/_utils/get-session";
 
 export async function fetchAllJobsByFilter(
   jobListFilterValues: JobFilterSchemaType,
@@ -198,3 +198,27 @@ export const fetchPostedApprovedJobs = async () => {
 
   return { postedApprovedJobs };
 };
+
+/**
+ *
+ *
+ *
+ */
+export async function fetchCurrentUserCurrency() {
+  const { email, id } = await getSessionHandler();
+
+  if (!email && !id) {
+    throw new Error("SignIn with admin credentials to access.");
+  }
+
+  const fetchedUserCurrency = await prisma.user.findUnique({
+    where: {
+      id: id,
+    },
+    select: {
+      userCurrency: true,
+    },
+  });
+
+  return { fetchedUserCurrency };
+}

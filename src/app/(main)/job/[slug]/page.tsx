@@ -58,7 +58,7 @@ export default async function SingleJob({ params }: SingleJobProps) {
           <div className="space-y-2">
             <h1 className="text-lg font-bold lg:text-xl">{title}</h1>
             <p className="text-muted-foreground">{companyName}</p>
-            <h1 className="w-fit rounded-sm bg-amber-400 px-2 py-2 text-lg font-bold lg:text-xl">
+            <h1 className="w-fit rounded-sm bg-amber-400 px-2 py-2 text-lg font-bold dark:bg-orange-600 lg:text-xl">
               <b>Salary: </b>
               {salary}
             </h1>

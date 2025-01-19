@@ -2,7 +2,7 @@
 import Link from "next/link";
 
 // local modules
-import { getSessionHandler } from "@/app/utils/get-session";
+import { getSessionHandler } from "@/app/(main)/_utils/get-session";
 
 //components
 import DesktopNav from "@/app/(main)/_components/navbar/desktop-nav";
@@ -14,11 +14,11 @@ export default async function Header() {
   const admin = await isAdmin();
 
   return (
-    <header className="sticky top-0 z-20 h-16 w-full bg-secondary text-foreground">
+    <header className="sticky top-0 z-20 h-16 w-full bg-secondary/40 text-foreground backdrop-blur-md">
       <div className="mx-auto flex h-full max-w-[95rem] items-center justify-between px-4 lg:px-6">
         <Link
           href={"/"}
-          className="font-playfairDisplay text-xl font-bold md:text-2xl lg:text-3xl"
+          className="font-inter text-xl font-bold md:text-2xl lg:text-3xl"
         >
           findevs
         </Link>

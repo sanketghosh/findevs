@@ -1,7 +1,7 @@
-"use client";
+// "use client";
 
 // packages
-import { useState } from "react";
+// import { useState } from "react";
 import { format } from "date-fns";
 import {
   BookmarkIcon,
@@ -17,7 +17,7 @@ import Link from "next/link";
 import { Job } from "@prisma/client";
 
 // local modules
-import { convertToReadableString } from "@/app/utils/convert-readable-string";
+import { convertToReadableString } from "@/utils/convert-readable-string";
 import { cn } from "@/lib/utils";
 
 // components
@@ -25,14 +25,18 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { convertCurrency } from "../../_utils/convert-currency";
+import { fetchCurrentUserCurrency } from "../../_fetchers";
+import { salaryFormatter } from "../../_utils/salary-formatter";
 
 type JobCardProps = {
   job: Job;
   admin: boolean;
 };
 
-export default function JobCard({ job, admin = false }: JobCardProps) {
-  const [bookmark, setBookmark] = useState<boolean>(false);
+export default async function JobCard({ job, admin = false }: JobCardProps) {
+  // const [bookmark, setBookmark] = useState<boolean>(false);
+  const { fetchedUserCurrency } = await fetchCurrentUserCurrency();
 
   const {
     companyLogoUrl,
@@ -47,6 +51,7 @@ export default function JobCard({ job, admin = false }: JobCardProps) {
     country,
     slug,
     approved,
+    currency,
   } = job;
 
   return (
@@ -85,7 +90,16 @@ export default function JobCard({ job, admin = false }: JobCardProps) {
         </div> */}
         <Badge variant={"secondary"}>
           <WalletIcon size={17} />
-          <p className="ml-1.5">{salary} INR PA</p>
+          <p className="ml-1.5">
+            {salaryFormatter(
+              convertCurrency(
+                currency!,
+                fetchedUserCurrency?.userCurrency!,
+                salary,
+              ),
+            )}{" "}
+            {fetchedUserCurrency?.userCurrency} PA
+          </p>
         </Badge>
         <Badge variant={"secondary"}>
           <ClockIcon size={17} />
@@ -101,13 +115,13 @@ export default function JobCard({ job, admin = false }: JobCardProps) {
           {format(createdAt, "PPP")}
         </h2>
         <div className="flex items-center gap-3">
-          {approved && (
+          {/*  {approved && (
             <button onClick={() => setBookmark(!bookmark)}>
               <BookmarkIcon
                 className={cn(bookmark && "fill-primary stroke-none")}
               />
             </button>
-          )}
+          )} */}
           <Link href={`/job/${slug}`}>
             <EyeIcon />
           </Link>
@@ -123,7 +137,7 @@ export default function JobCard({ job, admin = false }: JobCardProps) {
       {!approved && admin ? <Separator /> : null}
       {!approved && admin ? (
         <div className="flex items-center justify-center space-x-4">
-          <Button className="w-full">
+          <Button className="w-full" variant={"secondary"}>
             <CheckCheckIcon /> Approve
           </Button>
           <Button variant={"destructive"} className="w-full">

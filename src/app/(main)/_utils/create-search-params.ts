@@ -1,4 +1,4 @@
-import { JobFilterSchemaType } from "../(main)/_schemas/job-filter";
+import { JobFilterSchemaType } from "../_schemas/job-filter";
 
 export const createSearchParams = (filters: JobFilterSchemaType) => {
   const params = new URLSearchParams();

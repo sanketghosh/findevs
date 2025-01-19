@@ -1,4 +1,4 @@
-import { getSessionHandler } from "@/app/utils/get-session";
+import { getSessionHandler } from "@/app/(main)/_utils/get-session";
 
 export async function isAdmin() {
   const { email, id } = await getSessionHandler();

@@ -2,7 +2,7 @@
 import { notFound } from "next/navigation";
 
 // local modules
-import { getSessionHandler } from "@/app/utils/get-session";
+import { getSessionHandler } from "@/app/(main)/_utils/get-session";
 import { isAdmin } from "@/app/(main)/_utils/is-admin";
 import { fetchUnApprovedJobs } from "@/app/(main)/_fetchers";
 

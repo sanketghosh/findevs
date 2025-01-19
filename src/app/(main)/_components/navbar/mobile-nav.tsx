@@ -56,10 +56,10 @@ export default function MobileNav({ email, id, name, admin }: MobileNavProps) {
             )}
           </nav>
           {id ? (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 rounded-md border bg-secondary p-2">
               <Link href={"/profile"}>
-                <Avatar className="border-2 bg-background">
-                  <AvatarFallback className="text-xl font-bold">
+                <Avatar className="bg-background">
+                  <AvatarFallback className="bg-background text-xl font-bold">
                     {name?.charAt(0)}
                   </AvatarFallback>
                 </Avatar>

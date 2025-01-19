@@ -1,18 +1,16 @@
 // packages
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import { ChevronLeftIcon, ChevronRightIcon, SearchIcon } from "lucide-react";
 
 // local modules
 import { JobFilterSchemaType } from "@/app/(main)/_schemas/job-filter";
 
 // components
 import { Button } from "@/components/ui/button";
-import FilterDrawer from "@/app/(main)/_components/filter-drawer";
+import FilterDrawer from "@/app/(main)/_components/filter/filter-drawer";
 import SidebarContainer from "@/app/(main)/_components/sidebar-container";
 import Hero from "@/app/(main)/_components/hero";
 import JobList from "@/app/(main)/_components/job/job-list";
-import { Suspense } from "react";
-import CustomSelect from "@/components/ui/custom-select";
-import { CURRENCIES_VALUES } from "./_data";
+import { Input } from "@/components/ui/input";
 
 type HomePageProps = {
   searchParams: Promise<JobFilterSchemaType>;
@@ -29,18 +27,16 @@ export default async function Home({ searchParams }: HomePageProps) {
 
         <div className="w-full space-y-6">
           {/* search box */}
-          <div className="flex w-full items-center">
-            <div className="h-10 w-full overflow-hidden rounded-l-md border p-1 md:h-14">
-              <input
-                type="text"
-                placeholder="Search title, description or company..."
-                className="w-ful h-full w-full border-none px-3 outline-none"
-              />
-            </div>
-            <button className="h-10 shrink-0 rounded-r-md bg-primary px-5 text-background hover:bg-primary/90 md:h-14">
-              {" "}
-              Search
-            </button>
+          <div className="flex w-full items-center gap-2">
+            <Input
+              type="text"
+              placeholder="Search title, description or company..."
+              className="h-10 md:h-14"
+            />
+            <Button className="h-10 shrink-0 md:h-14">
+              <SearchIcon />
+              <p className="hidden md:block">Search</p>
+            </Button>
           </div>
 
           <div className="block xl:hidden">

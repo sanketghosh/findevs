@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 
 // local modules
-import { createSearchParams } from "@/app/utils/create-search-params";
+import { createSearchParams } from "@/app/(main)/_utils/create-search-params";
 import { JobFilterSchema } from "@/app/(main)/_schemas/job-filter";
 
 export async function filterJobsAction(formData: FormData) {

@@ -2,11 +2,11 @@ import { ExternalLinkIcon, GithubIcon } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="absolute bottom-0 h-16 w-full border-t-2 bg-secondary">
+    <footer className="absolute bottom-0 h-16 w-full bg-secondary/40">
       <div className="mx-auto flex h-full max-w-[95rem] items-center justify-between px-4 lg:px-6">
         <span className="text-lg font-semibold">findevs</span>
 
-        <p className="text-sm font-medium text-muted-foreground">
+        <p className="text-[13px] font-medium text-muted-foreground md:text-sm">
           All copyright reserved. &copy; findevs 2025
         </p>
 

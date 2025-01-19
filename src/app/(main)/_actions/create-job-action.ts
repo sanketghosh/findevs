@@ -1,12 +1,21 @@
 "use server";
 
-import { toSlug } from "@/app/utils/to-slug";
+import { toSlug } from "@/app/(main)/_utils/to-slug";
 import { JobPostFormSchema } from "../_schemas/job-post-form";
 import { v4 as uuid_v4 } from "uuid";
 import { prisma } from "@/lib/prisma";
 import { Currency, JobType, Seniority, Workplace } from "@prisma/client";
+import { getSessionHandler } from "@/app/(main)/_utils/get-session";
 
 export async function createJobAction(formData: FormData) {
+  const { email, id } = await getSessionHandler();
+
+  if (!email && !id) {
+    return {
+      error: "User not authenticated to post a job.",
+    };
+  }
+
   const values = Object.fromEntries(formData.entries());
 
   const {
@@ -47,6 +56,7 @@ export async function createJobAction(formData: FormData) {
 
   await prisma.job.create({
     data: {
+      userId: id,
       slug: customSlug,
       title: title.trim(),
       companyName: companyName,

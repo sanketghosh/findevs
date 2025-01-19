@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
 // local modules
-import { getSessionHandler } from "@/app/utils/get-session";
+import { getSessionHandler } from "@/app/(main)/_utils/get-session";
 import {
   fetchPostedApprovedJobs,
   fetchPostedUnApprovedJobs,
