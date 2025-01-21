@@ -8,6 +8,7 @@ import { fetchUnApprovedJobs } from "@/app/(main)/_fetchers";
 
 // components
 import JobCard from "@/app/(main)/_components/job/job-card";
+import SectionTitle from "../_components/section-title";
 
 export default async function AdminDashboard() {
   const { email, id } = await getSessionHandler();
@@ -19,13 +20,19 @@ export default async function AdminDashboard() {
   }
 
   return (
-    <main className="space-y-6">
-      <h1 className="text-lg font-semibold lg:text-xl">Unapproved Jobs</h1>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {unApprovedJobs?.map((job) => (
-          <JobCard job={job} key={job.id} admin={admin} />
-        ))}
-      </div>
+    <main className="space-y-4">
+      {unApprovedJobs.length > 0 ? (
+        <>
+          <SectionTitle>Unapproved Jobs</SectionTitle>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {unApprovedJobs?.map((job) => (
+              <JobCard job={job} key={job.id} admin={admin} />
+            ))}
+          </div>
+        </>
+      ) : (
+        <p>No jobs here to check or validate.</p>
+      )}
     </main>
   );
 }

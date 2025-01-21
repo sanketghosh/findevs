@@ -55,9 +55,8 @@ export default function SignInForm() {
       if (result.success) {
         setSuccess(result.success);
         toast.success(result.success);
-        setInterval(() => {
-          router.push("/");
-        }, 1300);
+        setInterval(() => {}, 1000);
+        router.push("/");
       } else {
         setError(result.error);
         toast.error(result.error);

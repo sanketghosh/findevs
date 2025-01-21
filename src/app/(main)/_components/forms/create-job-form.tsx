@@ -1,6 +1,7 @@
 "use client";
 
 // packages
+import { toast } from "sonner";
 import { ImageIcon, Trash2Icon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -25,7 +26,7 @@ import { createJobAction } from "@/app/(main)/_actions/create-job-action";
 // components
 import DescriptionEditor from "@/app/(main)/_components/forms/description-editor";
 import CustomSelect from "@/components/ui/custom-select";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Form,
@@ -46,7 +47,6 @@ import {
 } from "@/components/ui/card";
 import LoadingButton from "@/components/buttons/loading-button";
 import { Label } from "@/components/ui/label";
-import { toast } from "sonner";
 
 export default function CreateJobForm() {
   const [cityDesc, setCityDesc] = useState<string | undefined | null>();

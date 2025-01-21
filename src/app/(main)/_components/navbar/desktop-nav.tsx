@@ -30,7 +30,7 @@ export default function DesktopNav({
           <Link
             href={item.href}
             key={item.id}
-            className="text-sm font-medium capitalize tracking-tight transition-all hover:underline hover:underline-offset-4"
+            className="text-[13px] font-medium capitalize tracking-tight text-muted-foreground transition-all hover:text-foreground hover:underline hover:underline-offset-4 lg:text-sm"
           >
             {item.label}
           </Link>
@@ -38,7 +38,7 @@ export default function DesktopNav({
         {admin && (
           <Link
             href={"/admin-dashboard"}
-            className="text-sm font-medium capitalize tracking-tight transition-all hover:underline hover:underline-offset-4"
+            className="text-[13px] font-medium capitalize tracking-tight text-muted-foreground transition-all hover:text-foreground hover:underline hover:underline-offset-4 lg:text-sm"
           >
             Admin Dashboard
           </Link>

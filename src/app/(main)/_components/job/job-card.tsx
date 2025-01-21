@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { Job } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
 
 // local modules
 import { convertToReadableString } from "@/utils/convert-readable-string";
@@ -24,6 +25,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { getSessionHandler } from "../../_utils/get-session";
 import JobSalary from "./job-salary";
+import BookmarkButton from "./job-card-buttons/bookmark-button";
 
 type JobCardProps = {
   job: Job;
@@ -50,7 +52,17 @@ export default async function JobCard({ job, admin = false }: JobCardProps) {
     slug,
     approved,
     currency,
+    id: jobId,
   } = job;
+
+  const isBookmarked = !!(await prisma.bookmark.findUnique({
+    where: {
+      userId_jobId: {
+        userId: sessionUserId!,
+        jobId: jobId,
+      },
+    },
+  }));
 
   const viewJobLink = admin ? `/admin-dashboard/job/${slug}` : `/job/${slug}`;
 
@@ -120,6 +132,7 @@ export default async function JobCard({ job, admin = false }: JobCardProps) {
             <EyeIcon />
           </Link> */}
           {/* <JobCardOptionDropdown /> */}
+          <BookmarkButton jobId={jobId} bookmarkInitialState={isBookmarked} />
         </div>
       </div>
       <Badge

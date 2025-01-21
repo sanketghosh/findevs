@@ -1,12 +1,14 @@
 // packages
 import { LogOutIcon } from "lucide-react";
+import { notFound } from "next/navigation";
 
 // local modules
-import { CURRENCIES_VALUES } from "@/app/(main)/_data";
 import { getSessionHandler } from "@/app/(main)/_utils/get-session";
+import { CURRENCY_CURRENT_VALUE } from "@/data/currency-current-value";
+import { setUserCurrencyAction } from "@/app/(main)/_actions/set-user-currency-action";
+import { fetchCurrentUserCurrency } from "@/app/(main)/_fetchers";
 
 // components
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -14,16 +16,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import FormSubmitButton from "@/components/buttons/form-submit-button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import ThemeToggle from "@/app/(main)/_components/theme-toggle";
 import CustomSelect from "@/components/ui/custom-select";
 import { Label } from "@/components/ui/label";
-import { CURRENCY_CURRENT_VALUE } from "@/data/currency-current-value";
-import { setUserCurrencyAction } from "../_actions/set-user-currency-action";
-import { notFound } from "next/navigation";
-import FormSubmitButton from "@/components/buttons/form-submit-button";
-import { fetchCurrentUserCurrency } from "../_fetchers";
+import SignOutButton from "@/app/(auth)/_components/sign-out-button";
 
 export default async function Profile() {
   const { sessionCreatedAt, sessionExpiresAt, id, name, email, image } =
@@ -55,10 +54,7 @@ export default async function Profile() {
                 <p className="text-sm text-muted-foreground xl:text-lg">
                   {email}
                 </p>
-                <Button variant={"destructive"}>
-                  Sign Out
-                  <LogOutIcon />
-                </Button>
+                <SignOutButton />
               </div>
             </div>
           </CardContent>

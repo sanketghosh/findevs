@@ -57,9 +57,8 @@ export default function SignUpForm() {
       if (result.success) {
         setSuccess(result.success);
         toast.success(result.success);
-        setInterval(() => {
-          router.push("/sign-in");
-        }, 1300);
+        setInterval(() => {}, 1000);
+        router.push("/sign-in");
       } else {
         setError(result.error);
         toast.error(result.error);

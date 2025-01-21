@@ -11,6 +11,7 @@ import { isAdmin } from "@/app/(main)/_utils/is-admin";
 // components
 import JobCard from "@/app/(main)/_components/job/job-card";
 import { Separator } from "@/components/ui/separator";
+import SectionTitle from "../../_components/section-title";
 
 export default async function PostedJobs() {
   const { postedApprovedJobs } = await fetchPostedApprovedJobs();
@@ -25,23 +26,31 @@ export default async function PostedJobs() {
 
   return (
     <div className="space-y-6">
-      <div className="space-y-4">
-        <h1 className="text-lg font-semibold lg:text-xl">Approved Jobs</h1>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {postedApprovedJobs.map((job) => (
-            <JobCard job={job} key={job.id} admin={admin} />
-          ))}
+      {postedApprovedJobs.length > 0 ? (
+        <div className="space-y-4">
+          <SectionTitle>Approved Jobs</SectionTitle>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {postedApprovedJobs.map((job) => (
+              <JobCard job={job} key={job.id} admin={admin} />
+            ))}
+          </div>
         </div>
-      </div>
+      ) : (
+        <p>No approved jobs found.</p>
+      )}
       <Separator />
-      <div className="space-y-4">
-        <h1 className="text-lg font-semibold lg:text-xl">Unapproved Jobs</h1>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {postedUnApprovedJobs.map((job) => (
-            <JobCard job={job} key={job.id} admin={admin} />
-          ))}
+      {postedUnApprovedJobs.length > 0 ? (
+        <div className="space-y-4">
+          <SectionTitle>Unapproved Jobs</SectionTitle>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {postedUnApprovedJobs.map((job) => (
+              <JobCard job={job} key={job.id} admin={admin} />
+            ))}
+          </div>
         </div>
-      </div>
+      ) : (
+        <p>No approved jobs found.</p>
+      )}
     </div>
   );
 }

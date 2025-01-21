@@ -1,11 +1,12 @@
 "use client";
+
 // packages
 import { toast } from "sonner";
 import { FormEvent, useTransition } from "react";
 import { Loader2Icon, Trash2Icon } from "lucide-react";
 
 // local modules
-import { rejectJobAction } from "@/app/(main)/_actions/admin-actions";
+import { deleteJobAction } from "@/app/(main)/_actions/delete-job-action";
 
 // components
 import { Button } from "@/components/ui/button";
@@ -21,7 +22,7 @@ export default function DeleteButton({ jobId }: DeleteButtonProps) {
     e.preventDefault();
 
     startTransition(async () => {
-      const result = await rejectJobAction(jobId);
+      const result = await deleteJobAction(jobId);
       if (result.success) {
         toast.success(result.success);
         /* setInterval(() => {

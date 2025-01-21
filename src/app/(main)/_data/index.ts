@@ -247,6 +247,11 @@ export const COUNTRY_LIST = [
 
 export const NAV_LINKS = [
   {
+    id: 0,
+    href: "/",
+    label: "home",
+  },
+  {
     id: 1,
     href: "/job/post-job",
     label: "post a job",

@@ -6,6 +6,7 @@ import { v4 as uuid_v4 } from "uuid";
 import { prisma } from "@/lib/prisma";
 import { Currency, JobType, Seniority, Workplace } from "@prisma/client";
 import { getSessionHandler } from "@/app/(main)/_utils/get-session";
+import { redirect } from "next/navigation";
 
 export async function createJobAction(formData: FormData) {
   const { email, id } = await getSessionHandler();
@@ -74,4 +75,6 @@ export async function createJobAction(formData: FormData) {
       approved: false,
     },
   });
+
+  redirect("/job/job-post-success");
 }

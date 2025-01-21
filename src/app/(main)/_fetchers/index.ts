@@ -239,3 +239,30 @@ export const fetchSingleJobAsAdmin = cache(async (slug: string) => {
 
   return { job };
 });
+
+/**
+ *
+ *
+ */
+export const fetchBookmarks = async () => {
+  const { id: sessionUserId } = await getSessionHandler();
+
+  // if user is not authenticated
+  if (!sessionUserId) {
+    throw new Error("User is not authenticated.");
+  }
+
+  try {
+    const bookmarks = await prisma.bookmark.findMany({
+      where: {
+        userId: sessionUserId,
+      },
+      include: {
+        job: true,
+      },
+    });
+    return { bookmarks };
+  } catch (error) {
+    throw new Error("Failed to fetch bookmarks.");
+  }
+};
