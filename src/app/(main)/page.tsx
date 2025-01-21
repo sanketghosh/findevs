@@ -13,11 +13,18 @@ import JobList from "@/app/(main)/_components/job/job-list";
 import { Input } from "@/components/ui/input";
 
 type HomePageProps = {
-  searchParams: Promise<JobFilterSchemaType>;
+  searchParams: Promise<{
+    city?: string;
+    country?: string;
+    jobTypes?: string[];
+    workplaceOptions?: string[];
+    seniorityOptions?: string[];
+    page?: string;
+  }>;
 };
 
 export default async function Home({ searchParams }: HomePageProps) {
-  const resolvedSearchParams = await searchParams;
+  const { page, ...resolvedSearchParams } = await searchParams;
 
   return (
     <div className="space-y-6">
@@ -45,18 +52,10 @@ export default async function Home({ searchParams }: HomePageProps) {
 
           {/* JOB LIST  */}
 
-          <JobList jobListFilterValues={resolvedSearchParams} />
-
-          <div className="flex items-center justify-end gap-4">
-            <Button variant={"default"} size={"sm"}>
-              <ChevronLeftIcon />
-              Previous
-            </Button>
-            <Button variant={"default"} size={"sm"}>
-              Next
-              <ChevronRightIcon />
-            </Button>
-          </div>
+          <JobList
+            jobListFilterValues={resolvedSearchParams}
+            page={page ? parseInt(page) : undefined}
+          />
         </div>
       </div>
     </div>

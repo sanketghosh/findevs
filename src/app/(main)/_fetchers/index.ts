@@ -1,5 +1,5 @@
 // packages
-import { JobType, Seniority, Workplace } from "@prisma/client";
+import { JobType, Prisma, Seniority, Workplace } from "@prisma/client";
 
 // local modules
 import { prisma } from "@/lib/prisma";
@@ -12,12 +12,21 @@ import { isAdmin } from "../_utils/is-admin";
 import { NextResponse } from "next/server";
 import { getSessionHandler } from "@/app/(main)/_utils/get-session";
 
-export async function fetchAllJobsByFilter(
-  jobListFilterValues: JobFilterSchemaType,
-) {
+type FilterProps = {
+  jobListFilterValues: JobFilterSchemaType;
+  page?: number;
+};
+
+export async function fetchAllJobsByFilter({
+  jobListFilterValues,
+  page = 1,
+}: FilterProps) {
   const resolvedFilterValues = await Promise.resolve(jobListFilterValues);
   const { city, country, jobTypes, seniorityOptions, workplaceOptions } =
     resolvedFilterValues;
+
+  const jobsPerPage = 5;
+  const skip = (page - 1) * jobsPerPage;
 
   // normalize the filter values
   const normalizedJobTypes = Array.isArray(jobTypes)
@@ -38,34 +47,52 @@ export async function fetchAllJobsByFilter(
       ? [workplaceOptions]
       : [];
 
-  const jobs = await prisma.job.findMany({
-    where: {
-      approved: true,
-      ...(city && { city: { equals: city?.trim(), mode: "insensitive" } }),
-      ...(country && {
-        country: { equals: country?.trim(), mode: "insensitive" },
-      }),
-      ...(normalizedJobTypes?.length && {
-        jobType: {
-          in: normalizedJobTypes as JobType[],
-        },
-      }),
-      ...(normalizedSeniorityOptions?.length && {
-        seniority: {
-          in: normalizedSeniorityOptions as Seniority[],
-        },
-      }),
-      ...(normalizedWorkplaceOptions?.length && {
-        workplace: {
-          in: normalizedWorkplaceOptions as Workplace[],
-        },
-      }),
-    },
+  const filterCriteria: Prisma.JobWhereInput = {
+    approved: true,
+    ...(city && { city: { equals: city?.trim(), mode: "insensitive" } }),
+    ...(country && {
+      country: { equals: country?.trim(), mode: "insensitive" },
+    }),
+    ...(normalizedJobTypes?.length && {
+      jobType: {
+        in: normalizedJobTypes as JobType[],
+      },
+    }),
+    ...(normalizedSeniorityOptions?.length && {
+      seniority: {
+        in: normalizedSeniorityOptions as Seniority[],
+      },
+    }),
+    ...(normalizedWorkplaceOptions?.length && {
+      workplace: {
+        in: normalizedWorkplaceOptions as Workplace[],
+      },
+    }),
+  };
+
+  const jobsPromise = prisma.job.findMany({
+    where: filterCriteria,
     orderBy: {
       createdAt: "desc",
     },
+    take: jobsPerPage,
+    skip: skip,
   });
-  return { jobs };
+
+  const countPromise = prisma.job.count({
+    where: filterCriteria,
+  });
+
+  const [jobs, totalResults] = await Promise.all([jobsPromise, countPromise]);
+
+  const totalPages = Math.ceil(totalResults / jobsPerPage);
+
+  console.log({
+    // jobs,
+    totalPages,
+    totalResults,
+  });
+  return { jobs, totalResults, totalPages };
 }
 
 export async function fetchDistinctCities() {

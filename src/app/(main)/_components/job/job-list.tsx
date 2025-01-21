@@ -7,17 +7,26 @@ import CustomSelect from "@/components/ui/custom-select";
 import { CURRENCIES_VALUES } from "../../_data";
 import { Button } from "@/components/ui/button";
 import { isAdmin } from "../../_utils/is-admin";
+import JobPagination from "./job-pagination";
+import { Separator } from "@/components/ui/separator";
 
 type JobListProps = {
   jobListFilterValues: JobFilterSchemaType;
+  page?: number;
 };
 
-export default async function JobList({ jobListFilterValues }: JobListProps) {
-  const { jobs } = await fetchAllJobsByFilter(jobListFilterValues);
+export default async function JobList({
+  jobListFilterValues,
+  page,
+}: JobListProps) {
+  const { jobs, totalPages, totalResults } = await fetchAllJobsByFilter({
+    jobListFilterValues,
+    page,
+  });
   const admin = await isAdmin();
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {/* <div className="flex w-[450px] items-center gap-2">
         <CustomSelect name="currencyValue">
           <option value="" hidden className="capitalize">
@@ -42,6 +51,12 @@ export default async function JobList({ jobListFilterValues }: JobListProps) {
           </p>
         )}
       </div>
+      <Separator />
+      <JobPagination
+        currentPage={page!}
+        filterValues={jobListFilterValues}
+        totalPages={totalPages}
+      />
     </div>
   );
 }
