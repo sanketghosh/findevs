@@ -71,7 +71,7 @@ export async function createJobAction(formData: FormData) {
       employerWebsite: employerWebsite,
       address: address,
       description: description,
-      approved: true,
+      approved: false,
     },
   });
 }

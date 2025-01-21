@@ -382,7 +382,7 @@ export default function CreateJobForm() {
                   name="employerEmail"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Employer Email</FormLabel>
+                      <FormLabel>Application Email</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
@@ -400,7 +400,7 @@ export default function CreateJobForm() {
                   name="employerWebsite"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Employer Website</FormLabel>
+                      <FormLabel>Application Website</FormLabel>
                       <FormControl>
                         <Input
                           {...field}

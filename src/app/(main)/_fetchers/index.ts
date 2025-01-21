@@ -108,10 +108,12 @@ export async function fetchDistinctCountries() {
  *
  */
 export const fetchSingleJob = cache(async (slug: string) => {
+  const { id } = await getSessionHandler();
+  console.log("@@@ server fetched", slug);
   const job = await prisma.job.findUnique({
     where: {
       slug,
-      approved: true,
+      // approved: true,
     },
   });
 
@@ -207,10 +209,6 @@ export const fetchPostedApprovedJobs = async () => {
 export async function fetchCurrentUserCurrency() {
   const { email, id } = await getSessionHandler();
 
-  if (!email && !id) {
-    throw new Error("SignIn with admin credentials to access.");
-  }
-
   const fetchedUserCurrency = await prisma.user.findUnique({
     where: {
       id: id,
@@ -222,3 +220,22 @@ export async function fetchCurrentUserCurrency() {
 
   return { fetchedUserCurrency };
 }
+
+/**
+ *
+ *
+ *
+ */
+
+export const fetchSingleJobAsAdmin = cache(async (slug: string) => {
+  const job = await prisma.job.findUnique({
+    where: {
+      slug,
+      // approved: true,
+    },
+  });
+
+  if (!job) notFound();
+
+  return { job };
+});

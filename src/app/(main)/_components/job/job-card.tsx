@@ -1,33 +1,29 @@
-// "use client";
-
 // packages
-// import { useState } from "react";
 import { format } from "date-fns";
 import {
-  BookmarkIcon,
+  ArrowRightIcon,
   BriefcaseBusinessIcon,
-  CheckCheckIcon,
   ClockIcon,
-  EyeIcon,
   MapPinIcon,
   WalletIcon,
-  XIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { Job } from "@prisma/client";
 
 // local modules
 import { convertToReadableString } from "@/utils/convert-readable-string";
-import { cn } from "@/lib/utils";
+import { convertCurrency } from "@/app/(main)/_utils/convert-currency";
+import { fetchCurrentUserCurrency } from "@/app/(main)/_fetchers";
+import { salaryFormatter } from "@/app/(main)/_utils/salary-formatter";
 
 // components
 import { Badge } from "@/components/ui/badge";
 import { Card, CardFooter } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { convertCurrency } from "../../_utils/convert-currency";
-import { fetchCurrentUserCurrency } from "../../_fetchers";
-import { salaryFormatter } from "../../_utils/salary-formatter";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { getSessionHandler } from "../../_utils/get-session";
+import JobSalary from "./job-salary";
 
 type JobCardProps = {
   job: Job;
@@ -36,7 +32,9 @@ type JobCardProps = {
 
 export default async function JobCard({ job, admin = false }: JobCardProps) {
   // const [bookmark, setBookmark] = useState<boolean>(false);
-  const { fetchedUserCurrency } = await fetchCurrentUserCurrency();
+  const { id: sessionUserId } = await getSessionHandler();
+
+  // const admin = await isAdmin();
 
   const {
     companyLogoUrl,
@@ -54,6 +52,8 @@ export default async function JobCard({ job, admin = false }: JobCardProps) {
     currency,
   } = job;
 
+  const viewJobLink = admin ? `/admin-dashboard/job/${slug}` : `/job/${slug}`;
+
   return (
     <Card className="relative w-full space-y-3.5 p-4 hover:shadow">
       <div className="flex items-center gap-3">
@@ -66,7 +66,7 @@ export default async function JobCard({ job, admin = false }: JobCardProps) {
         </div>
         <div className="leading-tight">
           <Link
-            href={`/job/${slug}`}
+            href={viewJobLink}
             className="text-base font-semibold lg:text-lg"
           >
             {title}
@@ -84,22 +84,16 @@ export default async function JobCard({ job, admin = false }: JobCardProps) {
 
       {/* 3rd para */}
       <div className="flex items-center gap-3 font-medium">
-        {/* <div className="line-clamp-1 flex items-center gap-1 rounded-md border bg-secondary px-2 py-1 font-medium">
-          <WalletIcon size={17} />
-          <p className="line-clamp-1 text-sm">120000 INR PA</p>
-        </div> */}
         <Badge variant={"secondary"}>
           <WalletIcon size={17} />
-          <p className="ml-1.5">
-            {salaryFormatter(
-              convertCurrency(
-                currency!,
-                fetchedUserCurrency?.userCurrency!,
-                salary,
-              ),
-            )}{" "}
-            {fetchedUserCurrency?.userCurrency} PA
-          </p>
+          {sessionUserId ? (
+            <JobSalary fromCurrency={currency!} salary={salary} />
+          ) : (
+            <p className="ml-1.5">
+              {salaryFormatter(convertCurrency(currency!, "USD", salary))} USD
+              PA
+            </p>
+          )}
         </Badge>
         <Badge variant={"secondary"}>
           <ClockIcon size={17} />
@@ -122,9 +116,10 @@ export default async function JobCard({ job, admin = false }: JobCardProps) {
               />
             </button>
           )} */}
-          <Link href={`/job/${slug}`}>
+          {/* <Link href={viewJobLink}>
             <EyeIcon />
-          </Link>
+          </Link> */}
+          {/* <JobCardOptionDropdown /> */}
         </div>
       </div>
       <Badge
@@ -134,18 +129,26 @@ export default async function JobCard({ job, admin = false }: JobCardProps) {
         {convertToReadableString(workplace)}
       </Badge>
 
-      {!approved && admin ? <Separator /> : null}
+      {/* {!approved && admin ? <Separator /> : null}
       {!approved && admin ? (
         <div className="flex items-center justify-center space-x-4">
-          <Button className="w-full" variant={"secondary"}>
-            <CheckCheckIcon /> Approve
-          </Button>
-          <Button variant={"destructive"} className="w-full">
-            <XIcon />
-            Reject
-          </Button>
+          <ApproveButton />
+          <RejectButton />
         </div>
-      ) : null}
+      ) : null} */}
+      <Separator />
+      <Link
+        href={viewJobLink}
+        className={cn(
+          buttonVariants({
+            variant: "secondary",
+          }),
+          "w-full",
+        )}
+      >
+        View Job Details
+        <ArrowRightIcon />
+      </Link>
     </Card>
   );
 }
