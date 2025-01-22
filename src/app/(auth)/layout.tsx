@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import "@/app/globals.css";
 
 export const metadata: Metadata = {
-  title: "findevs",
-  description: "Signup or Login to find your next developer job.",
+  title: {
+    template: "%s | findevs",
+    default: "findevs",
+  },
+  description: "Just make an account or login and get started",
 };
-
 export default function AuthLayout({
   children,
 }: Readonly<{

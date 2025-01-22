@@ -1,8 +1,11 @@
 // packages
+import { Metadata } from "next";
 import { format } from "date-fns";
 import { notFound, redirect } from "next/navigation";
 
 // local modules
+import { getSessionHandler } from "@/app/(main)/_utils/get-session";
+import { isAdmin } from "@/app/(main)/_utils/is-admin";
 import { fetchSingleJob } from "@/app/(main)/_fetchers";
 import { cn } from "@/lib/utils";
 
@@ -11,14 +14,23 @@ import DeleteButton from "@/app/(main)/_components/job/job-card-buttons/delete-b
 import JobDescriptionMarkdown from "@/app/(main)/_components/job/job-description-markdown";
 import { Separator } from "@/components/ui/separator";
 import { buttonVariants } from "@/components/ui/button";
-import { getSessionHandler } from "../../_utils/get-session";
-import { isAdmin } from "../../_utils/is-admin";
 
 type SingleJobProps = {
   params: {
     slug: string;
   };
 };
+
+export async function generateMetadata({
+  params: { slug },
+}: SingleJobProps): Promise<Metadata> {
+  const job = await fetchSingleJob(slug);
+
+  return {
+    title: job.job.title,
+    // description: job.job.description,
+  };
+}
 
 export default async function SingleJob({ params }: SingleJobProps) {
   const { slug } = await params;
@@ -162,7 +174,7 @@ export default async function SingleJob({ params }: SingleJobProps) {
         <>
           <Separator />
           <div className="flex items-center justify-start gap-4">
-            <DeleteButton />
+            <DeleteButton jobId={job.id} />
           </div>
         </>
       )}

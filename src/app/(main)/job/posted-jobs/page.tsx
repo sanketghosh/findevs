@@ -1,4 +1,6 @@
+// packages
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
 // local modules
 import { getSessionHandler } from "@/app/(main)/_utils/get-session";
@@ -11,7 +13,13 @@ import { isAdmin } from "@/app/(main)/_utils/is-admin";
 // components
 import JobCard from "@/app/(main)/_components/job/job-card";
 import { Separator } from "@/components/ui/separator";
-import SectionTitle from "../../_components/section-title";
+import SectionTitle from "@/app/(main)/_components/section-title";
+
+export const metadata: Metadata = {
+  title: "All the jobs you have posted",
+  description:
+    "Here is the list of all the jobs you have posted, Here approved and unapproved jobs will be posted.",
+};
 
 export default async function PostedJobs() {
   const { postedApprovedJobs } = await fetchPostedApprovedJobs();

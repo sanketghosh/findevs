@@ -19,6 +19,7 @@ const validWorkplaceOptionIds = WORKPLACE_OPTIONS.map(
  *
  */
 export const JobFilterSchema = z.object({
+  q: z.string().optional(),
   city: z.string().optional(),
   country: z.string().optional(),
   jobTypes: z

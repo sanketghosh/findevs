@@ -1,10 +1,15 @@
 "use client";
 
-import { toggleBookmarkAction } from "@/app/(main)/_actions/bookmark-actions";
-import { Button } from "@/components/ui/button";
+// packages
 import { BookmarkIcon, Loader2Icon } from "lucide-react";
 import { FormEvent, useState, useTransition } from "react";
 import { toast } from "sonner";
+
+// local modules
+import { toggleBookmarkAction } from "@/app/(main)/_actions/bookmark-actions";
+
+// components
+import { Button } from "@/components/ui/button";
 
 type BookmarkButtonProps = {
   jobId: string;

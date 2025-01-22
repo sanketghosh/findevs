@@ -6,6 +6,13 @@ import { redirect } from "next/navigation";
 import { createSearchParams } from "@/app/(main)/_utils/create-search-params";
 import { JobFilterSchema } from "@/app/(main)/_schemas/job-filter";
 
+/**
+
+    @description Handles job filtering form submission.
+    @param {FormData} formData - The form data containing the filter options.
+    @redirects to the filtered jobs page with the parsed query parameters.
+    */
+
 export async function filterJobsAction(formData: FormData) {
   // form values by name
   const values = {

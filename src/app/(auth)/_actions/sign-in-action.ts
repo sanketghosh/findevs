@@ -1,7 +1,11 @@
 "use server";
 
+// local modules
 import { auth } from "@/lib/auth";
-import { SignInSchema, SignInSchemaType } from "../_schemas/auth-schema";
+import {
+  SignInSchema,
+  SignInSchemaType,
+} from "@/app/(auth)/_schemas/auth-schema";
 import { prisma } from "@/lib/prisma";
 
 export const signInAction = async (values: SignInSchemaType) => {

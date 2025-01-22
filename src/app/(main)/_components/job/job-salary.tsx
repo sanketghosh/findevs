@@ -1,3 +1,4 @@
+// local modules
 import { fetchCurrentUserCurrency } from "@/app/(main)/_fetchers";
 import { convertCurrency } from "@/app/(main)/_utils/convert-currency";
 import { salaryFormatter } from "@/app/(main)/_utils/salary-formatter";

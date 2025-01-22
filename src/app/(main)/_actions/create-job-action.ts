@@ -1,13 +1,24 @@
 "use server";
 
-import { toSlug } from "@/app/(main)/_utils/to-slug";
-import { JobPostFormSchema } from "../_schemas/job-post-form";
-import { v4 as uuid_v4 } from "uuid";
-import { prisma } from "@/lib/prisma";
-import { Currency, JobType, Seniority, Workplace } from "@prisma/client";
-import { getSessionHandler } from "@/app/(main)/_utils/get-session";
+// packages
 import { redirect } from "next/navigation";
+import { v4 as uuid_v4 } from "uuid";
+import { Currency, JobType, Seniority, Workplace } from "@prisma/client";
 
+// local modules
+import { toSlug } from "@/app/(main)/_utils/to-slug";
+import { JobPostFormSchema } from "@/app/(main)/_schemas/job-post-form";
+import { prisma } from "@/lib/prisma";
+import { getSessionHandler } from "@/app/(main)/_utils/get-session";
+
+/**
+
+    @description Creates a new job posting.
+    @param {FormData} formData - The form data containing the job posting details.
+    @throws {Error} If the user is not authenticated.
+    @redirects to the job posting success page after creation.
+    @returns {Promise<{ error: string } | void>} A promise that resolves with an error message if creation fails, or void if successful.
+    */
 export async function createJobAction(formData: FormData) {
   const { email, id } = await getSessionHandler();
 
@@ -36,7 +47,7 @@ export async function createJobAction(formData: FormData) {
     companyLogo,
   } = JobPostFormSchema.parse(values);
 
-  console.log({
+  /*  console.log({
     title,
     description,
     city,
@@ -51,7 +62,7 @@ export async function createJobAction(formData: FormData) {
     employerWebsite,
     employerEmail,
     companyLogo,
-  });
+  }); */
 
   const customSlug = `${toSlug(title)}-${uuid_v4()}`;
 

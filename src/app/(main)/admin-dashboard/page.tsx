@@ -1,4 +1,5 @@
 // packages
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 // local modules
@@ -8,7 +9,13 @@ import { fetchUnApprovedJobs } from "@/app/(main)/_fetchers";
 
 // components
 import JobCard from "@/app/(main)/_components/job/job-card";
-import SectionTitle from "../_components/section-title";
+import SectionTitle from "@/app/(main)/_components/section-title";
+
+export const metadata: Metadata = {
+  title: "Admin Dashboard",
+  description:
+    "As an admin only you can access this page, here you can approve, reject or delete jobs.",
+};
 
 export default async function AdminDashboard() {
   const { email, id } = await getSessionHandler();

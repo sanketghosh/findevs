@@ -1,5 +1,5 @@
 // packages
-import { LogOutIcon } from "lucide-react";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 // local modules
@@ -24,9 +24,15 @@ import CustomSelect from "@/components/ui/custom-select";
 import { Label } from "@/components/ui/label";
 import SignOutButton from "@/app/(auth)/_components/sign-out-button";
 
+const { sessionCreatedAt, sessionExpiresAt, id, name, email, image } =
+  await getSessionHandler();
+
+export const metadata: Metadata = {
+  title: `${name}`,
+  description: `Hey ${name}, welcome to you profile. Manage your profile and change settings.`,
+};
+
 export default async function Profile() {
-  const { sessionCreatedAt, sessionExpiresAt, id, name, email, image } =
-    await getSessionHandler();
   const { fetchedUserCurrency } = await fetchCurrentUserCurrency();
 
   if (!id && !email) {

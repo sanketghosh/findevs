@@ -1,9 +1,11 @@
 // packages
 import { SlidersHorizontalIcon } from "lucide-react";
 
+// local modules
+import { JobFilterSchemaType } from "@/app/(main)/_schemas/job-filter";
+
 // components
 import FilterOptions from "@/app/(main)/_components/filter/filter-options";
-import { JobFilterSchemaType } from "../_schemas/job-filter";
 
 type SidebarContainerProps = {
   defaultValues: JobFilterSchemaType;

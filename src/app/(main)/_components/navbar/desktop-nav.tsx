@@ -5,9 +5,9 @@ import React from "react";
 
 // local modules
 import { NAV_LINKS } from "@/app/(main)/_data";
-import { buttonVariants } from "@/components/ui/button";
 
 // components
+import { buttonVariants } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 type DesktopNavProps = {

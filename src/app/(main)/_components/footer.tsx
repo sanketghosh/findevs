@@ -1,4 +1,4 @@
-import { ExternalLinkIcon, GithubIcon } from "lucide-react";
+import { ExternalLinkIcon } from "lucide-react";
 
 export default function Footer() {
   return (

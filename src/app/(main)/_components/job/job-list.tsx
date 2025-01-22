@@ -1,13 +1,11 @@
+// local modules
 import { fetchAllJobsByFilter } from "@/app/(main)/_fetchers";
+import { isAdmin } from "@/app/(main)/_utils/is-admin";
+import { JobFilterSchemaType } from "@/app/(main)/_schemas/job-filter";
+
+// packages
 import JobCard from "@/app/(main)/_components/job/job-card";
-import { JobFilterSchemaType } from "../../_schemas/job-filter";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Suspense } from "react";
-import CustomSelect from "@/components/ui/custom-select";
-import { CURRENCIES_VALUES } from "../../_data";
-import { Button } from "@/components/ui/button";
-import { isAdmin } from "../../_utils/is-admin";
-import JobPagination from "./job-pagination";
+import JobPagination from "@/app/(main)/_components/job/job-pagination";
 import { Separator } from "@/components/ui/separator";
 
 type JobListProps = {
@@ -41,22 +39,25 @@ export default async function JobList({
         <Button>Set</Button>
       </div> */}
 
-      <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-2">
-        {jobs.map((item) => (
-          <JobCard key={item.id} job={item} admin={admin} />
-        ))}
-        {jobs.length === 0 && (
-          <p>
-            No jobs found maybe try again after adjusting the filter parameters.
-          </p>
-        )}
-      </div>
-      <Separator />
-      <JobPagination
-        currentPage={page!}
-        filterValues={jobListFilterValues}
-        totalPages={totalPages}
-      />
+      {jobs.length > 0 ? (
+        <>
+          <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-2">
+            {jobs.map((item) => (
+              <JobCard key={item.id} job={item} admin={admin} />
+            ))}
+          </div>
+          <Separator />
+          <JobPagination
+            currentPage={page!}
+            filterValues={jobListFilterValues}
+            totalPages={totalPages}
+          />
+        </>
+      ) : (
+        <p className="font-medium text-muted-foreground">
+          No jobs found maybe try again after adjusting the filter parameters.
+        </p>
+      )}
     </div>
   );
 }

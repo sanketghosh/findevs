@@ -6,7 +6,10 @@ import Header from "@/app/(main)/_components/header";
 import Footer from "@/app/(main)/_components/footer";
 
 export const metadata: Metadata = {
-  title: "findevs",
+  title: {
+    template: "%s | findevs",
+    default: "findevs",
+  },
   description: "Find your next developer job easily without much hassle.",
 };
 

@@ -1,6 +1,14 @@
+import Link from "next/link";
+import { Metadata } from "next";
+
+// components / local modules
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Job posting success",
+  description: "Your job has been posted successfully.",
+};
 
 export default function JobPostSuccess() {
   return (

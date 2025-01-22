@@ -1,8 +1,8 @@
 // packages
-import { ChevronLeftIcon, ChevronRightIcon, SearchIcon } from "lucide-react";
+import { SearchIcon } from "lucide-react";
 
 // local modules
-import { JobFilterSchemaType } from "@/app/(main)/_schemas/job-filter";
+import { searchJobAction } from "@/app/(main)/_actions/search-job-action";
 
 // components
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 
 type HomePageProps = {
   searchParams: Promise<{
+    q?: string;
     city?: string;
     country?: string;
     jobTypes?: string[];
@@ -26,6 +27,9 @@ type HomePageProps = {
 export default async function Home({ searchParams }: HomePageProps) {
   const { page, ...resolvedSearchParams } = await searchParams;
 
+  // Parse page and set default to 1 if invalid
+  const currentPage = page && !isNaN(Number(page)) ? parseInt(page, 10) : 1;
+
   return (
     <div className="space-y-6">
       <Hero />
@@ -34,17 +38,23 @@ export default async function Home({ searchParams }: HomePageProps) {
 
         <div className="w-full space-y-6">
           {/* search box */}
-          <div className="flex w-full items-center gap-2">
+          <form
+            className="flex w-full items-center gap-2"
+            action={searchJobAction}
+          >
             <Input
               type="text"
+              id="q"
+              name="q"
               placeholder="Search title, description or company..."
               className="h-10 md:h-14"
+              defaultValue={resolvedSearchParams.q}
             />
             <Button className="h-10 shrink-0 md:h-14">
               <SearchIcon />
               <p className="hidden md:block">Search</p>
             </Button>
-          </div>
+          </form>
 
           <div className="block xl:hidden">
             <FilterDrawer defaultValues={resolvedSearchParams} />
@@ -54,7 +64,7 @@ export default async function Home({ searchParams }: HomePageProps) {
 
           <JobList
             jobListFilterValues={resolvedSearchParams}
-            page={page ? parseInt(page) : undefined}
+            page={currentPage}
           />
         </div>
       </div>

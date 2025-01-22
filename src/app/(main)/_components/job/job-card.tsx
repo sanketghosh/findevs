@@ -12,20 +12,19 @@ import { Job } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 
 // local modules
+import { cn } from "@/lib/utils";
+import { getSessionHandler } from "@/app/(main)/_utils/get-session";
 import { convertToReadableString } from "@/utils/convert-readable-string";
 import { convertCurrency } from "@/app/(main)/_utils/convert-currency";
-import { fetchCurrentUserCurrency } from "@/app/(main)/_fetchers";
 import { salaryFormatter } from "@/app/(main)/_utils/salary-formatter";
 
 // components
 import { Badge } from "@/components/ui/badge";
-import { Card, CardFooter } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { getSessionHandler } from "../../_utils/get-session";
-import JobSalary from "./job-salary";
-import BookmarkButton from "./job-card-buttons/bookmark-button";
+import { buttonVariants } from "@/components/ui/button";
+import JobSalary from "@/app/(main)/_components/job/job-salary";
+import BookmarkButton from "@/app/(main)/_components/job/job-card-buttons/bookmark-button";
 
 type JobCardProps = {
   job: Job;
@@ -55,14 +54,17 @@ export default async function JobCard({ job, admin = false }: JobCardProps) {
     id: jobId,
   } = job;
 
-  const isBookmarked = !!(await prisma.bookmark.findUnique({
-    where: {
-      userId_jobId: {
-        userId: sessionUserId!,
-        jobId: jobId,
-      },
-    },
-  }));
+  // Check bookmark status only if user is logged in
+  const isBookmarked = sessionUserId
+    ? !!(await prisma.bookmark.findUnique({
+        where: {
+          userId_jobId: {
+            userId: sessionUserId,
+            jobId: jobId,
+          },
+        },
+      }))
+    : false;
 
   const viewJobLink = admin ? `/admin-dashboard/job/${slug}` : `/job/${slug}`;
 
@@ -131,7 +133,6 @@ export default async function JobCard({ job, admin = false }: JobCardProps) {
           {/* <Link href={viewJobLink}>
             <EyeIcon />
           </Link> */}
-          {/* <JobCardOptionDropdown /> */}
           <BookmarkButton jobId={jobId} bookmarkInitialState={isBookmarked} />
         </div>
       </div>

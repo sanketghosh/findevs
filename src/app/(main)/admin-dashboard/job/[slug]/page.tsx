@@ -1,4 +1,5 @@
 // packages
+import { Metadata } from "next";
 import { format } from "date-fns";
 import { MegaphoneIcon } from "lucide-react";
 import { notFound } from "next/navigation";
@@ -22,6 +23,16 @@ type JobApplicationAdminCheckpointProps = {
     slug: string;
   };
 };
+
+export async function generateMetadata({
+  params: { slug },
+}: JobApplicationAdminCheckpointProps): Promise<Metadata> {
+  const job = await fetchSingleJobAsAdmin(slug);
+
+  return {
+    title: job.job.title,
+  };
+}
 
 export default async function JobApplicationAdminCheckpoint({
   params,

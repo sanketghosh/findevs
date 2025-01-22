@@ -3,11 +3,11 @@ import Link from "next/link";
 
 // local modules
 import { getSessionHandler } from "@/app/(main)/_utils/get-session";
+import { isAdmin } from "@/app/(main)/_utils/is-admin";
 
 //components
 import DesktopNav from "@/app/(main)/_components/navbar/desktop-nav";
 import MobileNav from "@/app/(main)/_components/navbar/mobile-nav";
-import { isAdmin } from "../_utils/is-admin";
 
 export default async function Header() {
   const { id, name, email } = await getSessionHandler();

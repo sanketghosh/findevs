@@ -1,7 +1,11 @@
 "use server";
 
+// components
 import { auth } from "@/lib/auth";
-import { SignUpSchema, SignUpSchemaType } from "../_schemas/auth-schema";
+import {
+  SignUpSchema,
+  SignUpSchemaType,
+} from "@/app/(auth)/_schemas/auth-schema";
 import { prisma } from "@/lib/prisma";
 
 export const signUpAction = async (values: SignUpSchemaType) => {

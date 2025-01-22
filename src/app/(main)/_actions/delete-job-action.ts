@@ -1,8 +1,19 @@
 "use server";
 
+// packages
 import { revalidatePath } from "next/cache";
-import { getSessionHandler } from "../_utils/get-session";
+
+// local modules
+import { getSessionHandler } from "@/app/(main)/_utils/get-session";
 import { prisma } from "@/lib/prisma";
+
+/**
+
+    @description Deletes a job by its ID.
+    @param {string} jobId - The ID of the job to delete.
+    @throws {Error} If the user is not authenticated or does not own the job.
+    @returns {Promise<{ success: string } | { error: string }>} A promise that resolves with a success message or an error message.
+    */
 
 export async function deleteJobAction(jobId: string) {
   //   console.log(jobId);

@@ -1,5 +1,11 @@
 "use client";
 
+// components
+import { DropzoneOptions } from "react-dropzone";
+import { ImageIcon } from "lucide-react";
+import React, { SetStateAction } from "react";
+
+//
 import {
   FileUploader,
   FileInput,
@@ -7,10 +13,7 @@ import {
   FileUploaderItem,
 } from "@/components/ui/file-upload";
 import { Label } from "@/components/ui/label";
-import { ImageIcon } from "lucide-react";
 import Image from "next/image";
-import React, { SetStateAction, useState } from "react";
-import { DropzoneOptions } from "react-dropzone";
 
 type CompanyLogoUploadProps = {
   files: File[] | null;

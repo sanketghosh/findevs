@@ -1,7 +1,18 @@
-import JobCard from "../_components/job/job-card";
-import SectionTitle from "../_components/section-title";
-import { fetchBookmarks } from "../_fetchers";
-import { isAdmin } from "../_utils/is-admin";
+// packages
+import { Metadata } from "next";
+
+// local modules
+import { fetchBookmarks } from "@/app/(main)/_fetchers";
+import { isAdmin } from "@/app/(main)/_utils/is-admin";
+
+// components
+import JobCard from "@/app/(main)/_components/job/job-card";
+import SectionTitle from "@/app/(main)/_components/section-title";
+
+export const metadata: Metadata = {
+  title: "Bookmarks",
+  description: "All your bookmarks are here.",
+};
 
 export default async function Bookmarks() {
   const { bookmarks } = await fetchBookmarks();
