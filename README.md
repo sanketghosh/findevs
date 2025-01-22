@@ -6,7 +6,7 @@
 <div align="center">
   <br />
     <a href="https://github.com/sanketghosh/findevs" target="_blank">
-      <img src="https://github.com/sanketghosh/findevs/blob/public/findevsdemo.png" alt="Project Banner">
+      <img src="https://github.com/sanketghosh/findevs/blob/main/public/findevsdemo.png" alt="Project Banner">
     </a>
   <br />
 </div>
