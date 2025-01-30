@@ -1,7 +1,9 @@
 // packages
+import { Metadata } from "next";
 import { SearchIcon } from "lucide-react";
 
 // local modules
+import { getTitle } from "@/app/(main)/_utils/get-title";
 import { searchJobAction } from "@/app/(main)/_actions/search-job-action";
 
 // components
@@ -24,6 +26,26 @@ type HomePageProps = {
   }>;
 };
 
+type PageProps = {
+  searchParams: {
+    q?: string;
+    city?: string;
+    country?: string;
+    jobTypes?: string[];
+    workplaceOptions?: string[];
+    seniorityOptions?: string[];
+    page?: string;
+  };
+};
+
+export function generateMetadata({
+  searchParams: { city, country, q },
+}: PageProps): Metadata {
+  return {
+    title: `${getTitle({ city, country, q })}| findevs`,
+  };
+}
+
 export default async function Home({ searchParams }: HomePageProps) {
   const { page, ...resolvedSearchParams } = await searchParams;
 
@@ -32,7 +54,11 @@ export default async function Home({ searchParams }: HomePageProps) {
 
   return (
     <div className="space-y-6">
-      <Hero />
+      <Hero
+        city={resolvedSearchParams.city}
+        country={resolvedSearchParams.country}
+        q={resolvedSearchParams.q}
+      />
       <div className="flex flex-col gap-5 lg:flex-row">
         <SidebarContainer defaultValues={resolvedSearchParams} />
 
