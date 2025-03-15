@@ -3,13 +3,17 @@
 <p>Findevs is a developer-focused job board connecting tech talent with companies, offering curated job listings, advanced filters, and seamless application management.</p>
 </div>
 
+---
+
 <div align="center">
   <br />
     <a href="https://github.com/sanketghosh/findevs" target="_blank">
-      <img src="https://github.com/sanketghosh/findevs/blob/main/public/findevsdemo.png" alt="Project Banner">
+      <img src="https://github.com/sanketghosh/findevs/blob/main/public/findevs.png" alt="Project Banner">
     </a>
   <br />
 </div>
+
+---
 
 <div align="center">
   <img src="https://skillicons.dev/icons?i=nextjs" height="40" alt="nextjs logo"  />
@@ -23,6 +27,14 @@
   <img src="https://skillicons.dev/icons?i=postgres" height="40" alt="postgresql logo"  />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=prisma" height="40" alt="prisma logo"  />
+</div>
+
+<div align="center">
+  <br />
+    <a href="https://github.com/sanketghosh/findevs" target="_blank">
+      <img src="https://github.com/sanketghosh/findevs/blob/main/public/findevsdemo.png" alt="Project Banner">
+    </a>
+  <br />
 </div>
 
 ###
