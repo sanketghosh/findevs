@@ -5,7 +5,7 @@ import Link from "next/link";
 
 // local modules
 import { cn } from "@/lib/utils";
-import { NAV_LINKS } from "@/app/(main)/_data";
+import { getNavLinks } from "@/app/(main)/_utils/get-nav-links";
 
 // components
 import {
@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { buttonVariants } from "@/components/ui/button";
+import { getSessionHandler } from "../../_utils/get-session";
 
 type MobileNavProps = {
   id?: string;
@@ -25,7 +26,15 @@ type MobileNavProps = {
   admin: boolean;
 };
 
-export default function MobileNav({ email, id, name, admin }: MobileNavProps) {
+export default async function MobileNav({
+  email,
+  id,
+  name,
+  admin,
+}: MobileNavProps) {
+  const { id: authenticatedUserId } = await getSessionHandler();
+  const { NAV_LINKS } = await getNavLinks(authenticatedUserId!);
+
   return (
     <Sheet>
       <SheetTrigger>

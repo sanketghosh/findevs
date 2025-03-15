@@ -73,7 +73,11 @@ export default async function JobCard({ job, admin = false }: JobCardProps) {
       <div className="flex items-center gap-3">
         <div className="size-16 overflow-hidden rounded-md border">
           <img
-            src={companyLogoUrl === null ? "/company-img.webp" : companyLogoUrl}
+            src={
+              companyLogoUrl === null || companyLogoUrl.length === 0
+                ? "/company-img.webp"
+                : companyLogoUrl
+            }
             alt={companyName}
             className="h-full w-full object-cover"
           />

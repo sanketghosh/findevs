@@ -1,11 +1,12 @@
 "use client";
 
 // packages
-import { toast } from "sonner";
-import { ImageIcon, Trash2Icon } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { toast } from "sonner";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
+import { ImageIcon, Trash2Icon } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 // local modules
@@ -21,12 +22,12 @@ import {
   SENIORITY_OPTIONS,
   WORKPLACE_OPTIONS,
 } from "@/app/(main)/_data";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { createJobAction } from "@/app/(main)/_actions/create-job-action";
 
 // components
 import DescriptionEditor from "@/app/(main)/_components/forms/description-editor";
 import CustomSelect from "@/components/ui/custom-select";
-import { buttonVariants } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Form,
@@ -47,11 +48,30 @@ import {
 } from "@/components/ui/card";
 import LoadingButton from "@/components/buttons/loading-button";
 import { Label } from "@/components/ui/label";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
-export default function CreateJobForm() {
+type CreateJobFormProps = {
+  authenticatedUserId?: string;
+};
+
+export default function CreateJobForm({
+  authenticatedUserId,
+}: CreateJobFormProps) {
+  const router = useRouter();
+
+  const [isPending, startTransition] = useTransition();
   const [cityDesc, setCityDesc] = useState<string | undefined | null>();
-  const [countryDesc, setCountryDesc] = useState<string | undefined | null>();
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [countryDesc, setCountryDesc] = useState<string | undefined | null>();
 
   const form = useForm<JobPostFormSchemaType>({
     resolver: zodResolver(JobPostFormSchema),
@@ -73,7 +93,7 @@ export default function CreateJobForm() {
     },
   });
 
-  const onSubmitJobCreateFormHandler = async (data: JobPostFormSchemaType) => {
+  const onSubmitJobCreateFormHandler = (data: JobPostFormSchemaType) => {
     // console.log(data);
     const formData = new FormData();
 
@@ -83,14 +103,18 @@ export default function CreateJobForm() {
       }
     });
 
-    try {
-      await createJobAction(formData);
-      // console.log(formData);
-      toast.success("Job post has been created successfully.");
-    } catch (error) {
-      // alert("Something went wrong, try again.");
-      toast.error("Something went wrong, try again.");
-    }
+    console.log(formData);
+
+    startTransition(async () => {
+      const result = await createJobAction(formData);
+      if (result.success) {
+        toast.success(result.success);
+        setInterval(() => {}, 1000);
+        router.push("/job/job-post-success");
+      } else {
+        toast.error(result.error);
+      }
+    });
   };
 
   return (
@@ -122,7 +146,7 @@ export default function CreateJobForm() {
                           {...field}
                           placeholder="Software development intern"
                           type="text"
-                          // disabled={isPending}
+                          disabled={isPending}
                         />
                       </FormControl>
                       <FormDescription>Job title is required</FormDescription>
@@ -141,7 +165,7 @@ export default function CreateJobForm() {
                           {...field}
                           placeholder="ABC Company inc."
                           type="text"
-                          // disabled={isPending}
+                          disabled={isPending}
                         />
                       </FormControl>
                       <FormDescription>
@@ -158,7 +182,7 @@ export default function CreateJobForm() {
                     <FormItem>
                       <FormLabel>Currency of provided salary</FormLabel>
                       <FormControl>
-                        <CustomSelect {...field}>
+                        <CustomSelect {...field} disabled={isPending}>
                           <option value="" hidden>
                             Select the currency
                           </option>
@@ -187,7 +211,7 @@ export default function CreateJobForm() {
                           {...field}
                           placeholder="700000000"
                           type="text"
-                          // disabled={isPending}
+                          disabled={isPending}
                         />
                       </FormControl>
                       <FormDescription>Default amount is USD.</FormDescription>
@@ -202,7 +226,7 @@ export default function CreateJobForm() {
                     <FormItem>
                       <FormLabel>Job Type*</FormLabel>
                       <FormControl>
-                        <CustomSelect {...field}>
+                        <CustomSelect {...field} disabled={isPending}>
                           <option value="" hidden>
                             Select a job type
                           </option>
@@ -226,6 +250,7 @@ export default function CreateJobForm() {
                       <FormLabel>Workplace Type*</FormLabel>
                       <FormControl>
                         <CustomSelect
+                          disabled={isPending}
                           {...field}
                           onChange={(
                             e: React.ChangeEvent<HTMLSelectElement>,
@@ -278,7 +303,7 @@ export default function CreateJobForm() {
                     <FormItem>
                       <FormLabel>Seniority Options*</FormLabel>
                       <FormControl>
-                        <CustomSelect {...field}>
+                        <CustomSelect {...field} disabled={isPending}>
                           <option value="" hidden>
                             Select a seniority option
                           </option>
@@ -309,7 +334,9 @@ export default function CreateJobForm() {
                         <Input
                           {...field}
                           placeholder="Enter city name"
-                          disabled={form.watch("workplace") === "Remote"} // Disable if "Remote" is selected
+                          disabled={
+                            form.watch("workplace") === "Remote" || isPending
+                          } // Disable if "Remote" is selected
                           onBlur={(e) => {
                             if (
                               form.watch("workplace") === "Remote" &&
@@ -340,7 +367,9 @@ export default function CreateJobForm() {
                       <FormControl>
                         <CustomSelect
                           {...field}
-                          disabled={form.watch("workplace") === "Remote"} // Disable if "Remote" is selected
+                          disabled={
+                            form.watch("workplace") === "Remote" || isPending
+                          } // Disable if "Remote" is selected
                           onBlur={(e) => {
                             if (
                               form.watch("workplace") === "Remote" &&
@@ -388,7 +417,7 @@ export default function CreateJobForm() {
                           {...field}
                           placeholder="employer@mail.com"
                           type="email"
-                          // disabled={isPending}
+                          disabled={isPending}
                         />
                       </FormControl>
                       <FormMessage />
@@ -406,7 +435,7 @@ export default function CreateJobForm() {
                           {...field}
                           placeholder="https://employer.com"
                           type="url"
-                          // disabled={isPending}
+                          disabled={isPending}
                           onChange={(e) => {
                             field.onChange(e);
                             form.trigger("employerEmail");
@@ -431,7 +460,7 @@ export default function CreateJobForm() {
                           {...field}
                           placeholder="Enter your full address."
                           rows={4}
-                          // disabled={isPending}
+                          disabled={isPending}
                         />
                       </FormControl>
                       <FormMessage />
@@ -520,12 +549,56 @@ export default function CreateJobForm() {
               </div>
 
               <div className="flex items-center space-x-4">
-                <LoadingButton
-                  type="submit"
-                  loading={form.formState.isSubmitting}
-                >
-                  Submit
-                </LoadingButton>
+                {authenticatedUserId ? (
+                  <LoadingButton type="submit" loading={isPending}>
+                    Submit
+                  </LoadingButton>
+                ) : (
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button variant={"default"}>Submit</Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>
+                          You are not authenticated
+                        </AlertDialogTitle>
+                        <AlertDialogDescription>
+                          If you do not have an account please sign up and if
+                          you already have an account sign in to continue.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogAction asChild>
+                          <Link
+                            href={"/sign-up"}
+                            className={cn(
+                              buttonVariants({
+                                size: "sm",
+                                variant: "default",
+                              }),
+                            )}
+                          >
+                            Sign Up
+                          </Link>
+                        </AlertDialogAction>
+                        <AlertDialogAction asChild>
+                          <Link
+                            href={"/sign-in"}
+                            className={cn(
+                              buttonVariants({
+                                size: "sm",
+                                variant: "secondary",
+                              }),
+                            )}
+                          >
+                            Sign In
+                          </Link>
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                )}
                 <Link
                   className={cn(
                     buttonVariants({

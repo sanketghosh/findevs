@@ -57,7 +57,7 @@ export default async function PostedJobs() {
           </div>
         </div>
       ) : (
-        <p>No approved jobs found.</p>
+        <p>No un approved jobs found.</p>
       )}
     </div>
   );

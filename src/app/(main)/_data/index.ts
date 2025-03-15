@@ -245,29 +245,6 @@ export const COUNTRY_LIST = [
   { name: "Zimbabwe", code: "ZW" },
 ];
 
-export const NAV_LINKS = [
-  {
-    id: 0,
-    href: "/",
-    label: "home",
-  },
-  {
-    id: 1,
-    href: "/job/post-job",
-    label: "post a job",
-  },
-  {
-    id: 2,
-    href: "/bookmarks",
-    label: "bookmarks",
-  },
-  {
-    id: 3,
-    href: "/job/posted-jobs",
-    label: "posted jobs",
-  },
-];
-
 export const JOB_TYPES = [
   {
     jobTypeId: "FullTime",

@@ -4,11 +4,12 @@ import Link from "next/link";
 import React from "react";
 
 // local modules
-import { NAV_LINKS } from "@/app/(main)/_data";
 
 // components
 import { buttonVariants } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { getNavLinks } from "../../_utils/get-nav-links";
+import { getSessionHandler } from "../../_utils/get-session";
 
 type DesktopNavProps = {
   id?: string;
@@ -17,12 +18,16 @@ type DesktopNavProps = {
   admin: boolean;
 };
 
-export default function DesktopNav({
+export default async function DesktopNav({
   email,
   id,
   name,
   admin,
 }: DesktopNavProps) {
+  const { id: authenticatedUserId } = await getSessionHandler();
+
+  const { NAV_LINKS } = await getNavLinks(authenticatedUserId!);
+
   return (
     <div className="hidden items-center gap-10 md:flex">
       <nav className="flex items-center gap-4">

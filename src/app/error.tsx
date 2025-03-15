@@ -1,5 +1,9 @@
 "use client";
 
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
+
 export default function Error() {
   return (
     <main className="mx-auto flex min-h-screen max-w-5xl flex-col items-center justify-center space-y-5 px-4 py-6 text-center">
@@ -10,7 +14,7 @@ export default function Error() {
         Something unexpected happened go back to the home page or reload if
         still nothing improves contact us.
       </p>
-      {/* <Link
+      <Link
         href={"/"}
         className={cn(
           buttonVariants({
@@ -20,7 +24,7 @@ export default function Error() {
         )}
       >
         Home Page
-      </Link> */}
+      </Link>
     </main>
   );
 }

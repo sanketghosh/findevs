@@ -27,7 +27,7 @@ type HomePageProps = {
 };
 
 type PageProps = {
-  searchParams: {
+  searchParams: Promise<{
     q?: string;
     city?: string;
     country?: string;
@@ -35,14 +35,20 @@ type PageProps = {
     workplaceOptions?: string[];
     seniorityOptions?: string[];
     page?: string;
-  };
+  }>;
 };
 
-export function generateMetadata({
-  searchParams: { city, country, q },
-}: PageProps): Metadata {
+export async function generateMetadata({
+  searchParams,
+}: PageProps): Promise<Metadata> {
+  // console.log("@@@ METADATA", { city, country, q });
+  const { city, country, q } = await searchParams;
+
   return {
-    title: `${getTitle({ city, country, q })}| findevs`,
+    title: !getTitle({ city, country, q })
+      ? "findevs"
+      : getTitle({ city, country, q }),
+    // title: `${getTitle({ city, country, q })}| findevs`,
   };
 }
 

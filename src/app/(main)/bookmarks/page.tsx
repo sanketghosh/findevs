@@ -8,6 +8,7 @@ import { isAdmin } from "@/app/(main)/_utils/is-admin";
 // components
 import JobCard from "@/app/(main)/_components/job/job-card";
 import SectionTitle from "@/app/(main)/_components/section-title";
+import { getSessionHandler } from "../_utils/get-session";
 
 export const metadata: Metadata = {
   title: "Bookmarks",
@@ -15,8 +16,8 @@ export const metadata: Metadata = {
 };
 
 export default async function Bookmarks() {
-  const { bookmarks } = await fetchBookmarks();
   const admin = await isAdmin();
+  const { bookmarks } = await fetchBookmarks();
 
   return (
     <div className="space-y-4">

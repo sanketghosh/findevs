@@ -19,17 +19,13 @@ export default function MainLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
-        <main className="relative min-h-screen w-full">
-          <Header />
-          <div className="mx-auto max-w-[95rem] px-4 py-6 md:py-8 lg:px-6 xl:py-10">
-            {children}
-          </div>
-          <div className="h-20" />
-          <Footer />
-        </main>
-      </body>
-    </html>
+    <main className="relative min-h-screen w-full">
+      <Header />
+      <div className="mx-auto max-w-[95rem] px-4 py-6 md:py-8 lg:px-6 xl:py-10">
+        {children}
+      </div>
+      <div className="h-20" />
+      <Footer />
+    </main>
   );
 }

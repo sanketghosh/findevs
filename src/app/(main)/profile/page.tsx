@@ -24,15 +24,15 @@ import CustomSelect from "@/components/ui/custom-select";
 import { Label } from "@/components/ui/label";
 import SignOutButton from "@/app/(auth)/_components/sign-out-button";
 
-const { sessionCreatedAt, sessionExpiresAt, id, name, email, image } =
-  await getSessionHandler();
-
-export const metadata: Metadata = {
+/* export const metadata: Metadata = {
   title: `${name}`,
   description: `Hey ${name}, welcome to you profile. Manage your profile and change settings.`,
-};
+}; */
 
 export default async function Profile() {
+  const { sessionCreatedAt, sessionExpiresAt, id, name, email, image } =
+    await getSessionHandler();
+
   const { fetchedUserCurrency } = await fetchCurrentUserCurrency();
 
   if (!id && !email) {
@@ -50,12 +50,12 @@ export default async function Profile() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex gap-2">
+            <div className="flex items-center gap-4">
               <Avatar className="size-28 rounded-md">
                 <AvatarImage src={image ? image : "/placeholder-user.webp"} />
                 <AvatarFallback>{name?.charAt(0)}</AvatarFallback>
               </Avatar>
-              <div className="space-y-1 text-left font-semibold">
+              <div className="space-y-2 text-left font-semibold">
                 <h1 className="text-lg font-bold lg:text-xl">{name}</h1>
                 <p className="text-sm text-muted-foreground xl:text-lg">
                   {email}

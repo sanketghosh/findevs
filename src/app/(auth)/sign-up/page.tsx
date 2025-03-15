@@ -6,9 +6,5 @@ export const metadata: Metadata = {
 };
 
 export default function SignUp() {
-  return (
-    <main>
-      <SignUpForm />
-    </main>
-  );
+  return <SignUpForm />;
 }
