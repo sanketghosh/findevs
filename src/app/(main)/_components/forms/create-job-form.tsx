@@ -120,13 +120,13 @@ export default function CreateJobForm({
   return (
     <div>
       <Card>
-        <CardHeader>
+        {/* <CardHeader>
           <CardTitle>Post a new job</CardTitle>
           <CardDescription>
             Fill all the necessary fields carefully and submit the form to
             create a new job
           </CardDescription>
-        </CardHeader>
+        </CardHeader> */}
         <CardContent>
           <Form {...form}>
             <form
@@ -495,15 +495,15 @@ export default function CreateJobForm({
                       <Label>Logo Upload (Only one file & max size 2MB)</Label>
                       <FormLabel
                         className={cn(
-                          "flex w-full cursor-pointer flex-col items-center justify-center rounded-md border bg-background px-4 py-14 text-sm text-muted-foreground shadow-sm hover:bg-secondary",
+                          "bg-background text-muted-foreground hover:bg-secondary flex w-full cursor-pointer flex-col items-center justify-center rounded-md border px-4 py-14 text-sm shadow-sm",
                           imagePreview && "pointer-events-none",
                         )}
                       >
-                        <ImageIcon className="size-6 stroke-muted-foreground md:size-8 lg:size-10" />
-                        <h1 className="font-semibold capitalize text-muted-foreground md:text-lg">
+                        <ImageIcon className="stroke-muted-foreground size-6 md:size-8 lg:size-10" />
+                        <h1 className="text-muted-foreground font-semibold capitalize md:text-lg">
                           Drop company logo here
                         </h1>
-                        <p className="text-sm font-medium text-muted-foreground/60">
+                        <p className="text-muted-foreground/60 text-center text-sm font-medium">
                           Only '.png', '.jpg', '.jpeg' format supported and
                           maximum size of 2MB allowed.
                         </p>
@@ -529,7 +529,7 @@ export default function CreateJobForm({
                   <div className="bg_cross_pattern flex h-full w-full items-center justify-center rounded-md border p-3">
                     <div className="relative h-[450px] w-[450px] overflow-hidden rounded-md">
                       <button
-                        className="absolute right-4 top-4 z-10 rounded-md border-none bg-destructive p-2 text-white outline-none"
+                        className="bg-destructive absolute top-4 right-4 z-10 rounded-md border-none p-2 text-white outline-none"
                         onClick={() => {
                           setImagePreview(null);
                         }}

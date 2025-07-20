@@ -1,6 +1,7 @@
 // packages
+import { Suspense } from "react";
 import { Metadata } from "next";
-import { SearchIcon } from "lucide-react";
+import { Loader2Icon, SearchIcon } from "lucide-react";
 
 // local modules
 import { getTitle } from "@/app/(main)/_utils/get-title";
@@ -13,6 +14,7 @@ import SidebarContainer from "@/app/(main)/_components/sidebar-container";
 import Hero from "@/app/(main)/_components/hero";
 import JobList from "@/app/(main)/_components/job/job-list";
 import { Input } from "@/components/ui/input";
+import { Skeleton } from "@/components/ui/skeleton";
 
 type HomePageProps = {
   searchParams: Promise<{
@@ -79,7 +81,7 @@ export default async function Home({ searchParams }: HomePageProps) {
               id="q"
               name="q"
               placeholder="Search title, description or company..."
-              className="h-10 md:h-14"
+              className="h-10 placeholder:text-sm md:h-14 lg:placeholder:text-base"
               defaultValue={resolvedSearchParams.q}
             />
             <Button className="h-10 shrink-0 md:h-14">
@@ -94,10 +96,20 @@ export default async function Home({ searchParams }: HomePageProps) {
 
           {/* JOB LIST  */}
 
-          <JobList
-            jobListFilterValues={resolvedSearchParams}
-            page={currentPage}
-          />
+          <Suspense
+            fallback={
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                {Array.from({ length: 6 }).map((_, idx) => (
+                  <Skeleton key={idx} className="h-52 rounded-lg" />
+                ))}
+              </div>
+            }
+          >
+            <JobList
+              jobListFilterValues={resolvedSearchParams}
+              page={currentPage}
+            />
+          </Suspense>
         </div>
       </div>
     </div>

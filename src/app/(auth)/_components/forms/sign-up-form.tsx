@@ -4,7 +4,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { Loader2Icon } from "lucide-react";
+import { ArrowLeftIcon, Loader2Icon } from "lucide-react";
 import { useState, useTransition } from "react";
 import { toast } from "sonner";
 
@@ -25,8 +25,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import AuthCardWrapper from "@/app/(auth)/_components/cards/auth-card-wrapper";
+import { Button, buttonVariants } from "@/components/ui/button";
+import CardWrapper from "@/components/card-wrapper";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export default function SignUpForm() {
   // states
@@ -67,12 +69,24 @@ export default function SignUpForm() {
   };
 
   return (
-    <div className="space-y-6">
-      <AuthCardWrapper
-        title="findevs - signup"
+    <div className="space-y-4">
+      <Link
+        href={"/"}
+        className={cn(
+          buttonVariants({
+            size: "icon",
+            variant: "secondary",
+          }),
+        )}
+      >
+        <ArrowLeftIcon />
+      </Link>
+      <CardWrapper
+        title="FINDEVS - signup"
         description="just signup and get started with your developer job hunting journey."
         footerText="Already have an account ? SignIn"
         footerHref="/sign-in"
+        className="w-full sm:w-[400px] md:w-[450px] lg:w-[490px]"
       >
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmitHandler)}>
@@ -155,7 +169,7 @@ export default function SignUpForm() {
             </Button>
           </form>
         </Form>
-      </AuthCardWrapper>
+      </CardWrapper>
     </div>
   );
 }

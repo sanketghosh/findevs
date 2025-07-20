@@ -11,11 +11,11 @@ export const SignUpSchema = z
       .max(12, {
         message: "Maximum twelve characters acceptable.",
       }),
-    email: z.string().email({
+    email: z.email({
       message: "A valid email is required",
     }),
-    password: z.string().min(6, {
-      message: "At least 6 characters needed.",
+    password: z.string().min(9, {
+      message: "At least 0 characters needed.",
     }),
     confirmPassword: z.string(),
   })
@@ -29,8 +29,8 @@ export const SignInSchema = z.object({
   email: z.string().email({
     message: "Not a valid email address.",
   }),
-  password: z.string().min(6, {
-    message: "Must be of at least six characters.",
+  password: z.string().min(9, {
+    message: "Must be of at least 9 characters.",
   }),
 });
 

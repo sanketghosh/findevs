@@ -38,13 +38,18 @@ export default function SignOutButton() {
       variant={"destructive"}
       disabled={isPending}
       onClick={signOutHandler}
+      size={"lg"}
+      className="w-full"
     >
       {isPending ? (
-        <Loader2Icon className="animate-spin" />
+        <>
+          <Loader2Icon className="animate-spin" size={20} />
+          Signing Out
+        </>
       ) : (
         <>
+          <LogOutIcon size={20} />
           Sign Out
-          <LogOutIcon />
         </>
       )}
     </Button>

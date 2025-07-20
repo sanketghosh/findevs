@@ -4,6 +4,9 @@ import {
   ArrowRightIcon,
   BriefcaseBusinessIcon,
   ClockIcon,
+  Globe2Icon,
+  GlobeIcon,
+  LaptopIcon,
   MapPinIcon,
   WalletIcon,
 } from "lucide-react";
@@ -20,7 +23,14 @@ import { salaryFormatter } from "@/app/(main)/_utils/salary-formatter";
 
 // components
 import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { buttonVariants } from "@/components/ui/button";
 import JobSalary from "@/app/(main)/_components/job/job-salary";
@@ -69,104 +79,84 @@ export default async function JobCard({ job, admin = false }: JobCardProps) {
   const viewJobLink = admin ? `/admin-dashboard/job/${slug}` : `/job/${slug}`;
 
   return (
-    <Card className="relative w-full space-y-3.5 p-4 hover:shadow">
-      <div className="flex items-center gap-3">
-        <div className="size-16 overflow-hidden rounded-md border">
-          <img
-            src={
-              companyLogoUrl === null || companyLogoUrl.length === 0
-                ? "/company-img.webp"
-                : companyLogoUrl
-            }
-            alt={companyName}
-            className="h-full w-full object-cover"
-          />
-        </div>
-        <div className="leading-tight">
-          <Link
-            href={viewJobLink}
-            className="text-base font-semibold lg:text-lg"
-          >
-            {title}
-          </Link>
-          <p className="font-medium text-muted-foreground">{companyName}</p>
-        </div>
-      </div>
-      <div className="line-clamp-1 flex items-center gap-1 font-medium">
-        <MapPinIcon size={17} />
-        <p className="line-clamp-1 text-sm">
-          {city}, {country}
-          {workplace === "InCountryRemote" && ` (In Country Remote)`}
-        </p>
-      </div>
-
-      {/* 3rd para */}
-      <div className="flex items-center gap-3 font-medium">
-        <Badge variant={"secondary"}>
-          <WalletIcon size={17} />
-          {sessionUserId ? (
-            <JobSalary fromCurrency={currency!} salary={salary} />
-          ) : (
-            <p className="ml-1.5">
-              {salaryFormatter(convertCurrency(currency!, "USD", salary))} USD
-              PA
-            </p>
-          )}
-        </Badge>
-        <Badge variant={"secondary"}>
-          <ClockIcon size={17} />
-          <p className="ml-1.5">{jobType}</p>
-        </Badge>
-        <Badge variant={"secondary"}>
-          <BriefcaseBusinessIcon size={17} />
-          <p className="ml-1.5">{seniority}</p>
-        </Badge>
-      </div>
-      <div className="flex w-full items-center justify-between">
-        <h2 className="text-sm font-semibold text-muted-foreground">
-          {format(createdAt, "PPP")}
-        </h2>
+    <Card className="">
+      <CardHeader>
+        <CardTitle>{title}</CardTitle>
+        <CardDescription>{companyName}</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
         <div className="flex items-center gap-3">
-          {/*  {approved && (
-            <button onClick={() => setBookmark(!bookmark)}>
-              <BookmarkIcon
-                className={cn(bookmark && "fill-primary stroke-none")}
-              />
-            </button>
-          )} */}
-          {/* <Link href={viewJobLink}>
-            <EyeIcon />
-          </Link> */}
+          <div className="size-14 shrink-0 overflow-hidden rounded-md border">
+            <img
+              src={
+                companyLogoUrl === null || companyLogoUrl.length === 0
+                  ? "/company-img.webp"
+                  : companyLogoUrl
+              }
+              alt={companyName}
+              className="h-full w-full object-cover"
+            />
+          </div>
+          <div className="space-y-1">
+            <div className="flex items-center font-semibold">
+              {sessionUserId ? (
+                <JobSalary fromCurrency={currency!} salary={salary} />
+              ) : (
+                <p>
+                  {salaryFormatter(convertCurrency(currency!, "USD", salary))}{" "}
+                  USD PA
+                </p>
+              )}
+            </div>{" "}
+            <div className="line-clamp-1 flex items-center gap-1 font-medium">
+              <MapPinIcon size={17} />
+              <p className="line-clamp-1 text-sm">
+                {city}, {country}
+                {workplace === "InCountryRemote" && ` (In Country Remote)`}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* 4th para */}
+        <div className="flex flex-wrap items-center gap-3 font-medium uppercase">
+          <Badge variant={"secondary"}>
+            <LaptopIcon size={17} />
+            <p className="ml-0.5">{convertToReadableString(workplace)}</p>
+          </Badge>
+
+          <Badge variant={"secondary"}>
+            <ClockIcon size={17} />
+            <p className="ml-0.5">{jobType}</p>
+          </Badge>
+          <Badge variant={"secondary"}>
+            <BriefcaseBusinessIcon size={17} />
+            <p className="ml-0.5">{seniority}</p>
+          </Badge>
+        </div>
+
+        <div className="flex w-full items-center justify-between">
+          <h2 className="text-muted-foreground text-sm font-semibold">
+            {format(createdAt, "PPP")}
+          </h2>
+
           <BookmarkButton jobId={jobId} bookmarkInitialState={isBookmarked} />
         </div>
-      </div>
-      <Badge
-        className="absolute -top-1 right-2 text-sm font-semibold"
-        variant={"secondary"}
-      >
-        {convertToReadableString(workplace)}
-      </Badge>
 
-      {/* {!approved && admin ? <Separator /> : null}
+        {/* {!approved && admin ? <Separator /> : null}
       {!approved && admin ? (
         <div className="flex items-center justify-center space-x-4">
           <ApproveButton />
           <RejectButton />
         </div>
       ) : null} */}
-      <Separator />
-      <Link
-        href={viewJobLink}
-        className={cn(
-          buttonVariants({
-            variant: "secondary",
-          }),
-          "w-full",
-        )}
-      >
-        View Job Details
-        <ArrowRightIcon />
-      </Link>
+      </CardContent>
+      <CardFooter>
+        <Link href={viewJobLink} className={cn(buttonVariants({}), "w-full")}>
+          View Job Details
+          <ArrowRightIcon />
+        </Link>
+      </CardFooter>
     </Card>
   );
 }

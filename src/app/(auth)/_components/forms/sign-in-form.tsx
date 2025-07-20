@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { Loader2Icon } from "lucide-react";
+import { ArrowLeftIcon, Loader2Icon } from "lucide-react";
 
 // local modules
 import { signInAction } from "@/app/(auth)/_actions/sign-in-action";
@@ -25,8 +25,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import AuthCardWrapper from "@/app/(auth)/_components/cards/auth-card-wrapper";
+import { Button, buttonVariants } from "@/components/ui/button";
+import CardWrapper from "@/components/card-wrapper";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export default function SignInForm() {
   // states
@@ -65,12 +67,24 @@ export default function SignInForm() {
   };
 
   return (
-    <div className="space-y-6">
-      <AuthCardWrapper
-        title="findevs - signin"
+    <div className="space-y-4">
+      <Link
+        href={"/"}
+        className={cn(
+          buttonVariants({
+            size: "icon",
+            variant: "secondary",
+          }),
+        )}
+      >
+        <ArrowLeftIcon />
+      </Link>
+      <CardWrapper
+        title="FINDEVS - signin"
         description="start from exactly where you left last time, just signin"
         footerText="Don't have an account ? SignUp"
         footerHref="/sign-up"
+        className="w-full sm:w-[400px] md:w-[450px] lg:w-[490px]"
       >
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmitHandler)}>
@@ -118,7 +132,7 @@ export default function SignInForm() {
             </Button>
           </form>
         </Form>
-      </AuthCardWrapper>
+      </CardWrapper>
     </div>
   );
 }

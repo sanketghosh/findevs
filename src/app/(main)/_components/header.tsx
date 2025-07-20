@@ -1,5 +1,6 @@
 // packages
 import Link from "next/link";
+import { ShipWheelIcon } from "lucide-react";
 
 // local modules
 import { getSessionHandler } from "@/app/(main)/_utils/get-session";
@@ -14,12 +15,13 @@ export default async function Header() {
   const admin = await isAdmin();
 
   return (
-    <header className="sticky top-0 z-20 h-16 w-full bg-secondary/40 text-foreground backdrop-blur-md">
-      <div className="mx-auto flex h-full max-w-[95rem] items-center justify-between px-4 lg:px-6">
+    <header className="bg-card text-foreground sticky top-0 z-20 h-16 w-full border-b">
+      <div className="mx-auto flex h-full max-w-[85rem] items-center justify-between px-4 lg:px-6">
         <Link
           href={"/"}
-          className="font-inter text-xl font-bold md:text-2xl lg:text-3xl"
+          className="flex items-center gap-1 text-xl font-extrabold tracking-tight uppercase"
         >
+          <ShipWheelIcon size={23} />
           findevs
         </Link>
         <DesktopNav email={email} id={id} name={name} admin={admin} />

@@ -1,5 +1,6 @@
 <div align="center">
 <h1>findevs</h1>
+
 <p>Findevs is a developer-focused job board connecting tech talent with companies, offering curated job listings, advanced filters, and seamless application management.</p>
 </div>
 

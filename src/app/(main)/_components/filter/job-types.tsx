@@ -13,8 +13,10 @@ export default function JobTypes({ defaultJobTypes }: JobTypesProps) {
   // console.log(defaultJobTypes);
 
   return (
-    <div className="space-y-2 rounded-md border p-3">
-      <h1 className="font-semibold">Job Types</h1>
+    <div className="bg-card space-y-3 rounded-md border p-3">
+      <h1 className="cursor-pointer text-sm font-medium select-none">
+        Job Types
+      </h1>
       <div className="grid grid-cols-2 gap-2">
         {JOB_TYPES.map((item) => {
           return (

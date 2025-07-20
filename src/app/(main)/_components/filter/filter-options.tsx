@@ -14,6 +14,8 @@ import WorkplaceOptions from "@/app/(main)/_components/filter/workplace-options"
 import { Label } from "@/components/ui/label";
 import CustomSelect from "@/components/ui/custom-select";
 import FormSubmitButton from "@/components/buttons/form-submit-button";
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
 
 type FilterOptionsProps = {
   defaultValues: JobFilterSchemaType;
@@ -31,8 +33,8 @@ export default async function FilterOptions({
     <div className={cn(className)}>
       <form action={filterJobsAction} className="space-y-4">
         {/*  custom select for cities */}
-        <div className="space-y-2 rounded-md border p-3">
-          <Label htmlFor="city" className="text-base font-medium capitalize">
+        <div className="bg-card space-y-3 rounded-md border p-3">
+          <Label htmlFor="city" className="text-sm font-medium capitalize">
             Cities
           </Label>
           <CustomSelect
@@ -53,8 +55,8 @@ export default async function FilterOptions({
           </CustomSelect>
         </div>
         {/*  custom select for countries */}
-        <div className="space-y-2 rounded-md border p-3">
-          <Label htmlFor="country" className="text-base font-medium capitalize">
+        <div className="bg-card space-y-3 rounded-md border p-3">
+          <Label htmlFor="country" className="text-sm font-medium capitalize">
             Countries
           </Label>
           <CustomSelect
@@ -85,6 +87,17 @@ export default async function FilterOptions({
           Apply Filter
         </FormSubmitButton>
       </form>
+      <Link
+        href={"/"}
+        className={cn(
+          buttonVariants({
+            variant: "secondary",
+          }),
+          "mt-3 w-full",
+        )}
+      >
+        Reset Filter
+      </Link>
     </div>
   );
 }

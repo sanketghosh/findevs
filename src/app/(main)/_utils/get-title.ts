@@ -67,7 +67,9 @@ export function getTitle({ city, country, q, isHero }: getTitleProps): string {
   } else if (headerLocation) {
     title = headerLocation;
   } else {
-    title = isHero ? "Find best developer jobs at your fingertips" : "findevs";
+    title = isHero
+      ? "Best developer jobs at your fingertips in no time."
+      : "findevs";
   }
 
   return title;

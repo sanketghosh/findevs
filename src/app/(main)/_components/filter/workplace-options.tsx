@@ -15,8 +15,10 @@ export default function WorkplaceOptions({
   // console.log(defaultWorkplaceOptions);
 
   return (
-    <div className="space-y-2 rounded-md border p-3">
-      <h1 className="font-semibold">Workplace</h1>
+    <div className="bg-card space-y-3 rounded-md border p-3">
+      <h1 className="cursor-pointer text-sm font-medium select-none">
+        Workplace
+      </h1>
       <div className="grid grid-cols-2 gap-2">
         {WORKPLACE_OPTIONS.map((item) => {
           /**

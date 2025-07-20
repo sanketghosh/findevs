@@ -28,7 +28,7 @@ export default function ThemeToggle() {
       </CardHeader>
       <CardContent className="flex w-full items-center justify-between gap-2">
         <Button
-          className="w-full"
+          className="flex-1"
           size={"sm"}
           variant={theme === "light" ? "default" : "secondary"}
           onClick={() => setTheme("light")}
@@ -37,7 +37,7 @@ export default function ThemeToggle() {
           Light
         </Button>
         <Button
-          className="w-full"
+          className="flex-1"
           size={"sm"}
           variant={theme === "dark" ? "default" : "secondary"}
           onClick={() => setTheme("dark")}
@@ -46,7 +46,7 @@ export default function ThemeToggle() {
           Dark
         </Button>
         <Button
-          className="w-full"
+          className="flex-1"
           size={"sm"}
           variant={theme === "system" ? "default" : "secondary"}
           onClick={() => setTheme("system")}

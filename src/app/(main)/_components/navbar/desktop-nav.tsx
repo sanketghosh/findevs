@@ -30,12 +30,19 @@ export default async function DesktopNav({
 
   return (
     <div className="hidden items-center gap-10 md:flex">
-      <nav className="flex items-center gap-4">
+      <nav className="flex items-center gap-1">
         {NAV_LINKS.map((item) => (
           <Link
             href={item.href}
             key={item.id}
-            className="text-[13px] font-medium capitalize tracking-tight text-muted-foreground transition-all hover:text-foreground hover:underline hover:underline-offset-4 lg:text-sm"
+            /*  className="text-[13px] font-medium capitalize tracking-tight text-muted-foreground transition-all hover:text-foreground hover:underline hover:underline-offset-4 lg:text-sm" */
+            className={cn(
+              buttonVariants({
+                variant: "ghost",
+                size: "sm",
+              }),
+              "capitalize",
+            )}
           >
             {item.label}
           </Link>
@@ -43,7 +50,14 @@ export default async function DesktopNav({
         {admin && (
           <Link
             href={"/admin-dashboard"}
-            className="text-[13px] font-medium capitalize tracking-tight text-muted-foreground transition-all hover:text-foreground hover:underline hover:underline-offset-4 lg:text-sm"
+            /*  className="text-[13px] font-medium capitalize tracking-tight text-muted-foreground transition-all hover:text-foreground hover:underline hover:underline-offset-4 lg:text-sm" */
+            className={cn(
+              buttonVariants({
+                variant: "ghost",
+                size: "sm",
+              }),
+              "capitalize",
+            )}
           >
             Admin Dashboard
           </Link>
@@ -52,7 +66,7 @@ export default async function DesktopNav({
       {id ? (
         <div className="flex items-center gap-2">
           <Link href={"/profile"}>
-            <Avatar className="border-2 bg-background">
+            <Avatar className="bg-background border-2">
               <AvatarFallback className="text-xl font-bold">
                 {name?.charAt(0)}
               </AvatarFallback>
@@ -60,7 +74,7 @@ export default async function DesktopNav({
           </Link>
           <div className="select-none">
             <h2 className="text-sm font-semibold">{name}</h2>
-            <p className="text-xs text-muted-foreground">{email}</p>
+            <p className="text-muted-foreground text-xs">{email}</p>
           </div>
         </div>
       ) : (

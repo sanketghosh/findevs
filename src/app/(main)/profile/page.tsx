@@ -1,5 +1,4 @@
 // packages
-import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 // local modules
@@ -9,20 +8,13 @@ import { setUserCurrencyAction } from "@/app/(main)/_actions/set-user-currency-a
 import { fetchCurrentUserCurrency } from "@/app/(main)/_fetchers";
 
 // components
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import FormSubmitButton from "@/components/buttons/form-submit-button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Separator } from "@/components/ui/separator";
 import ThemeToggle from "@/app/(main)/_components/theme-toggle";
 import CustomSelect from "@/components/ui/custom-select";
 import { Label } from "@/components/ui/label";
 import SignOutButton from "@/app/(auth)/_components/sign-out-button";
+import CredentialUpdateTabs from "@/app/(main)/profile/_components/credential-update-tabs";
+import CardWrapper from "@/components/card-wrapper";
 
 /* export const metadata: Metadata = {
   title: `${name}`,
@@ -40,40 +32,37 @@ export default async function Profile() {
   }
 
   return (
-    <div className="flex flex-col gap-6 md:flex-row">
-      <aside className="flex h-fit w-full shrink-0 flex-col gap-4 rounded-md border p-2 md:sticky md:top-20 md:w-1/2 lg:w-1/3">
-        <Card>
-          <CardHeader>
-            <CardTitle>User details & settings</CardTitle>
-            <CardDescription>
-              Here you can access all the details of yours and change settings
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center gap-4">
-              <Avatar className="size-28 rounded-md">
-                <AvatarImage src={image ? image : "/placeholder-user.webp"} />
-                <AvatarFallback>{name?.charAt(0)}</AvatarFallback>
-              </Avatar>
-              <div className="space-y-2 text-left font-semibold">
-                <h1 className="text-lg font-bold lg:text-xl">{name}</h1>
-                <p className="text-sm text-muted-foreground xl:text-lg">
+    <div>
+      <div className="flex flex-col gap-6 md:flex-row">
+        <aside className="flex h-fit w-full shrink-0 flex-col gap-4 rounded-xl border p-2 md:sticky md:top-20 md:w-1/2 lg:w-1/3">
+          <CardWrapper
+            title="User details & settings"
+            description="Here you can access all the details of yours and change settings"
+          >
+            <div className="mb-4 flex items-center gap-2">
+              {/* <Avatar className="size-24 rounded-md">
+              <AvatarImage src={image ? image : "/placeholder-user.webp"} />
+              <AvatarFallback>{name?.charAt(0)}</AvatarFallback>
+            </Avatar> */}
+              <div className="bg-background flex size-14 shrink-0 items-center justify-center rounded-xl border text-3xl font-extrabold md:size-16">
+                {name?.charAt(0)}
+              </div>
+              <div className="text-left leading-tight">
+                <h1 className="line-clamp-1 text-base font-bold md:text-lg">
+                  {name}
+                </h1>
+                <p className="text-muted-foreground line-clamp-1 text-sm font-medium md:text-base">
                   {email}
                 </p>
-                <SignOutButton />
               </div>
             </div>
-          </CardContent>
-        </Card>
-        <ThemeToggle />
-        <Card>
-          <CardHeader>
-            <CardTitle>Set your currency</CardTitle>
-            <CardDescription>
-              Please set your preferred currency
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
+            <SignOutButton />
+          </CardWrapper>
+          <ThemeToggle />
+          <CardWrapper
+            title="Set your currency"
+            description="Please set your preferred currency"
+          >
             <form action={setUserCurrencyAction} className="space-y-4">
               <Label htmlFor="userCurrency">Currency</Label>
               <CustomSelect
@@ -94,18 +83,17 @@ export default async function Profile() {
                 Set Currency
               </FormSubmitButton>
             </form>
-          </CardContent>
-        </Card>
-      </aside>
-      <div className="flex w-full flex-col space-y-4 rounded-md border p-2 md:w-1/2 lg:w-2/3">
-        <h2 className="text-lg font-semibold xl:text-xl">Sessions</h2>
-        <Separator />
-        <Card className="w-full bg-card p-3 font-medium">
-          <p className="text-left text-sm text-muted-foreground">
-            Session created at {sessionCreatedAt?.toISOString()} and session
-            expires at {sessionExpiresAt?.toISOString()}
-          </p>
-        </Card>
+          </CardWrapper>
+        </aside>
+        <div className="flex w-full flex-col space-y-4 rounded-xl border p-4 md:w-1/2 lg:w-2/3">
+          <CredentialUpdateTabs email={email!} name={name!} />
+          <div>
+            <h2 className="bg-card rounded-xl border px-4 py-4 text-sm font-medium">
+              Session started at {sessionCreatedAt?.toLocaleString()} and
+              expires at {sessionExpiresAt?.toLocaleString()}
+            </h2>
+          </div>
+        </div>
       </div>
     </div>
   );

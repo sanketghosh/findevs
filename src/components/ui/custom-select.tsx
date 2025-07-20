@@ -13,13 +13,15 @@ export default forwardRef<
     <div className="relative w-full">
       <select
         className={cn(
-          "h-10 w-full appearance-none truncate rounded-md border border-input bg-background py-2 pl-3 pr-8 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+          "border-input bg-background ring-offset-background focus:ring-ring h-10 w-full appearance-none truncate rounded-md border py-2 pr-8 pl-3 text-sm focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+          "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
+          "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
           className,
         )}
         {...props}
         ref={ref}
       />
-      <ChevronDownIcon className="absolute right-3 top-3 h-4 w-4 opacity-50" />
+      <ChevronDownIcon className="absolute top-3 right-3 h-4 w-4 opacity-50" />
     </div>
   );
 });

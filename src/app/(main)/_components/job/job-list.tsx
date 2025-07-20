@@ -54,7 +54,7 @@ export default async function JobList({
           />
         </>
       ) : (
-        <p className="font-medium text-muted-foreground">
+        <p className="text-muted-foreground font-medium">
           No jobs found maybe try again after adjusting the filter parameters.
         </p>
       )}

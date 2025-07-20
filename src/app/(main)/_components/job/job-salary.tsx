@@ -15,7 +15,7 @@ export default async function JobSalary({
   const { fetchedUserCurrency } = await fetchCurrentUserCurrency();
 
   return (
-    <p className="ml-1.5">
+    <p>
       {salaryFormatter(
         convertCurrency(
           fromCurrency!,

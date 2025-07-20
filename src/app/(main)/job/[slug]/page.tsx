@@ -14,6 +14,8 @@ import DeleteButton from "@/app/(main)/_components/job/job-card-buttons/delete-b
 import JobDescriptionMarkdown from "@/app/(main)/_components/job/job-description-markdown";
 import { Separator } from "@/components/ui/separator";
 import { buttonVariants } from "@/components/ui/button";
+import JobSalary from "../../_components/job/job-salary";
+import { Wallet2Icon } from "lucide-react";
 
 type SingleJobProps = {
   params: {
@@ -56,6 +58,7 @@ export default async function SingleJob({ params }: SingleJobProps) {
     workplace,
     userId,
     approved,
+    currency,
   } = job;
 
   const applyNow = employerEmail ? `mailto:${employerEmail}` : employerWebsite;
@@ -95,38 +98,42 @@ export default async function SingleJob({ params }: SingleJobProps) {
             <div className="space-y-2">
               <h1 className="text-lg font-bold lg:text-xl">{title}</h1>
               <p className="text-muted-foreground">{companyName}</p>
-              <h1 className="w-fit rounded-sm bg-amber-400 px-2 py-2 text-lg font-bold dark:bg-orange-600 lg:text-xl">
-                <b>Salary: </b>
-                {salary}
-              </h1>
+              <div className="flex items-center rounded-md border px-3 py-2 text-xl font-semibold">
+                <Wallet2Icon size={22} />
+                <JobSalary fromCurrency={currency!} salary={salary} />
+              </div>
             </div>
 
             <Separator className="" />
-            <ul className="space-y-2">
+            <ul className="space-y-4">
               <li>
-                <b>Job Type: </b>
-                {jobType}
+                <p className="text-xs">Job Type</p>
+                <b className="text-lg">{jobType}</b>
               </li>
               <li>
-                <b>Seniority: </b> {seniority}
+                <p className="text-xs">Seniority</p>
+                <b className="text-lg">{seniority}</b>
               </li>
               <li>
-                <b>Workplace: </b>
-                {workplace}
+                <p className="text-xs">Workplace</p>
+                <b className="text-lg">{workplace}</b>
               </li>
               <li>
-                <b>Job Location: </b>
-                {city}, {country}
+                <p className="text-xs">Job Location</p>
+                <b className="text-lg">
+                  {city}, {country}
+                </b>
               </li>
               <li>
-                <b>Company Address:</b> {address}
+                <p className="text-xs">Company Address</p>
+                <b className="text-lg">{address}</b>
               </li>
               {employerEmail && (
                 <li>
-                  <b>Application Mail: </b>
+                  <p className="text-xs">Application Mail</p>
                   <a
                     href={`mailto:${employerEmail}`}
-                    className="text-blue-600 underline underline-offset-4"
+                    className="text-lg text-blue-500 underline underline-offset-4"
                   >
                     {employerEmail}
                   </a>
@@ -134,10 +141,10 @@ export default async function SingleJob({ params }: SingleJobProps) {
               )}
               {employerWebsite && (
                 <li>
-                  <b>Application Link: </b>
+                  <p className="text-xs">Application Link</p>
                   <a
                     href={employerWebsite}
-                    className="text-blue-600 underline underline-offset-4"
+                    className="text-lg text-blue-500 underline underline-offset-4"
                   >
                     {employerWebsite}
                   </a>
@@ -155,7 +162,7 @@ export default async function SingleJob({ params }: SingleJobProps) {
             >
               Apply Now
             </a>
-            <p className="text-sm font-medium text-muted-foreground">
+            <p className="text-muted-foreground text-sm font-medium">
               Posted on {format(createdAt, "PPP")}
             </p>
           </div>

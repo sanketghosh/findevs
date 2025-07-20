@@ -41,15 +41,16 @@ export default function BookmarkButton({
   return (
     <Button
       size={"icon"}
-      variant={bookmarked ? "default" : "ghost"}
+      variant={bookmarked ? "default" : "secondary"}
       onClick={onSubmitHandler}
       disabled={isPending}
+      className="cursor-pointer"
     >
       {isPending ? (
         <Loader2Icon className="animate-spin" />
       ) : (
         <BookmarkIcon
-          className={bookmarked ? "fill-background" : "fill-none"}
+          className={bookmarked ? "fill-primary-foreground" : "fill-none"}
         />
       )}
     </Button>

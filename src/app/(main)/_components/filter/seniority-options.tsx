@@ -13,8 +13,10 @@ export default function SeniorityOptions({
   defaultSeniorityOptions,
 }: SeniorityOptionsProps) {
   return (
-    <div className="space-y-2 rounded-md border p-3">
-      <h1 className="font-semibold">Seniority</h1>
+    <div className="bg-card space-y-3 rounded-md border p-3">
+      <h1 className="cursor-pointer text-sm font-medium select-none">
+        Seniority
+      </h1>
       <div className="grid grid-cols-2 gap-2">
         {SENIORITY_OPTIONS.map((item) => {
           return (
