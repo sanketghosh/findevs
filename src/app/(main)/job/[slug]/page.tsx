@@ -35,7 +35,7 @@ export async function generateMetadata({
 }
 
 export default async function SingleJob({ params }: SingleJobProps) {
-  const { slug } = await params;
+  const { slug } = params;
   const { job } = await fetchSingleJob(slug);
   const { id: sessionUserId } = await getSessionHandler();
   const admin = await isAdmin();
