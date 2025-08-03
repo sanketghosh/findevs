@@ -1,7 +1,6 @@
 import { buttonVariants } from "@/components/ui/button";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -18,8 +17,8 @@ export default function NotAuthenticatedPage() {
           <CardHeader>
             <CardTitle>You are not authenticated.</CardTitle>
             <CardDescription>
-              If you don't have an account please consider making an account and
-              if you have an account feel free to sign in and proceed.{" "}
+              If you do not have an account please consider making an account
+              and if you have an account feel free to sign in and proceed.{" "}
             </CardDescription>
           </CardHeader>
           <CardFooter className="space-x-3">

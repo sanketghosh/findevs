@@ -49,6 +49,7 @@ export default function UpdatePassword() {
         });
         toast.success("Password has been updated successfully.");
       } catch (error) {
+        console.log(error);
         toast.error(
           "Something went wrong! Check the existing password or try again.",
         );

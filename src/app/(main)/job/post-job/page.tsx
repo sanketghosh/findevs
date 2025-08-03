@@ -3,7 +3,7 @@ import { Metadata } from "next";
 // components
 import CreateJobForm from "@/app/(main)/_components/forms/create-job-form";
 import { getSessionHandler } from "../../_utils/get-session";
-import { BookMarkedIcon, SendIcon } from "lucide-react";
+import { SendIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
 export const metadata: Metadata = {

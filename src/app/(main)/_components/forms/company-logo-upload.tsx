@@ -12,8 +12,6 @@ import {
   FileUploaderContent,
   FileUploaderItem,
 } from "@/components/ui/file-upload";
-import { Label } from "@/components/ui/label";
-import Image from "next/image";
 
 type CompanyLogoUploadProps = {
   files: File[] | null;
@@ -45,14 +43,14 @@ export default function CompanyLogoUpload({
     >
       <div className="space-y-2">
         <FileInput id="logo__upload" onChange={onChange}>
-          <div className="flex h-44 w-full flex-col items-center justify-center space-y-2 rounded-md border bg-background p-3 text-center">
-            <ImageIcon className="size-6 stroke-muted-foreground md:size-8 lg:size-10" />
-            <h1 className="font-semibold capitalize text-muted-foreground md:text-lg">
+          <div className="bg-background flex h-44 w-full flex-col items-center justify-center space-y-2 rounded-md border p-3 text-center">
+            <ImageIcon className="stroke-muted-foreground size-6 md:size-8 lg:size-10" />
+            <h1 className="text-muted-foreground font-semibold capitalize md:text-lg">
               Drop company logo here
             </h1>
-            <p className="text-sm font-medium text-muted-foreground/60">
-              Only '.png', '.jpg', '.jpeg' format supported and maximum size of
-              2MB allowed.
+            <p className="text-muted-foreground/60 text-sm font-medium">
+              Only .png, .jpg, .jpeg format supported and maximum size of 2MB
+              allowed.
             </p>
           </div>
         </FileInput>

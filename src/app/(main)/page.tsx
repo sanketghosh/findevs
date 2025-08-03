@@ -1,7 +1,7 @@
 // packages
 import { Suspense } from "react";
 import { Metadata } from "next";
-import { Loader2Icon, SearchIcon } from "lucide-react";
+import { SearchIcon } from "lucide-react";
 
 // local modules
 import { getTitle } from "@/app/(main)/_utils/get-title";

@@ -3,7 +3,7 @@
 // packages
 import { v4 as uuid_v4 } from "uuid";
 import { Currency, JobType, Seniority, Workplace } from "@prisma/client";
-import { v2 as cloudinary } from "cloudinary";
+import { v2 as cloudinary, UploadApiResponse } from "cloudinary";
 
 // local modules
 import { toSlug } from "@/app/(main)/_utils/to-slug";
@@ -61,14 +61,14 @@ export async function createJobAction(formData: FormData) {
       const arrayBuffer = await companyLogo.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer);
 
-      const result = await new Promise((resolve, reject) => {
+      const result = await new Promise<UploadApiResponse>((resolve, reject) => {
         const stream = cloudinary.uploader.upload_stream(
           {
             folder: "findevs-company-logos", // optional folder in Cloudinary
             resource_type: "image",
           },
           (error, result) => {
-            if (error) {
+            if (error || !result) {
               console.error("Cloudinary upload error:", error);
               reject(error);
             } else {
@@ -80,7 +80,7 @@ export async function createJobAction(formData: FormData) {
         stream.end(buffer);
       });
 
-      uploadedCloudinaryLogoUrl = (result as any).secure_url;
+      uploadedCloudinaryLogoUrl = result.secure_url;
     } catch (error) {
       console.error("Failed to upload logo:", error);
       return { error: "Failed to upload company logo." };

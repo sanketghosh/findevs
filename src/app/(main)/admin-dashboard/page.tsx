@@ -10,7 +10,6 @@ import { fetchUnApprovedJobs } from "@/app/(main)/_fetchers";
 
 // components
 import JobCard from "@/app/(main)/_components/job/job-card";
-import SectionTitle from "@/app/(main)/_components/section-title";
 import { Separator } from "@/components/ui/separator";
 
 export const metadata: Metadata = {

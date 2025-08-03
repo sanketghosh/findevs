@@ -1,5 +1,3 @@
-import { UserSetCurrency } from "@prisma/client";
-
 export const CURRENCY_CURRENT_VALUE = [
   {
     currencyId: "AED",

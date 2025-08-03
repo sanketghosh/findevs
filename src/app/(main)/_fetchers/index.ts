@@ -191,7 +191,7 @@ export async function fetchDistinctCountries() {
     */
 
 export const fetchSingleJob = cache(async (slug: string) => {
-  const { id } = await getSessionHandler();
+  // const { id } = await getSessionHandler();
   console.log("@@@ server fetched", slug);
   const job = await prisma.job.findUnique({
     where: {
@@ -295,7 +295,7 @@ export const fetchPostedApprovedJobs = async () => {
     @returns {Promise<{ fetchedUserCurrency: string }>} A promise that resolves with an object containing the current user's currency.
     */
 export async function fetchCurrentUserCurrency() {
-  const { email, id } = await getSessionHandler();
+  const { id } = await getSessionHandler();
 
   const fetchedUserCurrency = await prisma.user.findUnique({
     where: {
@@ -354,7 +354,8 @@ export const fetchBookmarks = async () => {
       },
     });
     return { bookmarks };
-  } catch (error) {
+  } catch (e) {
+    console.log(e);
     throw new Error("Failed to fetch bookmarks.");
   }
 };

@@ -47,9 +47,9 @@ export function getTitle({ city, country, q, isHero }: getTitleProps): string {
     q,
   }); */
 
-  let headerQuery = q ? `${q} jobs` : "";
+  const headerQuery = q ? `${q} jobs` : "";
 
-  let headerLocation =
+  const headerLocation =
     city && country
       ? `Developer jobs in ${city}, ${country}`
       : city

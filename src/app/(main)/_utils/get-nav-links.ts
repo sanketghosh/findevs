@@ -1,5 +1,3 @@
-import { NAV_LINK_TYPE } from "../_types";
-
 export const getNavLinks = async (authenticatedUserId: string) => {
   const NAV_LINKS = [
     {

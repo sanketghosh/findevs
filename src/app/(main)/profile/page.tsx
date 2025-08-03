@@ -22,7 +22,7 @@ import CardWrapper from "@/components/card-wrapper";
 }; */
 
 export default async function Profile() {
-  const { sessionCreatedAt, sessionExpiresAt, id, name, email, image } =
+  const { sessionCreatedAt, sessionExpiresAt, id, name, email } =
     await getSessionHandler();
 
   const { fetchedUserCurrency } = await fetchCurrentUserCurrency();

@@ -4,8 +4,8 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { ArrowLeftIcon, HomeIcon, Loader2Icon } from "lucide-react";
-import { useState, useTransition } from "react";
+import { HomeIcon, Loader2Icon } from "lucide-react";
+import { useTransition } from "react";
 import { toast } from "sonner";
 
 // local modules
@@ -33,8 +33,6 @@ import { cn } from "@/lib/utils";
 export default function SignUpForm() {
   // states
   const router = useRouter();
-  const [error, setError] = useState<string | undefined>();
-  const [success, setSuccess] = useState<string | undefined>();
   const [isPending, startTransition] = useTransition();
 
   /*   console.log("@@@SUCCESS: ", success);
@@ -52,17 +50,13 @@ export default function SignUpForm() {
   });
 
   const onSubmitHandler = async (values: SignUpSchemaType) => {
-    setError("");
-    setSuccess("");
     startTransition(async () => {
       const result = await signUpAction(values);
       if (result.success) {
-        setSuccess(result.success);
         toast.success(result.success);
         setInterval(() => {}, 1000);
         router.push("/sign-in");
       } else {
-        setError(result.error);
         toast.error(result.error);
       }
     });

@@ -46,7 +46,7 @@ export const signInAction = async (values: SignInSchemaType) => {
     return { success: "User has been logged in successfully." };
   } catch (error) {
     return {
-      error: "Something went wrong while signing in. Please try again.",
+      error: `Something went wrong while signing in. Please try again. ${error}`,
     };
   }
 };

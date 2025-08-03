@@ -27,14 +27,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import CardWrapper from "@/components/card-wrapper";
+import { log } from "util";
 
 interface IUpdateNamePropsType {
   name: string;
@@ -59,6 +53,7 @@ export default function UpdateName({ name }: IUpdateNamePropsType) {
         });
         toast.success("User's name has been updated successfully");
       } catch (error) {
+        console.log(error);
         toast.error("Failed to update user,");
       }
     });

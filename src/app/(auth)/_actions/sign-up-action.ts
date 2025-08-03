@@ -47,7 +47,7 @@ export const signUpAction = async (values: SignUpSchemaType) => {
     return { success: "User has been registered successfully." };
   } catch (error) {
     return {
-      error: "Something went wrong while signing up. Please try again.",
+      error: `Something went wrong while signing up. Please try again. ${error}`,
     };
   }
 };

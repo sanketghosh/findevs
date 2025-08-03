@@ -39,13 +39,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import LoadingButton from "@/components/buttons/loading-button";
 import { Label } from "@/components/ui/label";
 import {
@@ -490,7 +484,7 @@ export default function CreateJobForm({
                 <FormField
                   control={form.control}
                   name="companyLogo"
-                  render={({ field: { value, ...fieldValues } }) => (
+                  render={({ field: { value: _value, ...fieldValues } }) => (
                     <FormItem>
                       <Label>Logo Upload (Only one file & max size 2MB)</Label>
                       <FormLabel
@@ -504,8 +498,8 @@ export default function CreateJobForm({
                           Drop company logo here
                         </h1>
                         <p className="text-muted-foreground/60 text-center text-sm font-medium">
-                          Only '.png', '.jpg', '.jpeg' format supported and
-                          maximum size of 2MB allowed.
+                          Only .png, .jpg, .jpeg format supported and maximum
+                          size of 2MB allowed.
                         </p>
                       </FormLabel>
                       <FormControl>

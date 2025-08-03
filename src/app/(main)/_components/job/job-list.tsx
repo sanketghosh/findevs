@@ -17,7 +17,7 @@ export default async function JobList({
   jobListFilterValues,
   page,
 }: JobListProps) {
-  const { jobs, totalPages, totalResults } = await fetchAllJobsByFilter({
+  const { jobs, totalPages } = await fetchAllJobsByFilter({
     jobListFilterValues,
     page,
   });

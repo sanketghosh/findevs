@@ -51,6 +51,7 @@ export default function UpdateEmail({ email }: IUpdateEmailPropsType) {
         });
         toast.success("User's email has been updated successfully.");
       } catch (error) {
+        console.log(error);
         toast.error("Failed to update user's email address.");
       }
     });

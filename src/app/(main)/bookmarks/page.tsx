@@ -7,8 +7,6 @@ import { isAdmin } from "@/app/(main)/_utils/is-admin";
 
 // components
 import JobCard from "@/app/(main)/_components/job/job-card";
-import SectionTitle from "@/app/(main)/_components/section-title";
-import { getSessionHandler } from "../_utils/get-session";
 import { BookMarkedIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 

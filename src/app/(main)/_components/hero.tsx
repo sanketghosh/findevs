@@ -7,8 +7,8 @@ type HeroProps = {
 };
 
 export default function Hero({ city, country, q }: HeroProps) {
-  let isHero = true;
-  let heroTitle = getTitle({ city, country, q, isHero });
+  const isHero = true;
+  const heroTitle = getTitle({ city, country, q, isHero });
 
   return (
     /*  <section className="bg-primary text-primary-foreground relative h-64 overflow-hidden rounded-2xl border-dotted">

@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { useState, useTransition } from "react";
+import { useTransition } from "react";
 import { HomeIcon, Loader2Icon } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 

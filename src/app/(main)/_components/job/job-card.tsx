@@ -4,11 +4,8 @@ import {
   ArrowRightIcon,
   BriefcaseBusinessIcon,
   ClockIcon,
-  Globe2Icon,
-  GlobeIcon,
   LaptopIcon,
   MapPinIcon,
-  WalletIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { Job } from "@prisma/client";
@@ -31,7 +28,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import { buttonVariants } from "@/components/ui/button";
 import JobSalary from "@/app/(main)/_components/job/job-salary";
 import BookmarkButton from "@/app/(main)/_components/job/job-card-buttons/bookmark-button";
@@ -59,7 +55,6 @@ export default async function JobCard({ job, admin = false }: JobCardProps) {
     workplace,
     country,
     slug,
-    approved,
     currency,
     id: jobId,
   } = job;

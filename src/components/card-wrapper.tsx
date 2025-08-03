@@ -9,7 +9,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { ShipWheelIcon } from "lucide-react";
 
 type AuthCardProps = {
   title: string;
