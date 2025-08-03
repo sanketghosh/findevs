@@ -17,19 +17,7 @@ export default function AuthLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="relative flex min-h-screen items-center justify-center p-4">
-      <Link
-        href={"/"}
-        className={cn(
-          buttonVariants({
-            size: "default",
-            variant: "ghost",
-          }),
-          "absolute right-4 top-4",
-        )}
-      >
-        Home
-      </Link>
+    <main className="relative flex min-h-screen w-full items-center justify-center p-4">
       {children}
     </main>
   );

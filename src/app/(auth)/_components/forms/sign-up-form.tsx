@@ -4,7 +4,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { ArrowLeftIcon, Loader2Icon } from "lucide-react";
+import { ArrowLeftIcon, HomeIcon, Loader2Icon } from "lucide-react";
 import { useState, useTransition } from "react";
 import { toast } from "sonner";
 
@@ -79,7 +79,7 @@ export default function SignUpForm() {
           }),
         )}
       >
-        <ArrowLeftIcon />
+        <HomeIcon />
       </Link>
       <CardWrapper
         title="FINDEVS - signup"

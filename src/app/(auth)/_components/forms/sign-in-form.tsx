@@ -1,19 +1,21 @@
 "use client";
 
 // packages
-import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { toast } from "sonner";
+import { cn } from "@/lib/utils";
+import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { ArrowLeftIcon, Loader2Icon } from "lucide-react";
+import { HomeIcon, Loader2Icon } from "lucide-react";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 // local modules
-import { signInAction } from "@/app/(auth)/_actions/sign-in-action";
 import {
   SignInSchema,
   SignInSchemaType,
 } from "@/app/(auth)/_schemas/auth-schema";
+import { signInAction } from "@/app/(auth)/_actions/sign-in-action";
 
 // components
 import {
@@ -25,20 +27,15 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button, buttonVariants } from "@/components/ui/button";
 import CardWrapper from "@/components/card-wrapper";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { Button, buttonVariants } from "@/components/ui/button";
 
 export default function SignInForm() {
   // states
   const router = useRouter();
-  const [error, setError] = useState<string | undefined>();
-  const [success, setSuccess] = useState<string | undefined>();
+  /* const [error, setError] = useState<string | undefined>();
+  const [success, setSuccess] = useState<string | undefined>(); */
   const [isPending, startTransition] = useTransition();
-
-  /*   console.log("@@@SUCCESS: ", success);
-  console.log("@@@ERROR: ", error); */
 
   // react hook form setting up and default values
   const form = useForm<SignInSchemaType>({
@@ -50,20 +47,32 @@ export default function SignInForm() {
   });
 
   const onSubmitHandler = async (values: SignInSchemaType) => {
-    setError("");
-    setSuccess("");
+    // setError("");
+    // setSuccess("");
     startTransition(async () => {
       const result = await signInAction(values);
       if (result.success) {
-        setSuccess(result.success);
+        // setSuccess(result.success);
         toast.success(result.success);
         setInterval(() => {}, 1000);
         router.push("/");
       } else {
-        setError(result.error);
+        // setError(result.error);
         toast.error(result.error);
       }
     });
+  };
+
+  const fillAdminCredentials = () => {
+    form.setValue("email", "johndoe@mail.com");
+    form.setValue("password", "123456789");
+    toast.success("Admin credentials has been added.");
+  };
+
+  const fillUserCredentials = () => {
+    form.setValue("email", "sarah@mail.com");
+    form.setValue("password", "123456789");
+    toast.success("User credentials has been added.");
   };
 
   return (
@@ -77,7 +86,7 @@ export default function SignInForm() {
           }),
         )}
       >
-        <ArrowLeftIcon />
+        <HomeIcon />
       </Link>
       <CardWrapper
         title="FINDEVS - signin"
@@ -131,6 +140,22 @@ export default function SignInForm() {
               {isPending ? <Loader2Icon className="animate-spin" /> : "Sign In"}
             </Button>
           </form>
+          <div className="mt-6 flex w-full items-center space-x-3">
+            <Button
+              variant={"secondary"}
+              className="w-full flex-1"
+              onClick={fillAdminCredentials}
+            >
+              Admin Credentials
+            </Button>
+            <Button
+              variant={"secondary"}
+              className="w-full flex-1"
+              onClick={fillUserCredentials}
+            >
+              User Credentials
+            </Button>
+          </div>
         </Form>
       </CardWrapper>
     </div>
