@@ -484,40 +484,46 @@ export default function CreateJobForm({
                 <FormField
                   control={form.control}
                   name="companyLogo"
-                  render={({ field: { value: _value, ...fieldValues } }) => (
-                    <FormItem>
-                      <Label>Logo Upload (Only one file & max size 2MB)</Label>
-                      <FormLabel
-                        className={cn(
-                          "bg-background text-muted-foreground hover:bg-secondary flex w-full cursor-pointer flex-col items-center justify-center rounded-md border px-4 py-14 text-sm shadow-sm",
-                          imagePreview && "pointer-events-none",
-                        )}
-                      >
-                        <ImageIcon className="stroke-muted-foreground size-6 md:size-8 lg:size-10" />
-                        <h1 className="text-muted-foreground font-semibold capitalize md:text-lg">
-                          Drop company logo here
-                        </h1>
-                        <p className="text-muted-foreground/60 text-center text-sm font-medium">
-                          Only .png, .jpg, .jpeg format supported and maximum
-                          size of 2MB allowed.
-                        </p>
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          type="file"
-                          accept="image/*"
-                          {...fieldValues}
-                          onChange={(e) => {
-                            const file = e.target.files?.[0];
-                            fieldValues.onChange(file);
-                            setImagePreview(URL.createObjectURL(file!));
-                          }}
-                          className="hidden"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
+                  render={({ field: { value, ...fieldValues } }) => {
+                    console.log(value);
+
+                    return (
+                      <FormItem>
+                        <Label>
+                          Logo Upload (Only one file & max size 2MB)
+                        </Label>
+                        <FormLabel
+                          className={cn(
+                            "bg-background text-muted-foreground hover:bg-secondary flex w-full cursor-pointer flex-col items-center justify-center rounded-md border px-4 py-14 text-sm shadow-sm",
+                            imagePreview && "pointer-events-none",
+                          )}
+                        >
+                          <ImageIcon className="stroke-muted-foreground size-6 md:size-8 lg:size-10" />
+                          <h1 className="text-muted-foreground font-semibold capitalize md:text-lg">
+                            Drop company logo here
+                          </h1>
+                          <p className="text-muted-foreground/60 text-center text-sm font-medium">
+                            Only .png, .jpg, .jpeg format supported and maximum
+                            size of 2MB allowed.
+                          </p>
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            type="file"
+                            accept="image/*"
+                            {...fieldValues}
+                            onChange={(e) => {
+                              const file = e.target.files?.[0];
+                              fieldValues.onChange(file);
+                              setImagePreview(URL.createObjectURL(file!));
+                            }}
+                            className="hidden"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    );
+                  }}
                 />
                 {imagePreview && (
                   <div className="bg_cross_pattern flex h-full w-full items-center justify-center rounded-md border p-3">

@@ -28,7 +28,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import CardWrapper from "@/components/card-wrapper";
-import { log } from "util";
 
 interface IUpdateNamePropsType {
   name: string;

@@ -16,7 +16,7 @@ import {
 type CompanyLogoUploadProps = {
   files: File[] | null;
   setFiles: React.Dispatch<SetStateAction<File[] | null>>;
-  onChange: (e: any) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export default function CompanyLogoUpload({

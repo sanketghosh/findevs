@@ -13,17 +13,12 @@ export default async function JobSalary({
   salary,
 }: JobSalaryProps) {
   const { fetchedUserCurrency } = await fetchCurrentUserCurrency();
+  const userCurrency = fetchedUserCurrency?.userCurrency || "USD";
 
   return (
     <p>
-      {salaryFormatter(
-        convertCurrency(
-          fromCurrency!,
-          fetchedUserCurrency?.userCurrency! || "USD",
-          salary,
-        ),
-      )}{" "}
-      {fetchedUserCurrency?.userCurrency || "USD"} PA
+      {salaryFormatter(convertCurrency(fromCurrency!, userCurrency, salary))}{" "}
+      {userCurrency} PA
     </p>
   );
 }
